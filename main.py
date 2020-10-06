@@ -19,88 +19,112 @@ class Room:
 rooms = pickle.load(roomFile)
 
 
-#~/ Main Loop \~#
+# Intro to Game
+start = Introduction()
+if start == "help":
+    Instructions()
 
-# beginning of game
-    #init player
-        #begin introduction
+# Sets the player to start in the start room
 Player.room = rooms[0]
-#Continue = Introduction()
 
-Continue = "1" #TODO: Delete this line when out of development
+# open the map picture
+#Image.open("Map.jpeg").show()
 
-# resume game
-if Continue == "1":
-    # open the map picture
-    #Image.open("Map.jpeg").show()
-    #TODO: save inventory to a file and read it from there
 
-    while 1:
+#~/ Main Loop \~#
+while 1:
+    ClearConsole()
+
+    # Informational messages
+    TypeOut("You are currently in ", 0.010,newline=False); ColorPrint(Player.room.name,TextColor.blue)
+    time.sleep(.5)
+    
+    ColorPrint("\nINVENTORY:", TextColor.blue)
+    print("%s\n"%', '.join(Player.inventory))
+
+    # location messages
+    print("Where would you like to travel to?",end =''); ColorPrint(" (u/d/l/r/m)",TextColor.lightpurple)
+
+    # Travel options
+    roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below
+    print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
+      
+    # Players next location
+    travelTo = ValidInput("->","u","d","l","r","m","menu")
+
+    if travelTo == "m" or travelTo == "menu": # open menu
         ClearConsole()
-        # informational messages
-        TypeOut("You are currently in ", 0.015,newline=False); ColorPrint(Player.room.name,TextColor.blue)
-        ColorPrint("\nINVENTORY:", TextColor.blue)
-        TypeOut("%s"%', '.join(Player.inventory),0.015)
-
-        # location messages
-        print("Where would you like to travel to?",end =''); ColorPrint(" (u/d/l/r/m)",TextColor.lightpurple)
-
-        roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below
-        print("up:",color("Room %s"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s"%rooms[roomIndex].right, TextColor.blue))
+        print("Menu:\n1. Search Room."
+            "\n2. Open Inventory."
+            "\n3. Exit/Save Game.\n"
+        )
+        menuOption = ValidInput("->", "1","2","3")
         
-        # next location
-        travelTo = ValidInput("->","u","d","l","r","m","menu")
 
-        if travelTo == "m" or travelTo == "menu": # open menu
+        # Search Room
+        if menuOption == "1": # search room
+            # credit JayPay loading bar
             ClearConsole()
-            print("Menu:\n1. Search Room."
-                "\n2. Open Inventory."
-                "\n3. Exit/Save Game.\n"
-            )
-            menuOption = ValidInput("->", "1","2","3")
             
-            # Search Room
-            if menuOption == "1": # search room
-                # credit JayPay loading bar
-                ClearConsole()
-                LoadingBar()
+            LoadingBar()
 
-                if Player.room.item != None:
-                    TypeOut("You found..",0.06, newline=False)
-                    ColorPrint(" %s!"%Player.room.item, TextColor.yellow)
-                if Player.room.NPC != None:
-                    TypeOut("You found..",0.06,newline=False)
-                    ColorPrint(" %s!"%Player.room.NPC, TextColor.yellow)
-                time.sleep(5)
+            if Player.room.item != None:
+                TypeOut("You found..",0.06, newline=False)
+                ColorPrint(" %s!"%Player.room.item, TextColor.yellow)
+            else:
+                TypeOut("There aren't any items in this room..")
+
+            if Player.room.NPC != None:
+                TypeOut("You found..",0.06,newline=False)
+                ColorPrint(" %s!"%Player.room.NPC, TextColor.yellow)
+            else:
+                TypeOut("There aren't any NPCs in this room..")
+
+            time.sleep(5)
+        
+
+        if menuOption == "2": # inspecting items in inventory
+            ClearConsole()
+
+            ColorPrint("\nINVENTORY:", TextColor.blue)
+            for index,name in enumerate(Player.inventory):
+                print("%g. %s"%(index+1, str(name)))
+
+            TypeOut("Which item do you want to inspect?")
+
+            digit_list = ["0","1","2","3","4","5","6","7","8","9"]
+            while True:
+                itemChoice = input("->")
+                if itemChoice not in digit_list:
+                    itemChoice = input("->")
+                elif int(itemChoice) in range(1,len(Player.inventory)+1) and itemChoice in digit_list:
+                    itemChoice = int(itemChoice)
+                    break
             
-
-            if menuOption == "2":
-                ColorPrint("\nINVENTORY:", TextColor.blue)
-                TypeOut("%s"%', '.join(Player.inventory),0.015)
-
-
-        else:
-            keystrokes = {
-                'u' : rooms[roomIndex].up,
-                'd' : rooms[roomIndex].down,
-                'l' : rooms[roomIndex].left,
-                'r' : rooms[roomIndex].right
+            items = {
+                'surgical mask' : "A mask to protect you from coronavirus.",
+                'gfuel' : "Gotta stay awake when you're solving those puzzles."
             }
-            for i in rooms:
-                if i.name == "Room %s"%keystrokes[travelTo]:
-                    Player.room = i
+
+            TypeOut(items[Player.inventory[itemChoice-1]])
+            input("\nPress any key to continue..")
 
 
-                
+        if menuOption == "3": # save game
+            with open("save.py","w") as saveFile:
+                saveFile.write("%s\n"%str(Player.name))
+                saveFile.write("%s\n"%str(Player.inventory))
+            input("Saved your progress.")
+            exit(1)
 
 
-
-
-
-
-
-# start a new game
-else:
-    pass
-    #TODO: make a way to play from save file lol
-
+    else: # traveling rooms
+        keystrokes = {
+            'u' : rooms[roomIndex].up,
+            'd' : rooms[roomIndex].down,
+            'l' : rooms[roomIndex].left,
+            'r' : rooms[roomIndex].right
+        }
+        for i in rooms:
+            if i.name == "Room %s"%keystrokes[travelTo]:
+                Player.room = i

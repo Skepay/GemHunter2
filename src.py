@@ -5,7 +5,6 @@ from color_source import ColorsFG, color, TextColor
 try:
     from PIL import Image
 except ImportError:
-    pass
     subprocess.call([sys.executable, "-m", "pip", "install", 'pillow'])
     print("Installed Pillow.")
     exit(1)
@@ -14,11 +13,12 @@ finally:
 
 
 #~/ Functions \~#
-def ValidInput(string, param1, param2,param3 = None, param4 = None, param5 = None, param6 = None):
+def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
+    validInputs = [param1,param2,param3,param4,param5,param6]
     inp = str(input(string))
     
     while 1:
-        if inp == param1 or inp == param2 or inp == param3 or inp == param4 or inp == param5 or param6:
+        if inp in validInputs:
             return inp
         inp = str(input(string))
 
@@ -29,6 +29,7 @@ def GetName():
 
 
 def LoadingBar():
+    # credit JayPay
     dots = 0; bar = 0; loops = 0
     nextl = random.randint(0,10)
 
@@ -54,7 +55,7 @@ def LoadingBar():
         print(barstring)
 
         time.sleep(random.uniform(0.1,0.2))
-        os.system('cls')
+        ClearConsole()
 
 
 # Clear the console
@@ -80,20 +81,28 @@ def ColorPrint(string, inputColor = TextColor.white):
     print(color(string, inputColor))
 
 
-#OG welcome message for gem hunter.
+# OG welcome message for gem hunter.
 def Introduction():
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
     time.sleep(0.5)
+
     TypeOut('G E M    H U N T E R',0.06)
-    ColorPrint("\n Credit: Isaiah Harville, Joshua Payne.", TextColor.blue)
-    input('')
+    time.sleep(1)
+    print("Credit: Isaiah Harville, Joshua Payne.")
+    time.sleep(1)
+    return input("Press any key to continue. Or type help for a list of keybinds.\n")
 
-    ClearConsole()
-    TypeOut("Would you like to:\n1. Continue\n2. New Game") # input options
-    ClearConsole()     # clear the console
-    continueGame = ValidInput("Would you like to:\n1. Continue\n2. New Game\n\n", "1", "2") # validate input
-    return continueGame
 
+# List of keybinds for the game.
+def Instructions():
+    print("""
+        "U" -> Moves up\n
+        "D" -> Moves down\n
+        "L" -> Moves left\n
+        "R" -> Moves right\n
+        "M" or "menu" -> Opens the menu.
+        """)
+    input("\n\nPress any key to continue.")
 
 #~/ Player \~#
 class Player:
