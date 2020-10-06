@@ -6,6 +6,7 @@ class TextColor:
     blue = (71, 177, 252)
     purple = (189, 71, 252)
     white = (255, 255, 255)
+    lightpurple = (155,155,255)
 
 
 class ColorsFG:
