@@ -1,5 +1,6 @@
-def npc1
-...
+def PewDiePie():
+    pass
 
-dict npcs
-'name' : function
+NPCS = {
+    'PewDiePie' : PewDiePie()
+}
