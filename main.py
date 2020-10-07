@@ -21,13 +21,13 @@ rooms = pickle.load(roomFile)
 
 
 # Intro to Game
-#Introduction()
+Introduction()
 
 # Sets the player to start in the start room
 Player.room = rooms[0]
 
 # open the map picture
-#Image.open("Map.jpeg").show()
+Image.open("Map.jpeg").show()
 
 
 #~/ Main Loop \~#
@@ -80,7 +80,7 @@ while 1:
             # credit JayPay loading bar
             ClearConsole()
             
-            #LoadingBar()
+            LoadingBar()
 
             ClearConsole()
 

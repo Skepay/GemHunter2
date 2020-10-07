@@ -85,7 +85,7 @@ def LoadingBar():
         barstring += '] %g%%'%bar
         print(barstring)
 
-        time.sleep(random.uniform(0.025,0.175))
+        time.sleep(random.uniform(0.010,0.135))
         ClearConsole()
 
 
