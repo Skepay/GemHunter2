@@ -107,6 +107,9 @@ while 1:
                     if Player.room.NPC == "PewDiePie": # if the npc is pewdiepie
                         PewDiePie()
                     #elif ..
+                
+                else:
+                    TypeOut("%s sadly sits alone."%Player.room.NPC)
 
             else:  # if there is not an npc
                 TypeOut("There aren't any NPCs in this room..")

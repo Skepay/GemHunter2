@@ -168,6 +168,7 @@ def PewDiePie():
 
     if playTrivia != "y": # if they dont want to play the game
         print("PEWDIEPIE: Oh well, you couldn't of won anyways.. Bye bye.")
+        time.sleep(1)
         return None
        
     pdpTrivia1 = pewQuestion(); pdpTrivia2 = pewQuestion(); pdpTrivia3 = pewQuestion()
@@ -232,4 +233,7 @@ def PewDiePie():
         TypeOut("PEWDIEPIE: No, you know what.. you're a sucky gamer, you can't have my chair.  Get out of my sight.")
         time.sleep(2)
 
+    # Removes npc from room.
+    Player.room.NPC = None
+    
 # other npcs here
