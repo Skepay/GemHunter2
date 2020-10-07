@@ -10,8 +10,7 @@ except ImportError:
     subprocess.call([sys.executable, "-m", "pip", "install", 'pillow'])
     print("Installed Pillow.")
     exit(1)
-finally:
-    from PIL import Image
+
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
@@ -25,24 +24,6 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
 
 
 #~/ Item Functions\~#
-def Chair():
-    ClearConsole()
-
-    useChair = ValidInput('This chair can teleport you to any room.. in STYLE.\nWould you like to use it?\n(y/n)\n\n->', "y", "n")
-    if useChair == "y":
-        digit_list = ["0","1","2","3","4","5","6","7","8","9"]
-        while True:
-            ClearConsole
-            teleportLocation = input("What is the number of the room you want to travel to?\n->")
-            if teleportLocation not in digit_list:
-                teleportLocation = input("What is the number of the room you want to travel to?\n->")
-                
-            elif teleportLocation in digit_list and int(teleportLocation) > 0:
-                teleportLocation = int(teleportLocation)
-                break
-            TypeOut('Type a valid answer or I will go to\nyour house and kill your family %s'%Player.name)
-            time.sleep(1)
-        return teleportLocation
 
 # Dictionary for the items
 items = {
@@ -66,9 +47,12 @@ def LoadingBar():
 
     while bar != 100:
         loops += 1
-        loading = '\n\n\nSearching Room.'
-        for i in range(loops % 4):
-            loading += '.'
+        if bar >=98:
+            loading = '\n\n\nFinished!'
+        else:
+            loading = '\n\n\nSearching Room.'
+            for i in range(loops % 4):
+                loading += '.'
         print(loading)
 
         if loops == nextl:
@@ -219,7 +203,7 @@ def PewDiePie():
 
     ClearConsole()
 
-    TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
+    TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
     time.sleep(2)
    
     if pdpScore >= 2: # if user won
