@@ -1,3 +1,5 @@
+# Controls the colors for CMD text.
+
 class TextColor:
     red = (245, 90, 66)
     orange = (245, 170, 66)

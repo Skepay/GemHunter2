@@ -1,6 +1,8 @@
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
+# Source File for Gem Hunter containing all background work.
+
 # Make sure PIL is installed
 try:
     from PIL import Image
@@ -11,8 +13,7 @@ except ImportError:
 finally:
     from PIL import Image
 
-
-#~/ Functions \~#
+# Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
     validInputs = [param1,param2,param3,param4,param5,param6]
     inp = str(input(string))
@@ -23,14 +24,44 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
         inp = str(input(string))
 
 
+#~/ Item Functions\~#
+def Chair():
+    ClearConsole()
+
+    useChair = ValidInput('This chair can teleport you to any room.. in STYLE.\nWould you like to use it?\n(y/n)\n\n->', "y", "n")
+    if useChair == "y":
+        digit_list = ["0","1","2","3","4","5","6","7","8","9"]
+        while True:
+            ClearConsole
+            teleportLocation = input("What is the number of the room you want to travel to?\n->")
+            if teleportLocation not in digit_list:
+                teleportLocation = input("What is the number of the room you want to travel to?\n->")
+                
+            elif teleportLocation in digit_list and int(teleportLocation) > 0:
+                teleportLocation = int(teleportLocation)
+                break
+            TypeOut('Type a valid answer or I will go to\nyour house and kill your family %s'%Player.name)
+            time.sleep(1)
+        return teleportLocation
+
+# Dictionary for the items
+items = {
+    'GFUEL' : "A tasty beverage.",
+    'PewDiePie 100M Edition Clutch Chair' : "Chair"
+}
+
+
+#~/ Functions \~#
+
 # Get windows username of player.
 def GetName():
     return os.getlogin()
 
 
+# Loading bar animation.
 def LoadingBar():
     # credit JayPay
-    dots = 0; bar = 0; loops = 0
+    bar = 0; loops = 0
     nextl = random.randint(0,10)
 
     while bar != 100:
@@ -54,7 +85,7 @@ def LoadingBar():
         barstring += '] %g%%'%bar
         print(barstring)
 
-        time.sleep(random.uniform(0.1,0.2))
+        time.sleep(random.uniform(0.025,0.175))
         ClearConsole()
 
 
@@ -88,9 +119,13 @@ def Introduction():
 
     TypeOut('G E M    H U N T E R',0.06)
     time.sleep(1)
+
     print("Credit: Isaiah Harville, Joshua Payne.")
     time.sleep(1)
-    return input("Press any key to continue. Or type help for a list of keybinds.\n")
+
+    InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
+    
+    Instructions() if InfoInp else print()
 
 
 # List of keybinds for the game.
@@ -104,8 +139,92 @@ def Instructions():
         """)
     input("\n\nPress any key to continue.")
 
+
 #~/ Player \~#
 class Player:
     name = GetName()
-    inventory = ['surgical mask','gfuel']
+    inventory = ['GFUEL']
     room = 0
+
+
+#~/ NPCS \~#
+
+# PEWDIEPIE
+class pewQuestion:
+    question = ""
+    ans1 = ""
+    ans2 = ""
+    ans3 = ""
+    correctAns = None
+
+def PewDiePie():
+    ClearConsole()
+
+    TypeOut("Sup Gamer, would you like to participate in a trivia?  I'll give you my chair if you win.\nDo you think you have what it takes?\n",newline=False)
+    playTrivia = ValidInput("(y/n)\n\n-> ", "y", "n")
+
+    ClearConsole()
+
+    if playTrivia != "y": # if they dont want to play the game
+        print("Oh well, you couldn't of won anyways.. Bye bye.")
+        return None
+    
+    pewdsResponses = ['Wonderful job!', 'Edgar cammMMmMmMm', 'I rate this Gfuel/10', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH' ]
+   
+    pdpTrivia1 = pewQuestion(); pdpTrivia2 = pewQuestion(); pdpTrivia3 = pewQuestion()
+    
+    pdpTrivia1.question = "What is the great price of my chair?"
+    pdpTrivia1.ans1 = "$399.99"; pdpTrivia1.ans2 = "$420.69"; pdpTrivia1.ans3 = "$399.90"
+    pdpTrivia1.correctAns = "1"
+
+    pdpTrivia2.question = "What is the name of my signature GFUEL flavor?"
+    pdpTrivia2.ans1 = "PewDiePie"; pdpTrivia2.ans2 = "Red Sugar"; pdpTrivia2.ans3 = "Lingonberry"
+    pdpTrivia2.correctAns = "3"
+
+    pdpTrivia3.question = "What year was it when I reached 50 million subs?"
+    pdpTrivia3.ans1 = "2015"; pdpTrivia3.ans2 = "2016"; pdpTrivia3.ans3 = "2013"
+    pdpTrivia3.correctAns = "2"
+
+    pdpTrivia = [pdpTrivia1,pdpTrivia2,pdpTrivia3]
+
+    # start game messages
+    TypeOut('\nNani da freaky deaky?!  You think you know the knowledge of the Swedes!?\n',newline=False)
+    time.sleep(1)
+    TypeOut("Well.. lets find out.")
+    time.sleep(1)
+
+    pdpScore = 0
+    for question in pdpTrivia: # prints the question and takes the answer
+        ClearConsole()
+        ColorPrint(question.question, TextColor.green)
+        print("""1. %s\n2. %s\n3. %s\n\n"""%(question.ans1,question.ans2,question.ans3))
+
+        pdpTriviaGuess = ValidInput("-> ","1","2","3")
+
+        if pdpTriviaGuess == question.correctAns: # if the player guessed correctly
+            pdpScore += 1
+            pewdsResponse = random.choice(pewdsResponses)
+            TypeOut("PEWDIEPIE: %s"%pewdsResponse)
+            pewdsResponses.pop(pewdsResponse)
+            time.sleep(1)
+
+        else: # if the player guessed incorrectly
+            pdpScore -= 1
+    time.sleep(1)
+    ClearConsole()
+
+    TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
+    time.sleep(2)
+   
+    if pdpScore >= 2: # if user won
+        TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
+        ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
+        TypeOut("To use the chair, interact with it in your inventory from the menu.")
+        time.sleep(2)
+        Player.inventory.append("PewDiePie 100M Edition Clutch Chair")
+
+    else: # if user lost
+        TypeOut("PEWDIEPIE: No, you know what.. you're a sucky gamer, you can't have my chair.  Get out of my sight.")
+
+
+# other npcs here
