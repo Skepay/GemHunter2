@@ -21,13 +21,13 @@ rooms = pickle.load(roomFile)
 
 
 # Intro to Game
-Introduction()
+#Introduction()
 
 # Sets the player to start in the start room
 Player.room = rooms[0]
 
 # open the map picture
-Image.open("Map.jpeg").show()
+#Image.open("Map.jpeg").show()
 
 
 #~/ Main Loop \~#
@@ -72,7 +72,7 @@ while 1:
             "\n2. Open Inventory."
             "\n3. Exit/Save Game.\n"
         )
-        menuOption = ValidInput("->", "1","2","3")
+        menuOption = input("->")
         
 
         # Search Room
@@ -80,7 +80,7 @@ while 1:
             # credit JayPay loading bar
             ClearConsole()
             
-            LoadingBar()
+            #LoadingBar()
 
             ClearConsole()
 
@@ -156,3 +156,4 @@ while 1:
                 saveFile.write("%s\n"%str(Player.inventory))
             input("Saved your progress.")
             exit(1)
+        
