@@ -18,10 +18,51 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
     inp = str(input(string))
     
     while 1:
-        if inp in validInputs:
-            return inp
+        if inp.lower() in validInputs:
+            return inp.lower()
         inp = str(input(string))
 
+
+#~/ Doors \~#
+def openDoor(keys):
+    missingKeys = []
+    if type(keys) == list:
+        for key in keys:
+            if key not in Player.inventory:
+                missingKeys.append(key)
+    else:
+        if keys not in Player.inventory:
+            missingKeys.append(keys)
+    
+    if len(missingKeys):
+        TypeOut("You do not have: %s."%', '.join(missingKeys))
+        time.sleep(1)
+
+        return False
+
+    else:
+        TypeOut("The door opened!", 0.06)
+
+        if type(keys) == list:
+            for key in keys: 
+                Player.inventory.remove(key)
+        else:
+            Player.inventory.remove(keys)
+
+        time.sleep(1)
+
+        return True
+    
+key = {
+    'Red Door' : 'Red Key',
+    'Orange Door' : 'Orange Key',
+    'Yellow Door' : 'Yellow Key',
+    'Green Door' : 'Green Key',
+    'Blue Door' : 'Blue Key',
+    'Indigo Door' : 'Indigo Key',
+    'Violet Door' : 'Violet Key',
+    'Gemstone Door' : ['Red Key', 'Orange Key', 'Yellow Key', 'Green Key', 'Blue Key', 'Indigo Key', 'Violet Key']
+}
 
 #~/ Item Functions\~#
 
@@ -98,6 +139,7 @@ def ColorPrint(string, inputColor = TextColor.white):
 
 # OG welcome message for gem hunter.
 def Introduction():
+    ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
     time.sleep(0.5)
 
@@ -126,8 +168,8 @@ def Instructions():
 
 #~/ Player \~#
 class Player:
-    name = GetName()
-    inventory = ['GFUEL']
+    name = ""
+    inventory = []
     room = 0
 
 

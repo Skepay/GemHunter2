@@ -116,9 +116,10 @@ while True:
                 print("Enter the names of your items/npcs, leave blank for None")
                 roomItem = input("What is the name of the item do you want to add to %s?\n"%Rooms[-1].name)
                 roomNPC = input("What is the name of the NPC you want to add to %s?\n"%Rooms[-1].name)
+                roomDoor = input("What is the name of the Door you want to add to %s?\n"%Rooms[-1].name)
 
                 if roomItem != '':
-                    Rooms[-1].item = roomItem 
+                    Rooms[-1].item = roomItem
                 else:
                     Rooms[-1].item = None
                 
@@ -126,6 +127,12 @@ while True:
                     Rooms[-1].NPC = roomNPC
                 else:
                     Rooms[-1].NPC = None
+
+                if roomDoor != '':
+                    Rooms[-1].door = roomDoor
+                else:
+                    Rooms[-1].door = None
+                
 
         
         elif event.type==pygame.KEYDOWN:
