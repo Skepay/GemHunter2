@@ -22,7 +22,7 @@ rooms = pickle.load(roomFile)
 
 #TODO INSTALL PYLINT-DJANGO
 # Intro to Game
-#TODO Introduction()
+Introduction()
 
 # Initialize Player
 Player.name = GetName()
@@ -30,7 +30,7 @@ Player.room = rooms[0]
 Player.inventory = ["GFUEL"]
 
 # open the map picture
-#TODO Image.open("Map.jpeg").show()
+Image.open("Map.jpeg").show()
 
 
 #~/ Main Loop \~#
