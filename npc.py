@@ -11,7 +11,7 @@ class BigDikman:
         self.hp = random.randint(15,20)
 
     def GetDikmanName(self):
-        firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
+        firstNawme = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = random.choice(firstName), random.choice(lastName)
         return name
@@ -91,82 +91,8 @@ class PewDiePie:
         # Removes npc from room.
         Player.room.NPC = None
 
-
-# AMONG US NPC (WHITE)
-def AmongUsNPC():
-    ClearConsole()
-
-    TypeOut("WHITE: I was in navigation doing tasks, I couldn't be the impostor.")
-    playAmongUs = ValidInput("Play Among Us? (y/n)\n\n-> ", "y", "n")
-
-    if playAmongUs != "y":
-        ClearConsole()
-        time.sleep(1)
-        TypeOut("White was not The Impostor.",0.07)
-        time.sleep(1)
-        ClearConsole()
-        time.sleep(.35)
-        return None
-
-    ClearConsole()
-    TypeOut("Vote out The Impostor.")
-    time.sleep(1)
-
-    #defense messages
-    crewMatesDef = {
-        "blue" : "I found yellow dead in cafeteria by the emergency meeting button.",
-        "white" : "I was in navigation.",
-        "red" : "I was in Admin swiping my card.",
-        "cyan" :  "I was in weapons destroying the asteroids.",
-        "green" : "I was starting reactor."
-    }
-
-    #select random impostor
-    crewMates = ["red","green","white","blue","cyan"]
-    impostor = random.choice(crewMates)
-
-    while impostor in crewMates:
-        ClearConsole()
-
-        ColorPrint("EMERGENCY MEETING\n\n", TextColor.red)
-        for mate in crewMates:
-            TypeOut("%s: %s"%(mate, crewMatesDef[mate]))
-
-        ColorPrint("VOTE", TextColor.red); ColorPrint("(%s)"%', '.join(crewMates))
-
-        voted = ValidInput("Who is the Impostor?\n->","white","red","blue","green","cyan")
-
-        while voted not in crewMates:
-            ClearConsole()
-            TypeOut("%s has already been voted out."%voted)
-            voted = ValidInput("Who is the Impostor?\n->","white","red","blue","green","cyan")
-
-        if len(crewMates) > 1:
-            if voted == impostor:
-                ClearConsole()
-                time.sleep(1)
-                TypeOut("%s was The Impostor."%voted)
-                time.sleep(1.5)
-                ClearConsole()
-                TypeOut("Victory.  [ITEM] has been added to your inventory.")
-                # give item
-                return None
-
-            else:
-                ClearConsole()
-                time.sleep(1)
-                TypeOut("%s was not The Impostor."%voted)
-                crewMates.remove(voted)
-                time.sleep(1.5)
-
-        else:
-            time.sleep(1)
-            TypeOut("Defeat.  %s was the Impostor."%impostor)
-            time.sleep(1.5)
-
     
 npc = {
     "PewDiePie" : PewDiePie,
-    "White" : AmongUsNPC,
     "BigDikman" : "", #TODO: Colin, call your npc here.
 }

@@ -1,9 +1,5 @@
-# Program for automating the development of rooms.
+# Program for automating the development of rooms.\
 
-
-<<<<<<< HEAD
-
-=======
 import pygame
 pygame.init()
 
@@ -38,4 +34,3 @@ class RoomDisplay:
 
 rooms = [Room()]
 Rooms[0] = 0
->>>>>>> d91737d730b1047621c16b512f31c3f0f658da9a
