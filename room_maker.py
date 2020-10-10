@@ -169,10 +169,6 @@ while not done:
             
             os.system('cls')
             print('Current settings for room %g:'%rooms[selectedRoomNum].room.name)
-            print('Up   =', rooms[selectedRoomNum].room.up)
-            print('Down =', rooms[selectedRoomNum].room.down)
-            print('Left =', rooms[selectedRoomNum].room.left)
-            print('Right =', rooms[selectedRoomNum].room.right)
             print('Door =', rooms[selectedRoomNum].room.door)
             print('Item =', rooms[selectedRoomNum].room.item)
             print('NPC  =', rooms[selectedRoomNum].room.npc)
