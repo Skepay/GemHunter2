@@ -1,3 +1,4 @@
+# Main File.
 import pickle, time
 from npc import *
 
@@ -9,14 +10,14 @@ roomFile = open('bin.dat', 'rb')
 roomFile.seek(0)
 
 class Room: # stores attributes of each room
-    name = None # Room num
-    item = None # str
-    door = None # str -> int
-    up = None   # room
-    down = None # room
-    left = None # room
-    right = None # room
-    NPC = None # str
+    name = None   # Room num
+    item = None   # str
+    door = None   # str -> int
+    up = None     # room
+    down = None   # room
+    left = None   # room
+    right = None  # room
+    NPC = None    # str
 
 
 rooms = pickle.load(roomFile)

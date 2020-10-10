@@ -1,4 +1,4 @@
-#import npc
+# Source File for Gem Hunter containing all background work.
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
@@ -142,7 +142,7 @@ class Player:
     health = 20
     inventory = []
     room = 0
-    
+
     def punch(enemy):
         item = enemy.Damage(random.randint(0,4))
         if(item):
