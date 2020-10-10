@@ -1,4 +1,6 @@
 import npc
+import os, time, sys, subprocess, random
+from color_source import ColorsFG, color, TextColor
 
 # Source File for Gem Hunter containing all background work.
 
