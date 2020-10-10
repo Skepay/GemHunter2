@@ -85,7 +85,7 @@ while not done:
 
                 if not foundRoom:
                     if xDistance > yDistance:
-                        rooms.append(RoomDisplay((pos[0] - 10, rooms[selectedRoomNum].rect.y), len(rooms) - 1))
+                        rooms.append(RoomDisplay((pos[0] - 10, rooms[selectedRoomNum].rect.y), len(rooms)))
                         if rooms[-1].rect.x > rooms[selectedRoomNum].rect.x: # If room is being added to the right
                             rooms[selectedRoomNum].room.right = len(rooms) - 1
                             rooms[-1].room.left = selectedRoomNum
@@ -93,7 +93,7 @@ while not done:
                             rooms[selectedRoomNum].room.left = len(rooms) - 1
                             rooms[-1].room.right = selectedRoomNum
                     else:
-                        rooms.append(RoomDisplay((rooms[selectedRoomNum].rect.x, pos[1] - 10), len(rooms) - 1))
+                        rooms.append(RoomDisplay((rooms[selectedRoomNum].rect.x, pos[1] - 10), len(rooms)))
                         if rooms[-1].rect.y > rooms[selectedRoomNum].rect.y: # If room is being added down
                             rooms[selectedRoomNum].room.down = len(rooms) - 1
                             rooms[-1].room.up = selectedRoomNum
