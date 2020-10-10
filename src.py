@@ -1,17 +1,8 @@
-import npc
+#import npc
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
 # Source File for Gem Hunter containing all background work.
-
-# Make sure PIL is installed
-try:
-    from PIL import Image
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", 'pillow'])
-    print("Installed Pillow.")
-    exit(1)
-
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):

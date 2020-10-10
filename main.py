@@ -28,9 +28,6 @@ Introduction()
 Player.room = rooms[0]
 Player.inventory = ["GFUEL"]
 
-# open the map picture
-Image.open("Map.jpeg").show()
-
 
 #~/ Main Loop \~#
 while 1:
