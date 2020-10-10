@@ -39,9 +39,6 @@ makingRoom = False
 while not done:
     screen.fill((0, 0, 0))
 
-    for room in rooms:
-        room.drawRoom()
-
     pos = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
@@ -49,7 +46,7 @@ while not done:
             pygame.quit()
             exit()
 
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if makingRoom:
                 makingRoom = False
 
@@ -61,6 +58,9 @@ while not done:
                 for roomNum in range(len(rooms)):
                     if rooms[roomNum].rect.colliderect(newRoom):                        
                         foundRoom = True
+
+                        if roomNum == selectedRoomNum:
+                            break
 
                         if xDistance > yDistance: # If room is being added on the X axis
                             if rooms[roomNum].rect.x > rooms[selectedRoomNum].rect.x: # If room pressed is to the right
@@ -104,6 +104,32 @@ while not done:
                         selectedRoomNum = roomNum
                         makingRoom = True
                         break
+
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 2:
+            makingRoom = False
+
+            for roomNum in range(len(rooms)):
+                if rooms[roomNum].rect.collidepoint(pos):
+                    selectedRoomNum = roomNum
+                    break
+            
+            if rooms[selectedRoomNum].room.name == 0:
+                break
+
+            if rooms[selectedRoomNum].room.left != None:
+                rooms[rooms[selectedRoomNum].room.left].room.right = None
+            if rooms[selectedRoomNum].room.right != None:
+                rooms[rooms[selectedRoomNum].room.right].room.left = None
+            if rooms[selectedRoomNum].room.up != None:
+                rooms[rooms[selectedRoomNum].room.up].room.down = None
+            if rooms[selectedRoomNum].room.down != None:
+                rooms[rooms[selectedRoomNum].room.down].room.up = None
+                    
+            rooms[-1].room.name = selectedRoomNum
+            rooms[selectedRoomNum] = rooms[-1]
+            del rooms[-1]
+            
+
     
     if makingRoom:
         xDistance = abs(pos[0] - rooms[selectedRoomNum].rect.x)
@@ -131,6 +157,8 @@ while not done:
             room.drawLine(rooms[room.room.up])
         if room.room.left != None:
             room.drawLine(rooms[room.room.left])
+
+        room.drawRoom()
 
 
     pygame.display.update()
