@@ -71,12 +71,12 @@ class PewDiePie:
             self.RandomResponse()
             time.sleep(1)
         else:                               # if their guess was wrong
-            pdpScore -= 1
+            self.pdpScore -= 1
             self.RandomResponse()
             time.sleep(1)
     
     def GameOver(self):
-        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
+        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
         
         if self.pdpScore >= 2:  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
