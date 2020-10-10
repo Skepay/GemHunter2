@@ -49,7 +49,7 @@ while 1:
             }
         for room in rooms:
             if room.name == keystrokes[travelTo]:
-                if room.door: # if there is a door
+                if room.door != None: # if there is a door
                     ClearConsole()
 
                     if type(key[room.door]) == list:
@@ -123,17 +123,14 @@ while 1:
 
             TypeOut("\nWhich item do you want to inspect?\n",newline=False)
 
-
-            digit_list = ["0","1","2","3","4","5","6","7","8","9"]
             while True: # gets index input of the items
-                itemChoice = input("-> ")
-                if itemChoice not in digit_list:
-                    itemChoice = input("-> ")
+                try:
+                    itemChoice = int(input("-> "))
+                    if int(itemChoice) in range(1,len(Player.inventory)) or itemChoice == len(Player.inventory):
+                        break
+                except:
+                    itemChoice = int(input("-> "))
 
-                elif int(itemChoice) in range(1,len(Player.inventory)+1) and itemChoice in digit_list:
-                    itemChoice = int(itemChoice)
-                    break
-
-            items[Player.inventory[itemChoice-1]]() # passes item in dictionary
+            items[Player.inventory[itemChoice]-1]() # passes item in dictionary
 
             input("\nPress any key to continue..")
