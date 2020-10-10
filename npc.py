@@ -6,17 +6,17 @@ class BigDikman:
         self.name = self.GetDikmanName()
         self.hp = random.randint(15,20)
 
-    def GetDikmanName():
+    def GetDikmanName(self):
         firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = random.choice(firstName), random.choice(lastName)
         return name
 
-    def GetRandomLine():
+    def GetRandomLine(self):
         lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
         return random.choice(lines)
 
-    def Damage(dmg):
+    def Damage(self, dmg):
         self.hp -= dmg
         if(self.hp > 0):
             TypeOut(self.name + ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!")
@@ -24,7 +24,7 @@ class BigDikman:
         else:
             return self.Die()
 
-    def Die():
+    def Die(self):
         TypeOut(self.name + ": Ouch. That one hurt my dik.")
         TypeOut(self.name + " HAS DIED.")
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
