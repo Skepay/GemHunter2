@@ -1,5 +1,6 @@
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
+from src import *
 #~/ NPCS \~#
 
 # PEWDIEPIE

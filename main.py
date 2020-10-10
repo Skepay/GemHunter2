@@ -1,6 +1,5 @@
 import pickle, time
-from src import *
-
+from npc import *
 
 # Main Game File for gemhunter
 # TODO: puzzles, more mpcs, more content, search room func, with search room loading bar (15 second).  Save file, NPC's that can grant keys,use colors
