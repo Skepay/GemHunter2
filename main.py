@@ -3,6 +3,8 @@ from npc import *
 
 # TODO: puzzles, more mpcs, more content,  NPC's that can grant keys
 
+# Initialize Rooms
+rooms = pickle.load(roomFile)
 
 # Intro to Game
 Introduction()
@@ -108,11 +110,11 @@ while 1:
             while True: # gets index input of the items
                 try:
                     itemChoice = int(input("-> "))
-                    if int(itemChoice) in range(1,len(Player.inventory)) or itemChoice == len(Player.inventory):
+                    if int(itemChoice) in range(0,len(Player.inventory)-1) or itemChoice == len(Player.inventory):
                         break
                 except:
-                    itemChoice = int(input("-> "))
+                    pass
 
-            items[Player.inventory[itemChoice]-1]() # passes item in dictionary
+            items[Player.inventory[itemChoice-1]]() # passes item in dictionary
 
             input("\nPress any key to continue..")

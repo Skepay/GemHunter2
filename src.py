@@ -16,7 +16,7 @@ class Room: # stores attributes of each room
     left = None   # room
     right = None  # room
     npc = None    # str
-
+    
 rooms = pickle.load(roomFile)
 
 # Valid Input function
@@ -87,12 +87,12 @@ def Chair():
         # verify the input of the room 
         while True:
             ClearConsole()
-            try:
-                teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
-                if teleportLocation in range(0,len(rooms)):
-                    break
-            except:
-                teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
+            #try:
+            teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
+            if teleportLocation in range(0,len(rooms)):
+                break
+            #except:
+                #pass
 
         # teleports the player to his desired location
         for room in rooms:
@@ -129,7 +129,7 @@ def LoadingBar():
         print('Searching Room%s'%('.' * (progress % 4)))
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
-        time.sleep(random.uniform(0.0075,.135))
+        time.sleep(random.uniform(0.0075,.100))
         
 
 # Clear the console
