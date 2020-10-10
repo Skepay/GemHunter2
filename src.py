@@ -1,4 +1,4 @@
-#import npc
+# Source File for Gem Hunter containing all background work.
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
@@ -136,13 +136,24 @@ def Instructions():
     input("\n\nPress any key to continue.")
 
 
+# Prints informational messages.
+def InfoMessages():
+    ClearConsole()
+    ColorPrint("LOCATION:", TextColor.blue)
+    TypeOut("You are currently in ", 0.010,newline=False); ColorPrint(str(Player.room.name),TextColor.blue) # types out the name of color in blue
+    ColorPrint("\nINVENTORY:", TextColor.blue)
+    TypeOut("%s"%', '.join(Player.inventory),0.010)
+    print("Where would you like to travel to?",end =''); ColorPrint(" (u/d/l/r/m)",TextColor.lightpurple)
+    
+
+
 #~/ Player \~#
 class Player:
     name = GetName()
     health = 20
     inventory = []
     room = 0
-    
+
     def punch(enemy):
         item = enemy.Damage(random.randint(0,4))
         if(item):

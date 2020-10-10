@@ -1,5 +1,4 @@
-# Program for automating the development of rooms.
-
+# Program for automating the development of rooms.\
 
 import pygame
 pygame.init()
