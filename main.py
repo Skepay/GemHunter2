@@ -94,7 +94,7 @@ while 1:
 
         # Search Room
         if menuOption == "1": # search room
-            # credit JayPay loading bar
+            # credit 2 JayPay loading bar
             ClearConsole()
 
             LoadingBar()
@@ -187,6 +187,9 @@ while 1:
 
             else: # if the item isnt the chair
                 TypeOut(inspectItem)
+
+            if False:
+                print('hohohohohohohoo')
 
             input("\nPress any key to continue..")
 
