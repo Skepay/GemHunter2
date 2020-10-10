@@ -11,8 +11,8 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
     inp = str(input(string))
 
     while 1:
-        if inp.lower() in validInputs:
-            return inp.lower()
+        if inp in validInputs:
+            return inp
         inp = str(input(string))
 
 
