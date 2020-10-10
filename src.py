@@ -60,6 +60,7 @@ key = {
 #~/ Item Functions\~#
 # Informational messagfe about gfuel.
 def Gfuel():
+    ClearConsole()
     TypeOut("A tasty beverage.")
 
 
@@ -117,13 +118,13 @@ def GetName():
 def LoadingBar():
     progress = 0
     while progress <= 100:
-        os.system('cls')
+        ClearConsole()
         progressBars = progress // 5
         print('Searching Room%s'%('.' * (progress % 4)))
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
-        time.sleep(random.randint(0.0025,.0075)
-
+        time.sleep(random.uniform(0.005,.100))
+        
 
 # Clear the console
 def ClearConsole(newline = False):
