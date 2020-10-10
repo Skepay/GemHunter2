@@ -107,14 +107,26 @@ while not done:
 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 2:
             makingRoom = False
-
+            
+            foundRoom = False
             for roomNum in range(len(rooms)):
                 if rooms[roomNum].rect.collidepoint(pos):
                     selectedRoomNum = roomNum
+                    foundRoom = True
                     break
             
-            if rooms[selectedRoomNum].room.name == 0:
+            if not foundRoom or rooms[selectedRoomNum].room.name == 0:
                 break
+
+
+            if rooms[-1].room.left != None:
+                rooms[rooms[-1].room.left].room.right = selectedRoomNum
+            if rooms[-1].room.right != None:
+                rooms[rooms[-1].room.right].room.left = selectedRoomNum
+            if rooms[-1].room.up != None:
+                rooms[rooms[-1].room.up].room.down = selectedRoomNum
+            if rooms[-1].room.down != None:
+                rooms[rooms[-1].room.down].room.up = selectedRoomNum
 
             if rooms[selectedRoomNum].room.left != None:
                 rooms[rooms[selectedRoomNum].room.left].room.right = None
@@ -124,7 +136,8 @@ while not done:
                 rooms[rooms[selectedRoomNum].room.up].room.down = None
             if rooms[selectedRoomNum].room.down != None:
                 rooms[rooms[selectedRoomNum].room.down].room.up = None
-                    
+
+            
             rooms[-1].room.name = selectedRoomNum
             rooms[selectedRoomNum] = rooms[-1]
             del rooms[-1]
