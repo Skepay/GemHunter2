@@ -1,4 +1,6 @@
 # Program for automating the development of rooms.
+import os
+
 import pygame
 pygame.init()
 
@@ -26,6 +28,13 @@ class RoomDisplay:
 
         text = font.render('%g'%self.room.name, True, (0, 0, 0))
         screen.blit(text, (self.rect.x + 1, self.rect.y + 1))
+
+        if self.room.door != None:
+            pygame.draw.rect(screen, (102, 51, 0), (self.rect.x + 1, self.rect.y + 15, 4, 4))
+        if self.room.item != None:
+            pygame.draw.rect(screen, (0, 0, 153), (self.rect.x + 8, self.rect.y + 15, 4, 4))
+        if self.room.NPC != None:
+            pygame.draw.rect(screen, (153, 0, 153), (self.rect.x + 15, self.rect.y + 15, 4, 4))
 
     def drawLine(self, room2):
         pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 10), (room2.rect.x + 10, room2.rect.y + 10))
@@ -136,11 +145,52 @@ while not done:
                 rooms[rooms[selectedRoomNum].room.up].room.down = None
             if rooms[selectedRoomNum].room.down != None:
                 rooms[rooms[selectedRoomNum].room.down].room.up = None
-
             
             rooms[-1].room.name = selectedRoomNum
             rooms[selectedRoomNum] = rooms[-1]
             del rooms[-1]
+
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+            foundRoom = False
+            for roomNum in range(len(rooms)):
+                if rooms[roomNum].rect.collidepoint(pos):
+                    selectedRoomNum = roomNum
+                    foundRoom = True
+                    break
+            
+            if not foundRoom:
+                break
+            
+            os.system('cls')
+            print('Current settings for room %g:'%rooms[selectedRoomNum].room.name)
+            print('Door =', rooms[selectedRoomNum].room.door)
+            print('Item =', rooms[selectedRoomNum].room.item)
+            print('NPC  =', rooms[selectedRoomNum].room.NPC)
+            print('*' * 35)
+
+            print('Change settings for room %g:'%rooms[selectedRoomNum].room.name)
+
+            door = input('Door = ')
+            if door != '':
+                try:
+                    rooms[selectedRoomNum].room.door = int(door)
+                except:
+                    rooms[selectedRoomNum].room.door = None
+            else:
+                rooms[selectedRoomNum].room.door = None
+
+            item = input('Item = ')
+            if item != '':
+                rooms[selectedRoomNum].room.item = item
+            else:
+                rooms[selectedRoomNum].room.item = None
+
+            NPC = input('NPC  = ')
+            if NPC != '':
+                rooms[selectedRoomNum].room.NPC = NPC
+            else:
+                rooms[selectedRoomNum].room.NPC = None
+            
             
 
     
