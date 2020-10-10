@@ -1,4 +1,4 @@
-import npc
+#import npc
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
