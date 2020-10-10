@@ -138,7 +138,7 @@ def Introduction():
     TypeOut('G E M    H U N T E R',0.06)
     time.sleep(1)
 
-    print("Credit: Isaiah Harville, Joshua Payne.")
+    print("Credit: Isaiah Harville, Joshua Payne, Colin O'Kain, Matthew Payne.")
     time.sleep(1)
 
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
