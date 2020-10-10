@@ -130,17 +130,17 @@ while not done:
                     foundRoom = True
                     break
             
-            if not foundRoom or rooms[selectedRoomNum].room.name == 0:
+            if not foundRoom or len(rooms) == 1:
                 break
 
 
-            if rooms[-1].room.left != None:
+            if rooms[-1].room.left != None and rooms[-1].room.left != selectedRoomNum:
                 rooms[rooms[-1].room.left].room.right = selectedRoomNum
-            if rooms[-1].room.right != None:
+            if rooms[-1].room.right != None and rooms[-1].room.right != selectedRoomNum:
                 rooms[rooms[-1].room.right].room.left = selectedRoomNum
-            if rooms[-1].room.up != None:
+            if rooms[-1].room.up != None and rooms[-1].room.up != selectedRoomNum:
                 rooms[rooms[-1].room.up].room.down = selectedRoomNum
-            if rooms[-1].room.down != None:
+            if rooms[-1].room.down != None and rooms[-1].room.down != selectedRoomNum:
                 rooms[rooms[-1].room.down].room.up = selectedRoomNum
 
             if rooms[selectedRoomNum].room.left != None:
@@ -151,7 +151,7 @@ while not done:
                 rooms[rooms[selectedRoomNum].room.up].room.down = None
             if rooms[selectedRoomNum].room.down != None:
                 rooms[rooms[selectedRoomNum].room.down].room.up = None
-            
+
             rooms[-1].room.name = selectedRoomNum
             rooms[selectedRoomNum] = rooms[-1]
             del rooms[-1]
@@ -169,6 +169,10 @@ while not done:
             
             os.system('cls')
             print('Current settings for room %g:'%rooms[selectedRoomNum].room.name)
+            print('Up   =', rooms[selectedRoomNum].room.up)
+            print('Down =', rooms[selectedRoomNum].room.down)
+            print('Left =', rooms[selectedRoomNum].room.left)
+            print('Right =', rooms[selectedRoomNum].room.right)
             print('Door =', rooms[selectedRoomNum].room.door)
             print('Item =', rooms[selectedRoomNum].room.item)
             print('NPC  =', rooms[selectedRoomNum].room.npc)
@@ -231,6 +235,7 @@ while not done:
         if room.room.left != None:
             room.drawLine(rooms[room.room.left])
 
+    for room in rooms:
         room.drawRoom()
 
 
@@ -239,8 +244,10 @@ while not done:
 
 # MAP IS FINISHED AT THIS POINT
 # SAVING ALL NECESSARY FILES
+os.system('cls')
 
 fileName = input('Enter file name for map files: ')
+print('*' * 45)
 
 pygame.image.save(screen, fileName + '.png')    # Saving png of map
 print('Saved image of map under name %s.png'%fileName)
