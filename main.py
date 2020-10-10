@@ -67,7 +67,8 @@ while 1:
                         else:
                             break
                     else:
-                        break
+                        TypeOut("The door remains locked.")
+                        time.sleep(1)
                 else: # if there is not a door
                     Player.room = room
 
@@ -81,26 +82,24 @@ while 1:
         menuOption = input("-> ")
 
         # Search Room
-        if menuOption == "1": # search room
-            # credit 2 JayPay loading bar
+        if menuOption == "1":
             ClearConsole()
 
             LoadingBar()
 
             ClearConsole()
 
+            #Room Items.
             if Player.room.item: # if there is a item in the room
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
-
                 Player.inventory.append(Player.room.item)
-
                 time.sleep(2)
 
             else:  # if there is not an item
                 TypeOut("There aren't any items in this room..")
-                time.sleep(2)
+                time.sleep(1.5)
 
-
+            # Room NPCs.
             if Player.room.NPC: # if there is an npc in the room
                 TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.NPC, TextColor.yellow)
                 time.sleep(2)
@@ -112,13 +111,15 @@ while 1:
 
                 else:
                     TypeOut("%s sadly sits alone."%Player.room.NPC)
+                    time.sleep(1.5)
 
             else:  # if there is not an npc
                 TypeOut("There aren't any NPCs in this room..")
-                time.sleep(2)
+                time.sleep(1.5)
 
 
-        elif menuOption == "2": # inspecting items in inventory
+        # Inspect inventory items.
+        elif menuOption == "2":
             ClearConsole()
 
             ColorPrint("\nINVENTORY:", TextColor.blue)

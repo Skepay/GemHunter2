@@ -3,7 +3,7 @@ import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
 # Define rooms to get rid of syntax errors.
-rooms = [0]
+rooms = []
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
@@ -17,7 +17,7 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
 
 
 #~/ Doors \~#
-def openDoor(keys):
+def openDoor(keys): 
     missingKeys = []
     if type(keys) == list:
         for key in keys:
@@ -27,12 +27,12 @@ def openDoor(keys):
         if keys not in Player.inventory:
             missingKeys.append(keys)
 
-    if len(missingKeys):
+    if len(missingKeys): # if player does not have keys
         TypeOut("You do not have: %s."%', '.join(missingKeys))
         time.sleep(1)
         return False
 
-    else:
+    else:  # if the player has the keys
         TypeOut("The door opened!", 0.06)
 
         if type(keys) == list:
@@ -54,8 +54,9 @@ key = {
     'Gemstone Door' : ['Red Key', 'Orange Key', 'Yellow Key', 'Green Key', 'Blue Key', 'Indigo Key', 'Violet Key']
 }
 
+
 #~/ Item Functions\~#
-# Informational messagfe about gfuel.
+# Informational message about gfuel.
 def Gfuel():
     ClearConsole()
     TypeOut("A tasty beverage.")
@@ -120,7 +121,7 @@ def LoadingBar():
         print('Searching Room%s'%('.' * (progress % 4)))
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
-        time.sleep(random.uniform(0.005,.100))
+        time.sleep(random.uniform(0.0075,.135))
         
 
 # Clear the console
@@ -150,16 +151,13 @@ def ColorPrint(string, inputColor = TextColor.white):
 def Introduction():
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
-    time.sleep(0.5)
-
-    TypeOut('G E M    H U N T E R',0.06)
-    time.sleep(1)
-
-    print("Credit: Isaiah Harville, Joshua Payne, Colin O'Kain, Matthew Payne.")
-    time.sleep(1)
-
+    time.sleep(0.75)
+    TypeOut('G E M    H U N T E R',0.075)
+    time.sleep(3)
+    ClearConsole()
+    ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
+    time.sleep(5)
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
-
     Instructions() if InfoInp else print()
 
 
