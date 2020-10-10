@@ -2,21 +2,21 @@ import pickle, time
 from npc import *
 
 # Main Game File for gemhunter
-# TODO: puzzles, more mpcs, more content, search room func, with search room loading bar (15 second).  Save file, NPC's that can grant keys,use colors
+# TODO: puzzles, more mpcs, more content,  NPC's that can grant keys
 
 #~/ Rooms \~#
 roomFile = open('bin.dat', 'rb')
 roomFile.seek(0)
 
 class Room: # stores attributes of each room
-    name = None
-    item = None
-    door = None
-    up = None
-    down = None
-    left = None
-    right = None
-    NPC = None
+    name = None # Room num
+    item = None # str
+    door = None # str -> int
+    up = None   # room
+    down = None # room
+    left = None # room
+    right = None # room
+    NPC = None # str
 
 
 rooms = pickle.load(roomFile)
@@ -76,7 +76,6 @@ while 1:
                             Player.room = room
                         else:
                             break
-
                     else:
                         break
                 else: # if there is not a door
@@ -120,10 +119,7 @@ while 1:
                 interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.NPC, "y","n")
 
                 if interact == "y":
-                    if Player.room.NPC == "PewDiePie": # if the npc is pewdiepie
-                        PewDiePie()
-                    if Player.room.NPC == "White": # among us impostor
-                        AmongUsNPC()
+                    npc[Player.room.NPC]()
 
                 else:
                     TypeOut("%s sadly sits alone."%Player.room.NPC)
