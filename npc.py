@@ -11,7 +11,7 @@ class BigDikman:
         self.hp = random.randint(15,20)
 
     def GetDikmanName(self):
-        firstNawme = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
+        firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = random.choice(firstName), random.choice(lastName)
         return name
