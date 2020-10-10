@@ -89,7 +89,7 @@ while 1:
             "\n2. Open Inventory."
             "\n3. Exit/Save Game.\n"
         )
-        menuOption = input("-> ")
+        menuOption = input("-> ") 
 
         # Search Room
         if menuOption == "1": # search room
