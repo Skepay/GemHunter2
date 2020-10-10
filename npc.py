@@ -43,7 +43,7 @@ class PewDiePie:
             "What is the great price of my chair?" : ["399.99", "420.69", "399.90"],
             "What is the name of my signature GFUEL flavor?" : ["Lingonberry", "Red Sugar", "PewDiePie"],
             "What year was it when I reached 50,000,000 subs?" :  ["2016", "2015", "2013"],
-            "What is my Wife's name?" : ["Marzia Kjellberg", "Marza Bisognin", "Merzia Kjellberg"],
+            "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"]
             }
@@ -92,7 +92,8 @@ class PewDiePie:
         Player.room.NPC = None
 
     
+#TODO: call npcs here
 npc = {
-    "PewDiePie" : PewDiePie,
-    "BigDikman" : "", #TODO: Colin, call your npc here.
+    "PewDiePie" : None,
+    "BigDikman" : None,
 }
