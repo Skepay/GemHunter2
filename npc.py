@@ -75,7 +75,7 @@ class PewDiePie:
             self.RandomResponse()
             time.sleep(1)
     
-    def GameOver():
+    def GameOver(self):
         TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
         
         if self.pdpScore >= 2:  # player win
