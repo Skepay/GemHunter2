@@ -74,36 +74,14 @@ def GetName():
 
 # Loading bar animation.
 def LoadingBar():
-    # credit JayPay
-    bar = 0; loops = 0
-    nextl = random.randint(0,10)
-
-    while bar != 100:
-        loops += 1
-        if bar >=98:
-            loading = '\n\n\nFinished!'
-        else:
-            loading = '\n\n\nSearching Room.'
-            for i in range(loops % 4):
-                loading += '.'
-        print(loading)
-
-        if loops == nextl:
-            bar += 1
-            nextl = random.randint(1,3)
-            loops = 0
-
-        barstring = '['
-        for i in range(bar):
-            if i % 5 == 0:
-                barstring += '#'
-        while len(barstring) != 21:
-            barstring += '-'
-        barstring += '] %g%%'%bar
-        print(barstring)
-
-        time.sleep(random.uniform(0.010,0.135))
-        ClearConsole()
+    progress = 0
+    while progress <= 100:
+        os.system('cls')
+        progressBars = progress // 5
+        print('Searching Room%s'%('.' * (progress % 4)))
+        print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
+        progress += 1
+        time.sleep(0.003)
 
 
 # Clear the console
