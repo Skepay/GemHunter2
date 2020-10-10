@@ -1,6 +1,24 @@
 from src import *
 #~/ NPCS \~#
 
+class Player:
+    def __init__(self):
+        self.name = 20
+
+class BigDikman:
+    def __init__(self, name):
+        self.name = self.GetDikmanName()
+        self.hp = random.randint(15,20)
+    def GetDikmanName():
+        firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
+        lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
+        name = random.choice(firstName), random.choice(lastName)
+        return name
+    def GetRandomLine():
+        lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
+        return random.choice(lines)
+
+
 # PEWDIEPIE
 class pewQuestion:
     question = ""
