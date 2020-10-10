@@ -93,7 +93,7 @@ while 1:
 
         # Search Room
         if menuOption == "1": # search room
-            # credit JayPay loading bar
+            # credit 2 JayPay loading bar
             ClearConsole()
 
             LoadingBar()
