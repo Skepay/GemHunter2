@@ -16,7 +16,7 @@ except ImportError:
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
     validInputs = [param1,param2,param3,param4,param5,param6]
     inp = str(input(string))
-    
+
     while 1:
         if inp.lower() in validInputs:
             return inp.lower()
@@ -33,7 +33,7 @@ def openDoor(keys):
     else:
         if keys not in Player.inventory:
             missingKeys.append(keys)
-    
+
     if len(missingKeys):
         TypeOut("You do not have: %s."%', '.join(missingKeys))
         time.sleep(1)
@@ -44,7 +44,7 @@ def openDoor(keys):
         TypeOut("The door opened!", 0.06)
 
         if type(keys) == list:
-            for key in keys: 
+            for key in keys:
                 Player.inventory.remove(key)
         else:
             Player.inventory.remove(keys)
@@ -52,7 +52,7 @@ def openDoor(keys):
         time.sleep(1)
 
         return True
-    
+
 key = {
     'Red Door' : 'Red Key',
     'Orange Door' : 'Orange Key',
@@ -127,7 +127,7 @@ def TypeOut(string, pause = 0.045, newline = True):
         print(letter, end='')
         sys.stdout.flush()
         time.sleep(pause)
-        
+
     if newline:
         print("\n")
 
@@ -150,7 +150,7 @@ def Introduction():
     time.sleep(1)
 
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
-    
+
     Instructions() if InfoInp else print()
 
 
@@ -168,7 +168,7 @@ def Instructions():
 
 #~/ Player \~#
 class Player:
-    name = ""
+    name = GetName()
     inventory = []
     room = 0
 
@@ -185,18 +185,18 @@ class pewQuestion:
 
 def PewDiePie():
     ClearConsole()
-    pewdsResponses = ['Wonderful job!', 'Edgar cammMMmMmMm', 'I rate this Gfuel/10', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH' ]
+    pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
 
-    TypeOut("PEWDIEPIE: Sup Gamer, would you like to participate in a trivia?  I'll give you my chair if you win.\nDo you think you have what it takes?\n",newline=False)
+    TypeOut("PEWDIEPIE: Sup Gamer, would you like to participate in a trivia?  I'll give you my chair if you win.  But there is a price if you lose..\nDo you think you have what it takes?\n",newline=False)
     playTrivia = ValidInput("(y/n)\n\n-> ", "y", "n")
 
     ClearConsole()
 
     if playTrivia != "y": # if they dont want to play the game
-        print("PEWDIEPIE: Oh well, you couldn't of won anyways.. Bye bye.")
+        print("PEWDIEPIE: Oh well, you couldn't of won anyways.. Bye bye")
         time.sleep(1)
         return None
-       
+
     pdpTrivia1 = pewQuestion(); pdpTrivia2 = pewQuestion(); pdpTrivia3 = pewQuestion()
 
     Trivia1answers = ["399.99", "420.69", "399.90"]; Trivia2answers = ["PewDiePie", "Red Sugar", "Lingonberry"]; Trivia3answers = ["2015", "2016", "2013"]
@@ -204,7 +204,7 @@ def PewDiePie():
 
     pdpTrivia1.question = "What is the great price of my chair?"
     pdpTrivia1.ans1 = Trivia1answers.pop(Trivia1answers.index(random.choice(Trivia1answers))); pdpTrivia1.ans2 = Trivia1answers.pop(Trivia1answers.index(random.choice(Trivia1answers))); pdpTrivia1.ans3 = Trivia1answers.pop(Trivia1answers.index(random.choice(Trivia1answers)))
-    
+
     pdpTrivia2.question = "What is the name of my signature GFUEL flavor?"
     pdpTrivia2.ans1 = Trivia2answers.pop(Trivia2answers.index(random.choice(Trivia2answers))); pdpTrivia2.ans2 = Trivia2answers.pop(Trivia2answers.index(random.choice(Trivia2answers))); pdpTrivia2.ans3 = Trivia2answers.pop(Trivia2answers.index(random.choice(Trivia2answers)))
 
@@ -222,9 +222,13 @@ def PewDiePie():
             question.correctAns = "3"
 
     # start game messages
-    TypeOut('\nPEWDIEPIE: Nani da freaky deaky?!  You think you have the knowledge of the Swedes!?\n',newline=False)
+    TypeOut("\nPEWDIEPIE: OMIWA SHINDERIU!!  You think you're a GAMER!?\n",newline=False)
     time.sleep(1)
-    TypeOut("PEWDIEPIE: Well.. lets find out.")
+    TypeOut("PEWDIEPIE: TAMBOURINE TAMBOURINE TAMBOURINE TAMBOURINE TAMBOURINE TAMBOURINE")
+    startTime = time.time()
+    while time.time() != startTime + 2.5:  # test this
+        print(".", end = '')
+
     time.sleep(1)
 
     pdpScore = 0
@@ -247,7 +251,7 @@ def PewDiePie():
 
     TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
     time.sleep(2)
-   
+
     if pdpScore >= 2: # if user won
         TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
         ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
@@ -261,5 +265,76 @@ def PewDiePie():
 
     # Removes npc from room.
     Player.room.NPC = None
-    
-# other npcs here
+
+
+# AMONG US NPC (WHITE)
+def AmongUsNPC():
+    ClearConsole()
+
+    TypeOut("WHITE: I was in navigation doing tasks, I couldn't be the impostor.")
+    playAmongUs = ValidInput("Play Among Us? (y/n)\n\n-> ", "y", "n")
+
+    if playAmongUs != "y":
+        ClearConsole()
+        time.sleep(1)
+        TypeOut("White was not The Impostor.",0.07)
+        time.sleep(1)
+        ClearConsole()
+        time.sleep(.35)
+        return None
+
+    ClearConsole()
+    TypeOut("Vote out The Impostor.")
+    time.sleep(1)
+
+    #defense messages
+    crewMatesDef = {
+        "blue" : "I found yellow dead in cafeteria by the emergency meeting button.",
+        "white" : "I was in navigation.",
+        "red" : "I was in Admin swiping my card.",
+        "cyan" :  "I was in weapons destroying the asteroids.",
+        "green" : "I was starting reactor."
+    }
+
+    #select random impostor
+    crewMates = ["red","green","white","blue","cyan"]
+    impostor = random.choice(crewMates)
+
+    while impostor in crewMates:
+        ClearConsole()
+
+        ColorPrint("EMERGENCY MEETING\n\n", TextColor.red)
+        for mate in crewMates:
+            TypeOut("%s: %s"%(mate, crewMatesDef[mate]))
+
+        ColorPrint("VOTE", TextColor.red); ColorPrint("(%s)"%', '.join(crewMates))
+
+        voted = ValidInput("Who is the Impostor?\n->","white","red","blue","green","cyan")
+
+        while voted not in crewMates:
+            ClearConsole()
+            TypeOut("%s has already been voted out."%voted)
+            voted = ValidInput("Who is the Impostor?\n->","white","red","blue","green","cyan")
+
+        if len(crewMates) > 1:
+            if voted == impostor:
+                ClearConsole()
+                time.sleep(1)
+                TypeOut("%s was The Impostor."%voted)
+                time.sleep(1.5)
+                ClearConsole()
+                TypeOut("Victory.  [ITEM] has been added to your inventory.")
+                # give item
+                return None
+
+            else:
+                ClearConsole()
+                time.sleep(1)
+                TypeOut("%s was not The Impostor."%voted)
+                crewMates.remove(voted)
+                time.sleep(1.5)
+
+        else:
+            time.sleep(1)
+            TypeOut("Defeat.  %s was the Impostor."%impostor)
+            time.sleep(1.5)

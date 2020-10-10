@@ -1,31 +1,31 @@
-import pickle
+import pickle, time
 from src import *
 
+
 # Main Game File for gemhunter
-#TODO: puzzles, more mpcs, more content, search room func, with search room loading bar (15 second).  Save file, NPC's that can grant keys,use colors
+# TODO: puzzles, more mpcs, more content, search room func, with search room loading bar (15 second).  Save file, NPC's that can grant keys,use colors
 
 #~/ Rooms \~#
-roomFile = open('bin.dat','rb')
+roomFile = open('bin.dat', 'rb')
 roomFile.seek(0)
 
 class Room: # stores attributes of each room
-        name = None
-        item = None
-        door = None
-        up = None
-        down = None
-        left = None
-        right = None
-        NPC = None
-        
+    name = None
+    item = None
+    door = None
+    up = None
+    down = None
+    left = None
+    right = None
+    NPC = None
+
+
 rooms = pickle.load(roomFile)
 
-#TODO INSTALL PYLINT-DJANGO
 # Intro to Game
 Introduction()
 
 # Initialize Player
-Player.name = GetName()
 Player.room = rooms[0]
 Player.inventory = ["GFUEL"]
 
@@ -40,7 +40,6 @@ while 1:
     # Informational messages
     ColorPrint("LOCATION:", TextColor.blue)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint(Player.room.name,TextColor.blue) # types out the name of color in blue
-    
     ColorPrint("\nINVENTORY:", TextColor.blue)
     TypeOut("%s"%', '.join(Player.inventory),0.010)
 
@@ -50,7 +49,7 @@ while 1:
     # Travel options
     roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below, it will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
-      
+
 
     # Players next location
     travelTo = ValidInput("-> ","u","d","l","r","m","menu")
@@ -64,14 +63,14 @@ while 1:
             }
         for room in rooms:
             if room.name == "Room %s"%keystrokes[travelTo]:
-                if room.door: # if there is a door 
+                if room.door: # if there is a door
                     ClearConsole()
 
                     if type(key[room.door]) == list:
                         doorKeys = ', '.join(key[room.door])
                     else:
                         doorKeys = key[room.door]
-                    
+
                     TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door, doorKeys))
                     openDoorInp = ValidInput("-> ","y","n")
 
@@ -89,27 +88,26 @@ while 1:
 
 
     # Menu
-    else: 
+    else:
         ClearConsole()
         print("Menu:\n1. Search Room." # prints a menu of options
             "\n2. Open Inventory."
             "\n3. Exit/Save Game.\n"
         )
         menuOption = input("-> ")
-        
 
         # Search Room
         if menuOption == "1": # search room
             # credit JayPay loading bar
             ClearConsole()
-            
+
             LoadingBar()
 
             ClearConsole()
 
             if Player.room.item: # if there is a item in the room
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
-                
+
                 Player.inventory.append(Player.room.item)
 
                 time.sleep(2)
@@ -123,20 +121,21 @@ while 1:
                 TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.NPC, TextColor.yellow)
                 time.sleep(2)
 
-                interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.NPC, "y","n") 
+                interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.NPC, "y","n")
 
                 if interact == "y":
                     if Player.room.NPC == "PewDiePie": # if the npc is pewdiepie
                         PewDiePie()
-                    #elif ..
-                
+                    if Player.room.NPC == "White": # among us impostor
+                        AmongUsNPC()
+
                 else:
                     TypeOut("%s sadly sits alone."%Player.room.NPC)
 
             else:  # if there is not an npc
                 TypeOut("There aren't any NPCs in this room..")
                 time.sleep(2)
-        
+
 
         if menuOption == "2": # inspecting items in inventory
             ClearConsole()
@@ -172,7 +171,7 @@ while 1:
 
                         if teleportLocation not in digit_list:
                             teleportLocation = input("What is the number of the room you want to travel to?\n-> ")
-                            
+
                         elif teleportLocation in digit_list and int(teleportLocation) in range(0,len(rooms)):
                             teleportLocation = int(teleportLocation)
                             break
@@ -189,11 +188,11 @@ while 1:
                 else:
                     ClearConsole()
                     TypeOut("The chair will be waiting for you.")
-            
+
             else: # if the item isnt the chair
                 TypeOut(inspectItem)
-                    
-            input("\nPress any key to continue..") 
+
+            input("\nPress any key to continue..")
 
 
         if menuOption == "3": # save game
@@ -202,4 +201,3 @@ while 1:
                 saveFile.write("%s\n"%str(Player.inventory))
             input("Saved your progress.")
             exit(1)
-        

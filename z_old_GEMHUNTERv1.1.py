@@ -90,6 +90,7 @@ def MakeRainbowKey():
     os.system('cls')
     TypeOut('Love to GEM HUNTER v1.')
 
+
 #|=-=-=| NPCS |=-=-=|#
 # Wizard Rock Paper scissors
 def RPS():
