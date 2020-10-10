@@ -161,6 +161,10 @@ def Instructions():
 #~/ Player \~#
 class Player:
     name = GetName()
+    health = 20
     inventory = []
     room = 0
-
+    def punch(enemy):
+        item = enemy.Damage(random.randint(0,4))
+        if(item):
+            inventory.append(item)

@@ -1,12 +1,8 @@
 from src import *
 #~/ NPCS \~#
 
-class Player:
-    def __init__(self):
-        self.name = 20
-
 class BigDikman:
-    def __init__(self, name):
+    def __init__(self):
         self.name = self.GetDikmanName()
         self.hp = random.randint(15,20)
     def GetDikmanName():
@@ -17,7 +13,17 @@ class BigDikman:
     def GetRandomLine():
         lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
         return random.choice(lines)
-
+    def Damage(dmg):
+        self.hp -= dmg
+        if(self.hp > 0):
+            TypeOut(self.name + ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!")
+            return 0
+        else:
+            return self.Die()
+    def Die():
+        TypeOut(self.name + ": Ouch. That one hurt my dik.")
+        TypeOut(self.name + " HAS DIED.")
+        return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
 
 # PEWDIEPIE
 class pewQuestion:
