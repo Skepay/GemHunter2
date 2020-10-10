@@ -40,9 +40,9 @@ class RoomDisplay:
         pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 10), (room2.rect.x + 10, room2.rect.y + 10))
 
 
-fileName = input('Enter name of map .dat file (leave blank for new map): ')
+fileName = input('Enter name of map file (leave blank for new map): ')
 if fileName != '':
-    inFile = open(fileName + '.dat', 'rb')
+    inFile = open(fileName + '_RM_DATA.dat', 'rb')
     inFile.seek(0)
     rooms = pickle.load(inFile)
 else:
@@ -237,6 +237,21 @@ while not done:
     pygame.display.update()
 
 
-fileName = input('Enter file name for map .dat file: ')
-with open(fileName + '.dat', 'wb') as outFile:
+# MAP IS FINISHED AT THIS POINT
+# SAVING ALL NECESSARY FILES
+
+fileName = input('Enter file name for map files: ')
+
+pygame.image.save(screen, fileName + '.png')
+print('Saved image of map under name %s.png'%fileName)
+
+with open(fileName + '_RM_DATA.dat', 'wb') as outFile: # Saving to room_maker data file
     pickle.dump(rooms, outFile)
+print('Saved room maker map data under name %s_RM_DATA.dat'%fileName)
+
+for i in range(len(rooms)):
+    rooms[i] = rooms[i].room
+
+with open(fileName + '.dat', 'wb') as outFile:  # Saving to game data file
+    pickle.dump(rooms, outFile)
+print('Saved game map data under name %s.dat'%fileName)
