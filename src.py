@@ -122,7 +122,6 @@ def LoadingBar():
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
         time.sleep(random.uniform(0.0075,.135))
-    ClearConsole()
         
 
 # Clear the console
