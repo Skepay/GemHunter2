@@ -26,8 +26,8 @@ class Room:
     left = None
     right = None
     NPC = None
-    
-    
+
+
 Rooms = [Room()]
 Rooms[0].name = 'Room 0'
 #RoomCoords = [(1000,600)]
@@ -46,7 +46,7 @@ while True:
             pygame.quit()
             exit()
 
-            
+
         if event.type == pygame.MOUSEBUTTONDOWN: # if click
             if event.button == 1:
                 if MakingRoom: #If mouse is pressed while MakingRoom is equal to True
@@ -60,7 +60,7 @@ while True:
 
                     for i in range(len(RoomCoords)): #Checking which room (if any) the user pressed
                         if pos[0] in range(RoomCoords[i][0],RoomCoords[i][0]+41) and pos[1] in range(RoomCoords[i][1], RoomCoords[i][1]+41):
-                            if i != Connectedto:                        
+                            if i != Connectedto:
                                 if Xdistance > Ydistance:
                                     if RoomCoords[i][0] > RoomCoords[Connectedto][0]: #RIGHT
                                         Rooms[Connectedto].right = len(Rooms) - 1
@@ -81,10 +81,10 @@ while True:
                     if Breakhere:
                         break
 
-                                    
+
                     Rooms.append(Room())
                     Rooms[-1].name = 'Room %g'%(len(Rooms)-1)
-        
+
                     if Xdistance > Ydistance:
                         RoomCoords.append((pos[0], RoomCoords[Connectedto][1]))
 
@@ -103,7 +103,7 @@ while True:
                         else:
                             Rooms[Connectedto].down = len(Rooms) - 1
                             Rooms[-1].up = Connectedto
-                    
+
                 else: #If mouse is pressed while MakingRoom is equal to False
                     for i in range(len(RoomCoords)): #Checking which room (if any) the user pressed
                         if pos[0] in range(RoomCoords[i][0],RoomCoords[i][0]+41) and pos[1] in range(RoomCoords[i][1], RoomCoords[i][1]+41):
@@ -122,7 +122,7 @@ while True:
                     Rooms[-1].item = roomItem
                 else:
                     Rooms[-1].item = None
-                
+
                 if roomNPC != '':
                     Rooms[-1].NPC = roomNPC
                 else:
@@ -132,13 +132,13 @@ while True:
                     Rooms[-1].door = roomDoor
                 else:
                     Rooms[-1].door = None
-                
 
-        
+
+
         elif event.type==pygame.KEYDOWN:
             if event.key==pygame.K_RETURN:
                 Quit = True
-                        
+
 
     if MakingRoom: #If making room, draw the room
         Xdistance = abs(pos[0] - RoomCoords[Connectedto][0])
@@ -147,24 +147,24 @@ while True:
             DrawRoom(pos[0], RoomCoords[Connectedto][1],len(Rooms))
         else:
             DrawRoom(RoomCoords[Connectedto][0], pos[1],len(Rooms))
-        
-            
-    for i in range(len(Rooms)):        
+
+
+    for i in range(len(Rooms)):
         if Rooms[i].up != None:
             DrawLine(RoomCoords[i][0],RoomCoords[i][1],RoomCoords[Rooms[i].up][0],RoomCoords[Rooms[i].up][1])
         if Rooms[i].left != None:
             DrawLine(RoomCoords[i][0],RoomCoords[i][1],RoomCoords[Rooms[i].left][0],RoomCoords[Rooms[i].left][1])
 
         DrawRoom(RoomCoords[i][0],RoomCoords[i][1],i)
-    
+
 
     pygame.display.update()
-    
+
 
     if Quit:
         break
 
-with open("bin.dat", "wb") as f:  
+with open("bin.dat", "wb") as f:
     pickle.dump(Rooms, f)
 
 """
@@ -177,9 +177,8 @@ for obj in Rooms:
     print('LEFT:',obj.left)
     print('RIGHT:',obj.right)
     print('\n')
-""" 
+"""
 print('\n\n\nSuccessfully loaded rooms into "bin.dat"')
 
 pygame.image.save(screen, "Map.jpeg")
 print('\nSuccessfully saved map image under "Map.jpeg"')
-
