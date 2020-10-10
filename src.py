@@ -30,7 +30,6 @@ def openDoor(keys):
     if len(missingKeys):
         TypeOut("You do not have: %s."%', '.join(missingKeys))
         time.sleep(1)
-
         return False
 
     else:
@@ -41,9 +40,7 @@ def openDoor(keys):
                 Player.inventory.remove(key)
         else:
             Player.inventory.remove(keys)
-
         time.sleep(1)
-
         return True
 
 key = {

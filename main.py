@@ -118,7 +118,7 @@ while 1:
                 time.sleep(2)
 
 
-        if menuOption == "2": # inspecting items in inventory
+        elif menuOption == "2": # inspecting items in inventory
             ClearConsole()
 
             ColorPrint("\nINVENTORY:", TextColor.blue)
