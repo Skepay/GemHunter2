@@ -28,8 +28,8 @@ class RoomDisplay:
         text = font.render('%g'%self.room.name, True, (0, 0, 0))
         screen.blit(text, (self.rect.x + 1, self.rect.y + 1))
 
-    def DrawLine(self, room2):
-        pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 20), (room2.rect.x + 20, room2.rect.y + 20))
+    def drawLine(self, room2):
+        pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 10), (room2.rect.x + 10, room2.rect.y + 10))
 
 
 
@@ -44,14 +44,14 @@ while not done:
     for room in rooms:
         room.drawRoom()
 
+    pos = pygame.mouse.get_pos()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            pos = pygame.mouse.get_pos()
-
             if makingRoom:
                 makingRoom = False
 
@@ -61,10 +61,7 @@ while not done:
 
                 foundRoom = False
                 for roomNum in range(len(rooms)):
-                    if rooms[roomNum].rect.collidepoint(pos):
-                        if roomNum == selectedRoomNum:
-                            break
-                        
+                    if rooms[roomNum].rect.colliderect(newRoom):                        
                         foundRoom = True
 
                         if xDistance > yDistance: # If room is being added on the X axis
@@ -109,7 +106,33 @@ while not done:
                         selectedRoomNum = roomNum
                         makingRoom = True
                         break
+    
+    if makingRoom:
+        xDistance = abs(pos[0] - rooms[selectedRoomNum].rect.x)
+        yDistance = abs(pos[1] - rooms[selectedRoomNum].rect.y)
 
+        if xDistance > yDistance:
+            newRoom = RoomDisplay((pos[0] - 10, rooms[selectedRoomNum].rect.y), len(rooms))
+        else:
+            newRoom = RoomDisplay((rooms[selectedRoomNum].rect.x, pos[1] - 10), len(rooms))
+
+        drawNewRoom = True
+        for room in rooms:
+            if room.rect.colliderect(newRoom):
+                drawNewRoom = False
+                room.drawLine(rooms[selectedRoomNum])
+                break
+
+        if drawNewRoom:
+            newRoom.drawLine(rooms[selectedRoomNum])
+            newRoom.drawRoom()
+
+
+    for room in rooms:
+        if room.room.up != None:
+            room.drawLine(rooms[room.room.up])
+        if room.room.left != None:
+            room.drawLine(rooms[room.room.left])
 
 
     pygame.display.update()
