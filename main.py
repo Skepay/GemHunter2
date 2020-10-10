@@ -188,9 +188,6 @@ while 1:
             else: # if the item isnt the chair
                 TypeOut(inspectItem)
 
-            if False:
-                print('hohohohohohohoo')
-
             input("\nPress any key to continue..")
 
 
