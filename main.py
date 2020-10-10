@@ -83,12 +83,7 @@ while 1:
 
         # Search Room
         if menuOption == "1":
-            ClearConsole()
-
-            LoadingBar()
-
-            ClearConsole()
-
+            LoadingBar() 
             #Room Items.
             if Player.room.item: # if there is a item in the room
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
