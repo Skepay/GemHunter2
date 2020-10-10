@@ -78,8 +78,7 @@ while 1:
     else:
         ClearConsole()
         print("Menu:\n1. Search Room." # prints a menu of options
-            "\n2. Open Inventory."
-            "\n3. Exit/Save Game.\n"
+            "\n2. Open Inventory.\n"
         )
         menuOption = input("-> ")
 
@@ -144,11 +143,3 @@ while 1:
             items[Player.inventory[itemChoice-1]]() # passes item in dictionary
 
             input("\nPress any key to continue..")
-
-
-        if menuOption == "3": # save game
-            with open("save.py","w") as saveFile:
-                saveFile.write("%s\n"%str(Player.name))
-                saveFile.write("%s\n"%str(Player.inventory))
-            input("Saved your progress.")
-            exit(1)

@@ -2,7 +2,8 @@
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
-# Source File for Gem Hunter containing all background work.
+# Define rooms to get rid of syntax errors.
+rooms = []
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
@@ -63,7 +64,7 @@ def Gfuel():
 
 
 # Function for the PewDiePie chair item.
-def Chair():
+def Chair(rooms):
     ClearConsole()
 
     useChair = ValidInput('This chair can teleport you to any room.. in STYLE.\nWould you like to use it?\n(y/n)\n\n-> ', "y", "n")
@@ -87,7 +88,7 @@ def Chair():
             time.sleep(1)
 
         # teleports the player to his desired location
-        for room in rooms: # TODO: syntax erorr with rooms needs ot be fixed
+        for room in rooms:
             if room.name == "Room %s"%teleportLocation:
                 Player.room = room
                 Player.inventory.remove("PewDiePie 100M Edition Clutch Chair")
@@ -121,7 +122,7 @@ def LoadingBar():
         print('Searching Room%s'%('.' * (progress % 4)))
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
-        time.sleep(0.003)
+        time.sleep(random.randint(0.0025,.0075)
 
 
 # Clear the console
