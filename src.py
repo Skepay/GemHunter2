@@ -2,7 +2,8 @@
 import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
-# Source File for Gem Hunter containing all background work.
+# Define rooms to get rid of syntax errors.
+rooms = []
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
@@ -57,11 +58,51 @@ key = {
 }
 
 #~/ Item Functions\~#
+# Informational messagfe about gfuel.
+def Gfuel():
+    TypeOut("A tasty beverage.")
+
+
+# Function for the PewDiePie chair item.
+def Chair(rooms):
+    ClearConsole()
+
+    useChair = ValidInput('This chair can teleport you to any room.. in STYLE.\nWould you like to use it?\n(y/n)\n\n-> ', "y", "n")
+    if useChair == "y":
+        ClearConsole()
+
+        # verify the input of the room 
+        digit_list = ["0","1","2","3","4","5","6","7","8","9"]
+        while True:
+            ClearConsole
+            teleportLocation = input("What is the number of the room you want to travel to?\n-> ")
+
+            if teleportLocation not in digit_list:
+                teleportLocation = input("What is the number of the room you want to travel to?\n-> ")
+
+            elif teleportLocation in digit_list and int(teleportLocation) in range(0,len(rooms)):
+                teleportLocation = int(teleportLocation)
+                break
+
+            TypeOut('Type a valid answer or I will go to your house and kill your family %s.'%Player.name)
+            time.sleep(1)
+
+        # teleports the player to his desired location
+        for room in rooms:
+            if room.name == "Room %s"%teleportLocation:
+                Player.room = room
+                Player.inventory.remove("PewDiePie 100M Edition Clutch Chair")
+                TypeOut("You have arrived!\n",0.06)
+                break
+    else:
+        ClearConsole()
+        TypeOut("The chair will be waiting for you.")
+
 
 # Dictionary for the items
 items = {
-    'GFUEL' : "A tasty beverage.",
-    'PewDiePie 100M Edition Clutch Chair' : "Chair"
+    'GFUEL' : Gfuel,
+    'PewDiePie 100M Edition Clutch Chair' : Chair
 }
 
 
@@ -81,7 +122,7 @@ def LoadingBar():
         print('Searching Room%s'%('.' * (progress % 4)))
         print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
         progress += 1
-        time.sleep(0.003)
+        time.sleep(random.randint(0.0025,.0075)
 
 
 # Clear the console

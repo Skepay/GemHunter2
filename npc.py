@@ -11,7 +11,7 @@ class BigDikman:
         self.hp = random.randint(15,20)
 
     def GetDikmanName(self):
-        firstNawme = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
+        firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = random.choice(firstName), random.choice(lastName)
         return name
@@ -71,12 +71,12 @@ class PewDiePie:
             self.RandomResponse()
             time.sleep(1)
         else:                               # if their guess was wrong
-            pdpScore -= 1
+            self.pdpScore -= 1
             self.RandomResponse()
             time.sleep(1)
     
     def GameOver(self):
-        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(pdpScore), TextColor.yellow)
+        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
         
         if self.pdpScore >= 2:  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")

@@ -1,5 +1,4 @@
-# Program for automating the development of rooms.\
-
+# Program for automating the development of rooms.
 import pygame
 pygame.init()
 
@@ -30,7 +29,6 @@ class RoomDisplay:
 
     def drawLine(self, room2):
         pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 10), (room2.rect.x + 10, room2.rect.y + 10))
-
 
 
 rooms = [RoomDisplay((750, 400), 0)]
@@ -80,6 +78,7 @@ while not done:
                                 rooms[selectedRoomNum].room.up = roomNum  
                         break
 
+
                 if not foundRoom:
                     if xDistance > yDistance:
                         rooms.append(RoomDisplay((pos[0] - 10, rooms[selectedRoomNum].rect.y), len(rooms)))
@@ -97,7 +96,6 @@ while not done:
                         else: # If room is being added up
                             rooms[selectedRoomNum].room.up = len(rooms) - 1
                             rooms[-1].room.down = selectedRoomNum                   
-
 
 
             else:
