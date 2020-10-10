@@ -1,26 +1,8 @@
-# Main File.
-import pickle, time
+# Main Game File for gemhunter
 from npc import *
 
-# Main Game File for gemhunter
 # TODO: puzzles, more mpcs, more content,  NPC's that can grant keys
 
-#~/ Rooms \~#
-roomFile = open('bin.dat', 'rb')
-roomFile.seek(0)
-
-class Room: # stores attributes of each room
-    name = None   # Room num
-    item = None   # str
-    door = None   # str -> int
-    up = None     # room
-    down = None   # room
-    left = None   # room
-    right = None  # room
-    NPC = None    # str
-
-
-rooms = pickle.load(roomFile)
 
 # Intro to Game
 Introduction()
@@ -95,17 +77,17 @@ while 1:
                 time.sleep(1.5)
 
             # Room NPCs.
-            if Player.room.NPC: # if there is an npc in the room
-                TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.NPC, TextColor.yellow)
+            if Player.room.npc: # if there is an npc in the room
+                TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
                 time.sleep(2)
 
-                interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.NPC, "y","n")
+                interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.npc, "y","n")
 
                 if interact == "y":
-                    npc[Player.room.NPC]()
+                    npc[Player.room.npc]()
 
                 else:
-                    TypeOut("%s sadly sits alone."%Player.room.NPC)
+                    TypeOut("%s sadly sits alone."%Player.room.npc)
                     time.sleep(1.5)
 
             else:  # if there is not an npc
