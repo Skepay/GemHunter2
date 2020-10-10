@@ -25,10 +25,8 @@ rooms = pickle.load(roomFile)
 # Intro to Game
 Introduction()
 
-# Initialize Player
+# Set Player location.
 Player.room = rooms[0]
-Player.inventory = ["GFUEL"]
-
 
 #~/ Main Loop \~#
 while 1:
@@ -50,7 +48,7 @@ while 1:
                 'r' : rooms[roomIndex].right
             }
         for room in rooms:
-            if room.name == "Room %s"%keystrokes[travelTo]:
+            if room.name == keystrokes[travelTo]:
                 if room.door: # if there is a door
                     ClearConsole()
 

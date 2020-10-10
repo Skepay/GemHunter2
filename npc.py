@@ -41,7 +41,7 @@ class PewDiePie:
         self.pdpScore = 0
         self.pdpTrivia = {
             "What is the great price of my chair?" : ["399.99", "420.69", "399.90"],
-            "What is the name of my signature GFUEL flavor?" : ["Lingonberry", "Red Sugar", "PewDiePie"],
+            "What is the name of my signature GFUEL flavor?" : ["Lingonberry", "Swedish Meatballs", "Pewds"],
             "What year was it when I reached 50,000,000 subs?" :  ["2016", "2015", "2013"],
             "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
@@ -52,7 +52,7 @@ class PewDiePie:
         pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
         return random.choice(pewdsResponses)
     
-    def printQuestions(self):
+    def PrintQuestions(self):
         ClearConsole()
 
         triviaQuestion = random.randint(0,len(self.pdpTrivia)-1) # gets a random question from the dictionary

@@ -3,7 +3,7 @@ import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
 
 # Define rooms to get rid of syntax errors.
-rooms = []
+rooms = [0]
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
@@ -193,7 +193,7 @@ def InfoMessages():
 class Player:
     name = GetName()
     health = 20
-    inventory = []
+    inventory = ["GFUEL"]
     room = 0
 
     def punch(enemy):
