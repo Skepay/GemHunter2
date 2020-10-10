@@ -1,6 +1,6 @@
 # Program for automating the development of rooms.
 import os
-
+import pickle #rick lol haha
 import pygame
 pygame.init()
 
@@ -40,7 +40,13 @@ class RoomDisplay:
         pygame.draw.line(screen, (255, 255, 255), (self.rect.x + 10, self.rect.y + 10), (room2.rect.x + 10, room2.rect.y + 10))
 
 
-rooms = [RoomDisplay((750, 400), 0)]
+fileName = input('Enter name of map .dat file (leave blank for new map): ')
+if fileName != '':
+    inFile = open(fileName + '.dat', 'rb')
+    inFile.seek(0)
+    rooms = pickle.load(inFile)
+else:
+    rooms = [RoomDisplay((750, 400), 0)]
 
 done = False
 makingRoom = False
@@ -190,6 +196,10 @@ while not done:
                 rooms[selectedRoomNum].room.NPC = NPC
             else:
                 rooms[selectedRoomNum].room.NPC = None
+
+        elif event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_RETURN:
+                done = True
             
             
 
@@ -225,3 +235,8 @@ while not done:
 
 
     pygame.display.update()
+
+
+fileName = input('Enter file name for map .dat file: ')
+with open(fileName + '.dat', 'wb') as outFile:
+    pickle.dump(rooms, outFile)
