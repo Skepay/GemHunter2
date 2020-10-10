@@ -15,7 +15,7 @@ class Room: # stores attributes of each room
     down = None # room
     left = None # room
     right = None # room
-    NPC = None # str
+    npc = None # str
 
 class RoomDisplay:
     def __init__(self, coords, roomNum):
@@ -33,7 +33,7 @@ class RoomDisplay:
             pygame.draw.rect(screen, (102, 51, 0), (self.rect.x + 1, self.rect.y + 15, 4, 4))
         if self.room.item != None:
             pygame.draw.rect(screen, (0, 0, 153), (self.rect.x + 8, self.rect.y + 15, 4, 4))
-        if self.room.NPC != None:
+        if self.room.npc != None:
             pygame.draw.rect(screen, (153, 0, 153), (self.rect.x + 15, self.rect.y + 15, 4, 4))
 
     def drawLine(self, room2):
@@ -171,7 +171,7 @@ while not done:
             print('Current settings for room %g:'%rooms[selectedRoomNum].room.name)
             print('Door =', rooms[selectedRoomNum].room.door)
             print('Item =', rooms[selectedRoomNum].room.item)
-            print('NPC  =', rooms[selectedRoomNum].room.NPC)
+            print('NPC  =', rooms[selectedRoomNum].room.npc)
             print('*' * 35)
 
             print('Change settings for room %g:'%rooms[selectedRoomNum].room.name)
@@ -191,11 +191,11 @@ while not done:
             else:
                 rooms[selectedRoomNum].room.item = None
 
-            NPC = input('NPC  = ')
-            if NPC != '':
-                rooms[selectedRoomNum].room.NPC = NPC
+            npc = input('NPC  = ')
+            if npc != '':
+                rooms[selectedRoomNum].room.npc = npc
             else:
-                rooms[selectedRoomNum].room.NPC = None
+                rooms[selectedRoomNum].room.npc = None
 
         elif event.type==pygame.KEYDOWN:
             if event.key==pygame.K_RETURN:
@@ -242,7 +242,7 @@ while not done:
 
 fileName = input('Enter file name for map files: ')
 
-pygame.image.save(screen, fileName + '.png')
+pygame.image.save(screen, fileName + '.png')    # Saving png of map
 print('Saved image of map under name %s.png'%fileName)
 
 with open(fileName + '_RM_DATA.dat', 'wb') as outFile: # Saving to room_maker data file
