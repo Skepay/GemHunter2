@@ -272,4 +272,5 @@ for room in rooms:
     line = '\nrooms.append(Room(%s))'%', '.join(memberValues)
     comment = '%s# Room %g'%(' ' * (75 - len(line)), room.room.name)
     outFile.write(line + comment)
+outFile.close()
 print('Saved map game file under name %s.py'%fileName)
