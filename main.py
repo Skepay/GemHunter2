@@ -36,10 +36,7 @@ while 1:
                 if room.door != None: # if there is a door
                     ClearConsole()
 
-                    if type(key[room.door]) == list:
-                        doorKeys = ', '.join(key[room.door])
-                    else:
-                        doorKeys = key[room.door]
+                    doorKeys = ', '.join(key[room.door])
 
                     TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door, doorKeys))
                     openDoorInp = ValidInput("-> ","y","n")

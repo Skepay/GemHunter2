@@ -10,7 +10,7 @@ roomFile.seek(0)
 class Room: # stores attributes of each room
     name = None   # Room num
     item = None   # str
-    door = None   # str -> int
+    door = None   # str
     up = None     # room
     down = None   # room
     left = None   # room
@@ -33,13 +33,9 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
 #~/ Doors \~#
 def openDoor(keys): 
     missingKeys = []
-    if type(keys) == list:
-        for key in keys:
-            if key not in Player.inventory:
-                missingKeys.append(key)
-    else:
-        if keys not in Player.inventory:
-            missingKeys.append(keys)
+    for key in keys:
+        if key not in Player.inventory:
+            missingKeys.append(key)
 
     if len(missingKeys): # if player does not have keys
         TypeOut("You do not have: %s."%', '.join(missingKeys))
@@ -48,23 +44,20 @@ def openDoor(keys):
 
     else:  # if the player has the keys
         TypeOut("The door opened!", 0.06)
+        for key in keys:
+            Player.inventory.remove(key)
 
-        if type(keys) == list:
-            for key in keys:
-                Player.inventory.remove(key)
-        else:
-            Player.inventory.remove(keys)
         time.sleep(1)
         return True
 
 key = {
-    'Red Door' : 'Red Key',
-    'Orange Door' : 'Orange Key',
-    'Yellow Door' : 'Yellow Key',
-    'Green Door' : 'Green Key',
-    'Blue Door' : 'Blue Key',
-    'Indigo Door' : 'Indigo Key',
-    'Violet Door' : 'Violet Key',
+    'Red Door' : ['Red Key'],
+    'Orange Door' : ['Orange Key'],
+    'Yellow Door' : ['Yellow Key'],
+    'Green Door' : ['Green Key'],
+    'Blue Door' : ['Blue Key'],
+    'Indigo Door' : ['Indigo Key'],
+    'Violet Door' : ['Violet Key'],
     'Gemstone Door' : ['Red Key', 'Orange Key', 'Yellow Key', 'Green Key', 'Blue Key', 'Indigo Key', 'Violet Key']
 }
 
