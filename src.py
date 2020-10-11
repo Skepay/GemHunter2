@@ -1,7 +1,13 @@
 # Source File for Gem Hunter containing all background work.
-import os, time, sys, subprocess, random
-from color_source import ColorsFG, color, TextColor
+import os
+import random
+import subprocess
+import sys
+import time
+
+from color_source import ColorsFG, TextColor, color
 from Map import rooms
+
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):

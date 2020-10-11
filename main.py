@@ -1,7 +1,7 @@
 # Main Game File for gemhunter
 from npc import *
 
-# TODO: puzzles, more mpcs, more content,  NPC's that can grant keys
+# TODO: puzzles, more mpcs, more items, room: key member
 
 # Intro to Game
 #Introduction()

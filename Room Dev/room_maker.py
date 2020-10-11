@@ -1,5 +1,8 @@
 # Program for automating the development of rooms.
-import pygame, pickle #rick lol haha
+import pickle
+
+import pygame  # rick lol haha
+
 pygame.init()
 
 screen = pygame.display.set_mode((1500, 800))
