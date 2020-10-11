@@ -252,9 +252,17 @@ with open(fileName + '_RM_DATA.dat', 'wb') as outFile: # Saving to room_maker da
     pickle.dump(rooms, outFile)
 print('Saved room maker map data under name %s_RM_DATA.dat'%fileName)
 
-for i in range(len(rooms)):
-    rooms[i] = rooms[i].room
 
-with open(fileName + '.dat', 'wb') as outFile:  # Saving to game data file
-    pickle.dump(rooms, outFile)
-print('Saved game map data under name %s.dat'%fileName)
+# Saving to game .py file
+members = ['name', 'item', 'door', 'up', 'down', 'left', 'right', 'npc']
+outFile = open(fileName + '.py', 'w')
+outFile.write('class Room:\n\tdef __init__(self, %s):'%', '.join(members))
+for member in members:
+    outFile.write('\n\t\tself.%s = %s'%(member, member))
+outFile.write('\n\nrooms = []\n')
+for room in rooms:
+    memberValues = [str(room.room.name), str(room.room.item), str(room.room.door), str(room.room.up), 
+                    str(room.room.down), str(room.room.left), str(room.room.right), str(room.room.npc)]
+    line = '\nrooms.append(Room(%s))'%', '.join(memberValues)
+    comment = '%s# Room %g'%(' ' * (75 - len(line)), room.room.name)
+    outFile.write(line + comment)
