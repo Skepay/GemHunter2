@@ -92,6 +92,18 @@ class PewDiePie:
         Player.room.NPC = None
 
     
+
+# NPC TODO: test
+class Elon:
+    def __init__(self):
+        self.name = "Elon Musk"
+
+    def Tunnel(self):
+        TypeOut("ELON MUSK: Thanks, this is exactly what I needed.  Heres a card to use the tunnel.\n", newline=False)
+        ColorPrint("You have recieved a Tunnel Card.", TextColor.lightpurple)
+        return "Tunnel Card"
+
+
 #TODO: call npcs here
 npc = {
     "PewDiePie" : None,

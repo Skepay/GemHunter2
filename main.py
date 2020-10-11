@@ -3,14 +3,8 @@ from npc import *
 
 # TODO: puzzles, more mpcs, more content,  NPC's that can grant keys
 
-# Initialize Rooms
-rooms = pickle.load(roomFile)
-
 # Intro to Game
-Introduction()
-
-# Set Player location.
-Player.room = rooms[0]
+#Introduction()
 
 #~/ Main Loop \~#
 while 1:
@@ -65,6 +59,7 @@ while 1:
         # Search Room
         if menuOption == "1":
             LoadingBar() 
+            ClearConsole()
             #Room Items.
             if Player.room.item: # if there is a item in the room
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
@@ -75,7 +70,7 @@ while 1:
                 TypeOut("There aren't any items in this room..")
                 time.sleep(1.5)
 
-            # Room NPCs.
+            # Room NPCs.            
             if Player.room.npc: # if there is an npc in the room
                 TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
                 time.sleep(2)

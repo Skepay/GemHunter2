@@ -1,29 +1,12 @@
 # Source File for Gem Hunter containing all background work.
-import os, time, sys, subprocess, random, pickle
+import os, time, sys, subprocess, random
 from color_source import ColorsFG, color, TextColor
-
-#~/ Rooms \~#
-datPath = os.path.dirname(__file__)
-roomFile = open(r"%s\map2.dat"%datPath, 'rb')
-roomFile.seek(0)
-
-class Room: # stores attributes of each room
-    name = None   # Room num
-    item = None   # str
-    door = None   # str
-    up = None     # room
-    down = None   # room
-    left = None   # room
-    right = None  # room
-    npc = None    # str
-    
-rooms = pickle.load(roomFile)
+from Map import rooms
 
 # Valid Input function
 def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = None, param6 = None):
     validInputs = [param1,param2,param3,param4,param5,param6]
     inp = str(input(string))
-
     while 1:
         if inp in validInputs:
             return inp
@@ -99,10 +82,27 @@ def Chair():
         TypeOut("The chair will be waiting for you.")
 
 
+# function for the tunnel
+def Tunnel():
+    ClearConsole()
+
+    startrooms = []
+    endrooms = []
+    for room in rooms:
+        if room.name in range(0, Player.room.name) and room.item == None and room.NPC == None:
+            startrooms.append(room)
+        elif room.name not in range(0, Player.room.name) and room.item != None:
+            endrooms.append(room)
+    startRoom = random.choice(startrooms)
+    endRoom = random.choice(endrooms)
+
+    TypeOut("The start of the tunnel is located in .  The tunnel leads to %s, which contains a %s."%(startRoom, endRoom, endRoom.item))
+
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
-    'PewDiePie 100M Edition Clutch Chair' : Chair
+    'PewDiePie 100M Edition Clutch Chair' : Chair,
+    'Tunnel Card' : Tunnel
 }
 
 
@@ -190,8 +190,7 @@ class Player:
     name = GetName()
     health = 20
     inventory = ["GFUEL"]
-    room = 0
-    #room = rooms[0]
+    room = rooms[0]
 
     def punch(enemy):
         item = enemy.Damage(random.randint(0,4))

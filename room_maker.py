@@ -1,7 +1,5 @@
 # Program for automating the development of rooms.
-import os
-import pickle #rick lol haha
-import pygame
+import pygame, pickle #rick lol haha
 pygame.init()
 
 screen = pygame.display.set_mode((1500, 800))
@@ -167,7 +165,7 @@ while not done:
             if not foundRoom:
                 break
             
-            os.system('cls')
+            print("\n" * 20)
             print('Current settings for room %g:'%rooms[selectedRoomNum].room.name)
             print('Door =', rooms[selectedRoomNum].room.door)
             print('Item =', rooms[selectedRoomNum].room.item)
@@ -240,7 +238,7 @@ while not done:
 
 # MAP IS FINISHED AT THIS POINT
 # SAVING ALL NECESSARY FILES
-os.system('cls')
+print("\n" * 20)
 
 fileName = input('Enter file name for map files: ')
 print('*' * 45)
