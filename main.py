@@ -10,6 +10,10 @@ from npc import *
 while 1:
     InfoMessages()
 
+    # Remove any doors that have been opened, or that the player may be trapped behind from teleporting.
+    if Player.room.door:
+        Player.room.door = None; Player.room.key = None
+
     # Travel options
     roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below, it will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
@@ -27,23 +31,22 @@ while 1:
             }
         for room in rooms:
             if room.name == keystrokes[travelTo]:
-                if room.door != None: # if there is a door
+                if room.door: # if there is a door
                     ClearConsole()
 
                     doorKeys = ', '.join(key[room.door])
+                    doorName = room.key[0:-4] # removes " Key" from key name
 
-                    TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door, doorKeys))
+                    TypeOut("There is a %s Door in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(doorName, doorKeys))
                     openDoorInp = ValidInput("-> ","y","n")
 
                     if openDoorInp == "y":
-                        opened = openDoor(key[room.door])
+                        opened = openDoor(key[room.door], doorName=doorName)
                         if opened:
                             Player.room = room
-                        else:
                             break
-                    else:
-                        TypeOut("The door remains locked.")
-                        time.sleep(1)
+                    TypeOut("The door remains locked.")
+                    time.sleep(1)
                 else: # if there is not a door
                     Player.room = room
 

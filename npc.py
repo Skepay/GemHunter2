@@ -97,11 +97,12 @@ class PewDiePie:
 class Elon:
     def __init__(self):
         self.name = "Elon Musk"
+        self.room = rooms.index(Player.room)
 
-    def Tunnel(self):
+    def TunnelCard(self):
         TypeOut("ELON MUSK: Thanks, this is exactly what I needed.  Heres a card to use the tunnel.\n", newline=False)
-        ColorPrint("You have recieved a Tunnel Card.", TextColor.lightpurple)
-        return "Tunnel Card"
+        ColorPrint("You have recieved a Tunnel Card.  This tunnel beings at %s", TextColor.lightpurple)
+        Player.inventory.append("Tunnel Card: %s"%self.room.name)
 
 
 #TODO: call npcs here

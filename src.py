@@ -14,19 +14,21 @@ def ValidInput(string, param1, param2, param3 = None, param4 = None, param5 = No
 
 
 #~/ Doors \~#
-def openDoor(keys): 
+def openDoor(keys, doorName): 
     missingKeys = []
     for key in keys:
         if key not in Player.inventory:
             missingKeys.append(key)
 
     if len(missingKeys): # if player does not have keys
+        ClearConsole()
         TypeOut("You do not have: %s."%', '.join(missingKeys))
         time.sleep(1)
         return False
 
     else:  # if the player has the keys
-        TypeOut("The door opened!", 0.06)
+        ClearConsole()
+        TypeOut("The %s Door opened!"%doorName, 0.06)
         for key in keys:
             Player.inventory.remove(key)
 
@@ -63,19 +65,19 @@ def Chair():
         # verify the input of the room 
         while True:
             ClearConsole()
-            #try:
-            teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
-            if teleportLocation in range(0,len(rooms)):
-                break
-            #except:
-                #pass
+            try:
+                teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
+                if teleportLocation in range(0,len(rooms)):
+                    break
+            except:
+                pass
 
         # teleports the player to his desired location
         for room in rooms:
             if room.name == teleportLocation:
                 Player.room = room
                 Player.inventory.remove("PewDiePie 100M Edition Clutch Chair")
-                TypeOut("You have arrived!\n",0.06)
+                TypeOut("You have arrived in Room %s!\n"%Player.room.name,0.06)
                 break
     else:
         ClearConsole()
@@ -86,17 +88,56 @@ def Chair():
 def Tunnel():
     ClearConsole()
 
-    startrooms = []
-    endrooms = []
-    for room in rooms:
-        if room.name in range(0, Player.room.name) and room.item == None and room.NPC == None:
-            startrooms.append(room)
-        elif room.name not in range(0, Player.room.name) and room.item != None:
-            endrooms.append(room)
-    startRoom = random.choice(startrooms)
-    endRoom = random.choice(endrooms)
+    # find room where elon spawns
+    for i in Player.inventory:
+        if "Tunnel" in i:
+            CardNum = Player.inventory.index(i)
+            break
 
-    TypeOut("The start of the tunnel is located in .  The tunnel leads to %s, which contains a %s."%(startRoom, endRoom, endRoom.item))
+    ElonRoom = int(Player.inventory[CardNum][13:])
+    for room in rooms:
+        if room.name == ElonRoom:
+            startRoom = room
+
+    # if there is already a made tunnel
+    if len(Player.inventory[CardNum]) > 16:
+        endRoom = []
+        for i in Player.inventory[CardNum][17:]:
+            try:
+                int(i)
+                endRoom.append(int(i))
+            except ValueError:
+                pass
+        endRoom = int(''.join(map(str, endRoom)))
+
+    # if there isnt
+    else:
+        while True:
+            ClearConsole()
+            try:
+                endRoom = int(input("What is the number of the room you want to tunnel to?\n-> "))
+                if endRoom in range(0,len(rooms)):
+                    break
+            except:
+                pass
+        Player.inventory.append("%s (USED TO: %s"%(Player.inventory[CardNum], endRoom))
+        Player.inventory.remove(Player.inventory[CardNum])
+
+    ClearConsole()
+    TypeOut("The start of the tunnel is located in Room %s.  The tunnel leads to Room %s."%(startRoom, endRoom), newline=False)
+    ValidInput("Use Tunnel? (y/n)\n\n-> ", "y", "n")
+    if ValidInput == "y":
+        ClearConsole()
+        TypeOut("ZOOOOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.",.03)
+        for room in rooms:
+            if room.name == endRoom:
+                Player.room = room
+
+        TypeOut("You have arrived in Room %s\n"%Player.room.name)
+        time.sleep(1)
+    else:
+        TypeOut("*tunnel noises*")
+        time.sleep(1)
 
 # Dictionary for the items
 items = {
