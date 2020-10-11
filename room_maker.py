@@ -253,6 +253,12 @@ with open(fileName + '_RM_DATA.dat', 'wb') as outFile: # Saving to room_maker da
 print('Saved room maker map data under name %s_RM_DATA.dat'%fileName)
 
 
+for roomNum in range(len(rooms)):
+    if rooms[roomNum].room.item != None:
+        rooms[roomNum].room.item = '\'%s\''%rooms[roomNum].room.item
+    if rooms[roomNum].room.npc != None:
+            rooms[roomNum].room.npc = '\'%s\''%rooms[roomNum].room.npc
+
 # Saving to game .py file
 members = ['name', 'item', 'door', 'up', 'down', 'left', 'right', 'npc']
 outFile = open(fileName + '.py', 'w')
@@ -266,3 +272,4 @@ for room in rooms:
     line = '\nrooms.append(Room(%s))'%', '.join(memberValues)
     comment = '%s# Room %g'%(' ' * (75 - len(line)), room.room.name)
     outFile.write(line + comment)
+print('Saved map game file under name %s.py'%fileName)
