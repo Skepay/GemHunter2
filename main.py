@@ -6,18 +6,14 @@ from npc import *
 
 #~/ Main Loop \~#
 while 1:
-    #InfoMessages()
-
-    # Remove any doors that have been opened, or that the player may be trapped behind from teleporting.
-    if Player.room.door:
-        Player.room.door = None; Player.room.key = None
+    InfoMessages()
 
     # Travel options
     roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below, it will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
 
     # Players next location
-    travelTo = ValidInput("-> ","u","d","l","r","m","menu")
+    travelTo = ValidInput("-> ",["u","d","l","r","m","menu"])
     
     # Travel.
     if "m" not in travelTo:
@@ -31,31 +27,46 @@ while 1:
             try:
                 room = rooms[keystrokes[travelTo]]
                 break
-            except NameError:
-                travelTo = ValidInput("-> ","u","d","l","r")
-        print("NEXT ROOM",room.name)
-        print("PLAYER START",Player.room.name)
-        print("PLAYER START DOOR",Player.room.door)
-        if Player.room.door != None and int(Player.room.door[0]) == int(room.name):
-            print("hello")
+            except (NameError, TypeError):
+                travelTo = ValidInput("-> ",["u","d","l","r"])
+        
+        if Player.room.door and Player.room.door[0] == room.name:
             ClearConsole()
 
-            doorKeys = ', '.join(room.door[2])
+            doorKeys = ', '.join(Player.room.door[2])
 
-            TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door[1], doorKeys))
-            openDoorInp = ValidInput("-> ","y","n")
+            TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(Player.room.door[1], doorKeys))
+            openDoorInp = ValidInput("-> ",["y","n"])
 
             if openDoorInp == "y":
-                opened = openDoor(room.door[2], doorName=room.door[1])
+                opened = openDoor(Player.room.door[2], doorName=Player.room.door[1])
                 if opened:
                     Player.room = room
-            TypeOut("The door remains locked.")
+                else:
+                    ClearConsole()
+                    TypeOut("The door remains locked.")
+            else:
+                ClearConsole()
+                TypeOut("The door remains locked.")
             time.sleep(1)
-            
+
         else: # if there is not a door
             Player.room = room
-        print("PLAYER END ROOM",Player.room.name)
-        print("PLAYER END DOOR",Player.room.door)
+
+        if Player.room.npc: # if there is an npc in the room
+            ClearConsole()
+            TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
+            time.sleep(2)
+
+            interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.npc, ["y","n"])
+
+            if interact == "y":
+                npc[Player.room.npc]()
+
+            else:
+                TypeOut("%s sadly sits alone."%Player.room.npc)
+                time.sleep(1.5) 
+
     # Menu
     else:
         ClearConsole()
@@ -79,23 +90,6 @@ while 1:
                 TypeOut("There aren't any items in this room..")
                 time.sleep(1.5)
 
-            # Room NPCs.            
-            if Player.room.npc: # if there is an npc in the room
-                TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
-                time.sleep(2)
-
-                interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.npc, "y","n")
-
-                if interact == "y":
-                    npc[Player.room.npc]()
-
-                else:
-                    TypeOut("%s sadly sits alone."%Player.room.npc)
-                    time.sleep(1.5)
-
-            else:  # if there is not an npc
-                TypeOut("There aren't any NPCs in this room..")
-                time.sleep(1.5)
 
 
         # Inspect inventory items.

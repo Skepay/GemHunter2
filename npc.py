@@ -55,14 +55,14 @@ class PewDiePie:
                 self.Questions()
             self.GameOver()
         else:
-            TypeOut('Get out of my sight. atoo I spit on you')
+            TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
 
     
     def Greeting(self):
         ClearConsole()
         TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.\n",newline=False)
         TypeOut("PEWDIEPIE: Wanna play a little trivia?  If you win I'll give you my chair.\n",newline=False)
-        playTrivia = ValidInput("(y/n)\n\n-> ","y","n")
+        playTrivia = ValidInput("(y/n)\n\n-> ",["y","n"])
         if playTrivia == "y":
             return True # play
         return False # dont play
@@ -83,7 +83,7 @@ class PewDiePie:
         for index, answer in enumerate(list(self.pdpTrivia.items())[triviaQuestion][1]):
             print("%s. %s\n"%(index+1, answer), end = '')
         
-        pdpTriviaGuess = ValidInput("-> ",answerList[0],answerList[1],answerList[2])
+        pdpTriviaGuess = ValidInput("-> ",[answerList[0],answerList[1],answerList[2]])
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
             self.pdpScore += 1
@@ -101,8 +101,8 @@ class PewDiePie:
         TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
         time.sleep(1.5)
 
-        if self.pdpScore >= 2:  # player win
-            TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
+        if self.pdpScore >= len(list(self.pdpTrivia)):  # player win
+            TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..\nPEWDIEPIE: Be seeing you, gamer.")
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
             time.sleep(1)
             TypeOut("To use the chair, interact with it in your inventory from the menu.")
@@ -122,10 +122,19 @@ class Elon:
         self.name = "Elon Musk"
         self.room = rooms.index(Player.room)
 
+        play = self.Greeting()
+        if play:
+            self.driveRoadster()
+            self.GameOver()
+        else:
+            TypeOut("ELON MUSK: ...")
+
+
     def Greeting(self):
-        TypeOut("???: H-h-h hey.  I'm Elon.")
-        TypeOut("ELON MUSK:  Can you drive my roadster through these martian mountains?  I'll let you build and use the next Boring Company tunnel if you do.")
-        driveRoadster = ValidInput("(y/n)\n\n->", "y", "n")
+        ClearConsole()
+        TypeOut("???: H-h-h hey.  I'm Elon.\n",newline=False)
+        TypeOut("ELON MUSK:  Can you drive my roadster through these martian mountains?  I'll let you build and use the next Boring Company tunnel if you do.\n",newline=False)
+        driveRoadster = ValidInput("(y/n)\n\n-> ", ["y", "n"])
         if driveRoadster == "y":
             return True # play
         return False # dont play
@@ -145,19 +154,21 @@ class Elon:
                 mazes += '\n'
             print(mazes)
             directions = {'w':[-1,0], 's':[1,0], 'a':[0,-1], 'd':[0,1]}
-            direction = input('Enter direction (wasd)\n').lower()
+            direction = input('Enter direction. (w/a/s/d)\n').lower()
             if direction in directions:
                 if maze[player[0] + directions[direction][0]][player[1] + directions[direction][1]] != '#':
                     player[0] += directions[direction][0]
                     player[1] += directions[direction][1]
             ClearConsole()
-        return True
+        time.sleep(1)
 
     def GameOver(self):
         ClearConsole()
-        TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\n", newline=False)
-        ColorPrint("You have recieved a Tunnel Card.  This tunnel beings at %s", TextColor.lightpurple)
-        Player.inventory.append("Tunnel Card: %s"%self.room.name)
+        TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\nELON MUSK: Bye.")
+        time.sleep(.5)
+        ColorPrint("You have recieved a Tunnel Pass.  This tunnel beings at Room %s"%self.room, TextColor.lightpurple)
+        Player.inventory.append("Tunnel Pass - %s"%self.room)
+        time.sleep(2)
         # Removes npc from room.
         Player.room.npc = None
 

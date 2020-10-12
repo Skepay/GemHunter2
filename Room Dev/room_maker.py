@@ -43,7 +43,13 @@ class RoomDisplay:
 
 fileName = input('Enter name of map file (leave blank for new map): ')
 if fileName != '':
-    inFile = open(fileName + '_RM_DATA.dat', 'rb')
+    while 1:
+        try:
+            fileName = input('Enter name of map file (leave blank for new map): ')
+            inFile = open(fileName + '_RM_DATA.dat', 'rb')
+        except FileNotFoundError:
+            pass
+
     inFile.seek(0)
     rooms = pickle.load(inFile)
 else:
