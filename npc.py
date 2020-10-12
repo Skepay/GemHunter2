@@ -83,7 +83,7 @@ class PewDiePie:
         for index, answer in enumerate(list(self.pdpTrivia.items())[triviaQuestion][1]):
             print("%s. %s\n"%(index+1, answer), end = '')
         
-        pdpTriviaGuess = ValidInput("-> ",[answerList[0],answerList[1],answerList[2]])
+        pdpTriviaGuess = ValidInput("\n-> ",[answerList[0],answerList[1],answerList[2]])
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
             self.pdpScore += 1
@@ -92,7 +92,7 @@ class PewDiePie:
 
         else:                               # if their guess was wrong
             self.pdpScore -= 1
-            self.RandomResponse()
+            TypeOut(self.RandomResponse())
             time.sleep(1)
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
 

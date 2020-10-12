@@ -69,10 +69,10 @@ def Introduction():
 # List of keybinds for the game.
 def Instructions():
     print("""
-        "U" -> Moves up\n
-        "D" -> Moves down\n
-        "L" -> Moves left\n
-        "R" -> Moves right\n
+        "W" -> Moves up\n
+        "S" -> Moves down\n
+        "A" -> Moves left\n
+        "D" -> Moves right\n
         "M" or "menu" -> Opens the menu.
         """)
     input("\n\nPress any key to continue.")
@@ -84,7 +84,7 @@ def InfoMessages():
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
     TypeOut(', '.join(Player.inventory),0.010)
-    print("Where would you like to travel to?",end =''); ColorPrint(" (u/d/l/r/m)",TextColor.lightpurple)
+    print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 
 #~/ Doors \~#

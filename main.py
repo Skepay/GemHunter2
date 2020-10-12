@@ -13,22 +13,22 @@ while 1:
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
 
     # Players next location
-    travelTo = ValidInput("-> ",["u","d","l","r","m","menu"])
+    travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
     
     # Travel.
     if "m" not in travelTo:
         keystrokes = {
-                'u' : rooms[roomIndex].up,
-                'd' : rooms[roomIndex].down,
-                'l' : rooms[roomIndex].left,
-                'r' : rooms[roomIndex].right
+                'w' : rooms[roomIndex].up,
+                's' : rooms[roomIndex].down,
+                'a' : rooms[roomIndex].left,
+                'd' : rooms[roomIndex].right
             }
         while 1:
             try:
                 room = rooms[keystrokes[travelTo]]
                 break
             except (NameError, TypeError):
-                travelTo = ValidInput("-> ",["u","d","l","r"])
+                travelTo = ValidInput("-> ",["w","a","s","d"])
         
         
         if Player.room.door and Player.room.door[0] == room.name:
@@ -119,6 +119,7 @@ while 1:
                 ClearConsole()
                 items["Tunnel"]()
             else:
+
                 ClearConsole()
                 items[Player.inventory[itemChoice-1]]() if type(items[Player.inventory[itemChoice-1]]) != str else TypeOut(items[Player.inventory[itemChoice-1]])
             
