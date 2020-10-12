@@ -1,4 +1,7 @@
-.vs/
+*.vs/
+*.suo
+*.sqlite
+VSWorkSpaceState.json
 .vscode/
 __pycache__/
 z_old_GEMHUNTERv1.1.py
