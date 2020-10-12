@@ -90,9 +90,8 @@ def Tunnel():
             break
 
     ElonRoom = int(Player.inventory[CardNum][13:])
-    for room in rooms:
-        if room.name == ElonRoom:
-            startRoom = room
+    startRomo = rooms[ElonRoom]
+
 
     # if there is already a made tunnel
     if len(Player.inventory[CardNum]) > 16:
@@ -125,10 +124,7 @@ def Tunnel():
     if ValidInput == "y":
         ClearConsole()
         TypeOut("ZOOOOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.", .03)
-        for room in rooms:
-            if room.name == endRoom:
-                Player.room = room
-
+        Player.room = rooms[endRoom]
         TypeOut("You have arrived in Room %s\n"%Player.room.name)
         time.sleep(1)
     else:
