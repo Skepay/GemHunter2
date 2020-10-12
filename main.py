@@ -13,22 +13,23 @@ while 1:
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
 
     # Players next location
-    travelTo = ValidInput("-> ",["u","d","l","r","m","menu"])
+    travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
     
     # Travel.
     if "m" not in travelTo:
         keystrokes = {
-                'u' : rooms[roomIndex].up,
-                'd' : rooms[roomIndex].down,
-                'l' : rooms[roomIndex].left,
-                'r' : rooms[roomIndex].right
+                'w' : rooms[roomIndex].up,
+                's' : rooms[roomIndex].down,
+                'a' : rooms[roomIndex].left,
+                'd' : rooms[roomIndex].right
             }
         while 1:
             try:
                 room = rooms[keystrokes[travelTo]]
                 break
             except (NameError, TypeError):
-                travelTo = ValidInput("-> ",["u","d","l","r"])
+                travelTo = ValidInput("-> ",["w","a","s","d"])
+        
         
         if Player.room.door and Player.room.door[0] == room.name:
             ClearConsole()
@@ -53,6 +54,7 @@ while 1:
         else: # if there is not a door
             Player.room = room
 
+
         if Player.room.npc: # if there is an npc in the room
             ClearConsole()
             TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
@@ -66,6 +68,7 @@ while 1:
             else:
                 TypeOut("%s sadly sits alone."%Player.room.npc)
                 time.sleep(1.5) 
+
 
     # Menu
     else:
@@ -89,7 +92,6 @@ while 1:
             else:  # if there is not an item
                 TypeOut("There aren't any items in this room..")
                 time.sleep(1.5)
-
 
 
         # Inspect inventory items.
@@ -117,6 +119,7 @@ while 1:
                 ClearConsole()
                 items["Tunnel"]()
             else:
+
                 ClearConsole()
                 items[Player.inventory[itemChoice-1]]() if type(items[Player.inventory[itemChoice-1]]) != str else TypeOut(items[Player.inventory[itemChoice-1]])
             
