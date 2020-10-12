@@ -6,7 +6,7 @@ from npc import *
 
 #~/ Main Loop \~#
 while 1:
-    InfoMessages()
+    #InfoMessages()
 
     # Remove any doors that have been opened, or that the player may be trapped behind from teleporting.
     if Player.room.door:
@@ -27,9 +27,17 @@ while 1:
                 'l' : rooms[roomIndex].left,
                 'r' : rooms[roomIndex].right
             }
-        room = rooms[keystrokes[travelTo]]
-
-        if room.door:
+        while 1:
+            try:
+                room = rooms[keystrokes[travelTo]]
+                break
+            except NameError:
+                travelTo = ValidInput("-> ","u","d","l","r")
+        print("NEXT ROOM",room.name)
+        print("PLAYER START",Player.room.name)
+        print("PLAYER START DOOR",Player.room.door)
+        if Player.room.door != None and int(Player.room.door[0]) == int(room.name):
+            print("hello")
             ClearConsole()
 
             doorKeys = ', '.join(room.door[2])
@@ -43,10 +51,11 @@ while 1:
                     Player.room = room
             TypeOut("The door remains locked.")
             time.sleep(1)
+            
         else: # if there is not a door
             Player.room = room
-
-
+        print("PLAYER END ROOM",Player.room.name)
+        print("PLAYER END DOOR",Player.room.door)
     # Menu
     else:
         ClearConsole()

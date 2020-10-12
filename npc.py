@@ -46,7 +46,7 @@ class PewDiePie:
             "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
-            "question" : ["answers"]
+            "question" : ["answers", "answer","ans"]
             }
 
         play = self.Greeting()
@@ -59,8 +59,9 @@ class PewDiePie:
 
     
     def Greeting(self):
+        ClearConsole()
         TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.\n",newline=False)
-        TypeOut("PEWDIEPIE: Wanna play a little trivia?  If you win I'll give you my chair.")
+        TypeOut("PEWDIEPIE: Wanna play a little trivia?  If you win I'll give you my chair.\n",newline=False)
         playTrivia = ValidInput("(y/n)\n\n-> ","y","n")
         if playTrivia == "y":
             return True # play
@@ -86,7 +87,7 @@ class PewDiePie:
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
             self.pdpScore += 1
-            self.RandomResponse()
+            TypeOut(self.RandomResponse())
             time.sleep(1)
 
         else:                               # if their guess was wrong
@@ -96,12 +97,14 @@ class PewDiePie:
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
 
     def GameOver(self):
-        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False);
-        ColorPrint(str(self.pdpScore), TextColor.yellow)
-        
+        ClearConsole()
+        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
+        time.sleep(1.5)
+
         if self.pdpScore >= 2:  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
+            time.sleep(1)
             TypeOut("To use the chair, interact with it in your inventory from the menu.")
             Player.inventory.append("PewDiePie 100M Edition Clutch Chair")
             time.sleep(2)
