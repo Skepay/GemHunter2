@@ -90,7 +90,7 @@ def Tunnel():
             break
 
     ElonRoom = int(Player.inventory[CardNum][13:])
-    startRomo = rooms[ElonRoom]
+    startRoom = rooms[ElonRoom]
 
 
     # if there is already a made tunnel

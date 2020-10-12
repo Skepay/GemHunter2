@@ -59,8 +59,8 @@ class PewDiePie:
 
     
     def Greeting(self):
-        TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.")
-        TypeOut("Wanna play a little trivia?  If you win I'll give you my chair.")
+        TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.\n",newline=False)
+        TypeOut("PEWDIEPIE: Wanna play a little trivia?  If you win I'll give you my chair.")
         playTrivia = ValidInput("(y/n)\n\n-> ","y","n")
         if playTrivia == "y":
             return True # play
@@ -80,19 +80,21 @@ class PewDiePie:
         
         # print answers
         for index, answer in enumerate(list(self.pdpTrivia.items())[triviaQuestion][1]):
-            print("%s. %s"%(index, answer), end = '')
-
+            print("%s. %s\n"%(index+1, answer), end = '')
+        
         pdpTriviaGuess = ValidInput("-> ",answerList[0],answerList[1],answerList[2])
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
             self.pdpScore += 1
             self.RandomResponse()
             time.sleep(1)
+
         else:                               # if their guess was wrong
             self.pdpScore -= 1
             self.RandomResponse()
             time.sleep(1)
-    
+        del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
+
     def GameOver(self):
         TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False);
         ColorPrint(str(self.pdpScore), TextColor.yellow)

@@ -63,6 +63,7 @@ while 1:
             if Player.room.item: # if there is a item in the room
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
                 Player.inventory.append(Player.room.item)
+                Player.room.item = None
                 time.sleep(2)
 
             else:  # if there is not an item
@@ -71,7 +72,7 @@ while 1:
 
             # Room NPCs.            
             if Player.room.npc: # if there is an npc in the room
-                TypeOut("You found..",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
+                TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
                 time.sleep(2)
 
                 interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%Player.room.npc, "y","n")
