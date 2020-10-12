@@ -1,7 +1,6 @@
 # Main Game File for gemhunter
 from npc import *
 
-#TODO: maya quest
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
 
@@ -24,7 +23,7 @@ while 1:
                 'a' : rooms[roomIndex].left,
                 'd' : rooms[roomIndex].right
             }
-            
+
         while 1:
             try:
                 room = rooms[keystrokes[travelTo]]

@@ -207,14 +207,15 @@ def Tunnel():
 def ssh():
     TypeOut("Here is a link to the Gem Hunter 2 Github repository!")
     ColorPrint("https://github.com/Skepay/GemHunter2", TextColor.darkblue)
-    
+
 
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
-    'SSH Key' : ssh
+    'SSH Key' : ssh,
+    'Maya\'s Eyepatch' : "Return this item to Maya!"
 }
 
 
