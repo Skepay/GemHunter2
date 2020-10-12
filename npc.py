@@ -48,6 +48,13 @@ class PewDiePie:
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
             "question" : ["answers"]
             }
+
+        play = self.Greeting()
+        if play:
+            while len(self.pdpTrivia) > 0:
+                self.Questions()
+        self.GameOver()
+
     
     def Greeting(self):
         TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.")
@@ -85,7 +92,8 @@ class PewDiePie:
             time.sleep(1)
     
     def GameOver(self):
-        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ",0.06,newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
+        TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False);
+        ColorPrint(str(self.pdpScore), TextColor.yellow)
         
         if self.pdpScore >= 2:  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
