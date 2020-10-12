@@ -104,7 +104,6 @@ class PewDiePie:
             self.GameOver()
         else:
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
-
     
     def Greeting(self):
         ClearConsole()
@@ -177,7 +176,6 @@ class Elon:
         else:
             TypeOut("ELON MUSK: ...")
 
-
     def Greeting(self):
         ClearConsole()
         TypeOut("???: H-h-h hey.  I'm Elon.\n",newline=False)
@@ -231,7 +229,7 @@ class Isaiah:
         ClearConsole()
         TypeOut('ISAIAH: Awesome! ', newline = False)
         time.sleep(0.5)
-        TypeOut('You start work on the game, I\'m gonna go put my name in the credits and then watch some silicon valley...')
+        TypeOut('You start work on the game, I\'m gonna go watch some silicon valley...')
         ColorPrint('\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
         input()
         self.Code()

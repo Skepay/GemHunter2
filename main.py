@@ -3,13 +3,14 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
+Introduction()
 
 #~/ Main Loop \~#
 while 1:
     InfoMessages()
 
     # Travel options
-    roomIndex = rooms.index(Player.room)    #ignore the stupidly long and ugly print statement below, it will type out move locations in blue
+    roomIndex = rooms.index(Player.room)    # thisstupidly long and ugly print statement below, will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
 
     # Players next location
