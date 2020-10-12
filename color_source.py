@@ -6,9 +6,11 @@ class TextColor:
     yellow = (245, 252, 71)
     green = (92, 252, 71)
     blue = (71, 177, 252)
+    darkblue = (0, 45, 168)
     purple = (189, 71, 252)
     white = (255, 255, 255)
     lightpurple = (155,155,255)
+    pink = (194, 2, 185)
 
 
 class ColorsFG:

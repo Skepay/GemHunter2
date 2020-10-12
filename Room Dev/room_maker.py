@@ -12,7 +12,6 @@ class Room: # stores attributes of each room
     name = None # int
     item = None # str
     door = None # int
-    key = None # str TODO: @JayPay108
     up = None   # room
     down = None # room
     left = None # room
