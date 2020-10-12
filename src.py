@@ -50,8 +50,10 @@ def TypeOut(string, pause = 0.045, newline = True):
         print("\n")
 
 # Print Colored messages.
-def ColorPrint(string, inputColor = TextColor.white):
-    print(color(string, inputColor))
+def ColorPrint(string, inputColor = TextColor.white, newLine = True):
+    print(color(string, inputColor), end = '')
+    if newLine:
+        print('')
 
 # OG welcome message for gem hunter.
 def Introduction():

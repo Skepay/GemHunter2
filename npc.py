@@ -1,6 +1,7 @@
 # Contains all npcs.
 #TODO: Convert to all object-oriented.
 from src import *
+from msvcrt import getch
 
 
 #~/ NPCS \~#
@@ -172,6 +173,56 @@ class Elon:
         # Removes npc from room.
         Player.room.npc = None
 
+class Isaiah:
+    def __init__(self):
+        play = self.Greeting()
+        if not play:
+            TypeOut('Isaiah: Frick you')
+            return
+        TypeOut('Isaiah: Awesome! ', newline = False)
+        time.sleep(0.5)
+        TypeOut('You start work on the game, Im gonna go put my name in the credits and then watch some silicon valley...')
+        ColorPrint('\n\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
+        input()
+        self.Code()
+    
+    def Greeting(self):
+        ClearConsole()
+        TypeOut('Isaiah: EYYYUHH yo waddup its me Isaiah')
+        time.sleep(0.5)
+        print('        ', end = '')
+        TypeOut('Listen... I need some help fixing bugs in my poopy code for Gem Hunter 2')
+        time.sleep(0.5)
+        print('        ', end = '')
+        TypeOut('Whatdya say? ', newline = False)
+        time.sleep(1)
+        TypeOut('will you help me?')
+        time.sleep(0.5)
+        print('')
+        return ValidInput("(y/n)\n-> ",['y', 'n']) == 'y'
+
+    def Code(self):
+        ClearConsole()
+        ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n\n\n', TextColor.green)
+        code = '\n'.join(open('main.py').read().split('\n')[:20])
+        lineNum = 1
+        ColorPrint('1:\t', TextColor.blue, newLine = False)
+        for char in code:
+            getch()
+            print(char, end='')
+            if char == '\n':
+                lineNum += 1
+                ColorPrint('%g:\t'%lineNum, TextColor.blue, newLine = False)
+            sys.stdout.flush()
+        print('\n' * 3)
+        TypeOut('Isaiah: Nice work!, looks pretty good... let me just finish it up and then we\'ll be done')
+        time.sleep(0.5)
+        ColorPrint('21:\t', TextColor.blue, newLine = False)
+        TypeOut('if startGame():', newLine = False)
+        ColorPrint('22:\t', TextColor.blue, newLine = False)
+        TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
+        TypeOut('Isaiah: Perfect! I think it may be ready to release')
+
 
 
 # MAYA
@@ -195,5 +246,5 @@ npc = {
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
-    "Maya" : Maya
+    "Isaiah"    : Isaiah
 }

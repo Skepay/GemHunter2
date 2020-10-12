@@ -12,7 +12,7 @@ class Room:
 rooms = []
 
 rooms.append(Room(0, None, None, 3, 2, 1, 4, None))                       # Room 0
-rooms.append(Room(1, 'Red Key', None, None, None, None, 0, None))         # Room 1
+rooms.append(Room(1, 'Red Key', None, None, None, None, 0, 'Isaiah'))         # Room 1
 rooms.append(Room(2, None, None, 0, None, None, None, 'Elon Musk'))       # Room 2
 rooms.append(Room(3, None, None, None, 0, None, None, 'PewDiePie'))       # Room 3
 rooms.append(Room(4, None, [5, 'Red Door', ['Red Key']], None, None, 0, 5, None))# Room 4
