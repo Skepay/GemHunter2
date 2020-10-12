@@ -182,17 +182,18 @@ while not done:
             door = input('Door = ')
             if door != '':
                 door = door.split(',')
-                door = door[:3]
-                if len(door) != 3:
+                if len(door) < 3:
                     validDoor = False
                 try:
                     door[0] = int(door[0])
                 except:
                     validDoor = False
-                for i in range(1, len(door)):
-                    if type(door[i]) == str:
-                        door[i] = door[i].strip()
                 if validDoor:
+                    for i in range(1, len(door)):
+                        if type(door[i]) == str:
+                            door[i] = door[i].strip()
+                    door[2] = door[2:]
+                    door = door[:3]
                     rooms[selectedRoomNum].room.door = door
 
             item = input('Item = ')
@@ -267,7 +268,9 @@ for roomNum in range(len(rooms)):
     if rooms[roomNum].room.item != None:
         rooms[roomNum].room.item = '\'%s\''%rooms[roomNum].room.item
     if rooms[roomNum].room.door != None:
-        rooms[roomNum].room.door = '[%s, \'%s\', \'%s\']'%(str(rooms[roomNum].room.door[0]), rooms[roomNum].room.door[1], rooms[roomNum].room.door[2])
+        for i in range(len(rooms[roomNum].room.door[2])):
+            rooms[roomNum].room.door[2][i] = '\'' + rooms[roomNum].room.door[2][i] + '\''
+        rooms[roomNum].room.door = '[%s, \'%s\', [%s]]'%(str(rooms[roomNum].room.door[0]), rooms[roomNum].room.door[1], ', '.join(rooms[roomNum].room.door[2]))
     if rooms[roomNum].room.npc != None:
             rooms[roomNum].room.npc = '\'%s\''%rooms[roomNum].room.npc
 
