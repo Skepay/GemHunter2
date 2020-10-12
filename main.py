@@ -24,6 +24,7 @@ while 1:
                 'a' : rooms[roomIndex].left,
                 'd' : rooms[roomIndex].right
             }
+            
         while 1:
             try:
                 room = rooms[keystrokes[travelTo]]

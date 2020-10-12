@@ -173,13 +173,15 @@ class Elon:
         # Removes npc from room.
         Player.room.npc = None
 
+
+# ISAIAH
 class Isaiah:
     def __init__(self):
         play = self.Greeting()
         if not play:
-            TypeOut('Isaiah: Frick you')
+            TypeOut('ISAIAH: Frick you.')
             return
-        TypeOut('Isaiah: Awesome! ', newline = False)
+        TypeOut('ISAIAH: Awesome! ', newline = False)
         time.sleep(0.5)
         TypeOut('You start work on the game, Im gonna go put my name in the credits and then watch some silicon valley...')
         ColorPrint('\n\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
@@ -188,17 +190,14 @@ class Isaiah:
     
     def Greeting(self):
         ClearConsole()
-        TypeOut('Isaiah: EYYYUHH yo waddup its me Isaiah')
+        TypeOut('ISAIAH: EYYYUHH yo waddup its me Isaiah.')
         time.sleep(0.5)
-        print('        ', end = '')
-        TypeOut('Listen... I need some help fixing bugs in my poopy code for Gem Hunter 2')
+        TypeOut('ISAIAH: Listen... I need some help fixing bugs in my poopy code for Gem Hunter 2.')
         time.sleep(0.5)
-        print('        ', end = '')
-        TypeOut('Whatdya say? ', newline = False)
+        TypeOut('ISAIAH: Whatdya say?', newline = False)
         time.sleep(1)
-        TypeOut('will you help me?')
+        TypeOut(' Will you help me?\n')
         time.sleep(0.5)
-        print('')
         return ValidInput("(y/n)\n-> ",['y', 'n']) == 'y'
 
     def Code(self):
@@ -215,34 +214,31 @@ class Isaiah:
                 ColorPrint('%g:\t'%lineNum, TextColor.blue, newLine = False)
             sys.stdout.flush()
         print('\n' * 3)
-        TypeOut('Isaiah: Nice work!, looks pretty good... let me just finish it up and then we\'ll be done')
+        TypeOut('ISAIAH: Nice work!, looks pretty good... let me just finish it up and then we\'ll be done.')
         time.sleep(0.5)
         ColorPrint('21:\t', TextColor.blue, newLine = False)
-        TypeOut('if startGame():', newLine = False)
+        TypeOut('if startGame():', newline = False)
         ColorPrint('22:\t', TextColor.blue, newLine = False)
         TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
-        TypeOut('Isaiah: Perfect! I think it may be ready to release')
-
+        TypeOut('ISAIAH: Perfect! I think it may be ready to release.')
+        time.sleep(3)
+        Player.room.npc = None
 
 
 # MAYA
 class Maya:
     def __init__(self):
         self.name = "Maya"
+        self.lostRooms = [random.choice(rooms), random.choice(rooms)]
         
         play = self.Greeting()
         if play == 1:
-            pass
+            self.FindItem()
         elif play == 2:
-            if "Maya's Eyepatch" in Player.inventory:
-                TypeOut("Oh yay!  Thank you so much.")
-            else:
-                TypeOut("Why are you lying to me?")
-                time.sleep(1)
+            self.GameOver()
         else:
             TypeOut("*sad maya face*")
             time.sleep(1)
-
 
     def Greeting(self):
         TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n", newline=False)
@@ -251,15 +247,22 @@ class Maya:
     
     def FindItem(self):
         ClearConsole()
-        room1 = random.choice(rooms)
-        room2 = random.choice(rooms)
-
         TypeOut("MAYA: Awesome!  Thank you.")
-        TypeOut("I think I left it in Room %s or maybe Room %s.  Come back here when you find it!"%(room1.name, room2.name))
-        time.sleep(3)
+        TypeOut("I think I left it in Room %s or maybe Room %s.  Come back here when you find it!"%(self.lostRooms[0].name, self.lostRooms[1].name))
+        input("\n\nPress any key to continue..")
 
     def GameOver(self):
-        pass
+        if "Maya's Eyepatch" in Player.inventory:
+            TypeOut("Oh yay!  Thank you so much.")
+            TypeOut("Just for you.. I respawned PewDiePie in a random room.. go and find him!")
+
+            newPdpRoom = random.choice(self.lostRooms)
+            newPdpRoom.npc = "PewDiePie"
+            Player.room.npc = None
+            time.sleep(2)
+        else:
+            TypeOut("Why are you lying to me?")
+            time.sleep(1)
 
 
 #TODO: call npcs here
@@ -267,5 +270,6 @@ npc = {
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
-    "Isaiah"    : Isaiah
+    "Isaiah"    : Isaiah,
+    "Maya" : Maya
 }
