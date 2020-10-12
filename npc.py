@@ -180,14 +180,35 @@ class Maya:
         self.name = "Maya"
         
         play = self.Greeting()
-        if play:
+        if play == 1:
             pass
+        elif play == 2:
+            if "Maya's Eyepatch" in Player.inventory:
+                TypeOut("Oh yay!  Thank you so much.")
+            else:
+                TypeOut("Why are you lying to me?")
+                time.sleep(1)
         else:
             TypeOut("*sad maya face*")
+            time.sleep(1)
+
 
     def Greeting(self):
         TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n", newline=False)
-        findEye = ValidInput("(y/n)\n\n-> ", ["y","n"])
+        findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
+        return findEye
+    
+    def FindItem(self):
+        ClearConsole()
+        room1 = random.choice(rooms)
+        room2 = random.choice(rooms)
+
+        TypeOut("MAYA: Awesome!  Thank you.")
+        TypeOut("I think I left it in Room %s or maybe Room %s.  Come back here when you find it!"%(room1.name, room2.name))
+        time.sleep(3)
+
+    def GameOver(self):
+        pass
 
 
 #TODO: call npcs here
