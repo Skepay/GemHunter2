@@ -46,7 +46,7 @@ class PewDiePie:
             "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
-            "question" : ["answers", "answer","ans"]
+            "Where am I from?" : ["Sweden", "America", "UK"]
             }
 
         play = self.Greeting()
@@ -173,6 +173,21 @@ class Elon:
         Player.room.npc = None
 
 
+
+# MAYA
+class Maya:
+    def __init__(self):
+        self.name = "Maya"
+        
+        play = self.Greeting()
+        if play:
+            pass
+        else:
+            TypeOut("*sad maya face*")
+
+    def Greeting(self):
+        TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n"newline=False)
+        findEye = ValidInput("(y/n)\n\n-> ", ["y","n"])
 
 
 #TODO: call npcs here
