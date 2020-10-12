@@ -45,8 +45,10 @@ class BigDikman:
             TypeOut(self.name + "HP: " + self.hp)
             TypeOut(player.name + "HP: " + player.hp)
             print('\n\n\n')
-
-            TypeOut("You attack first, what move would you like to use?")
+            if ct == 1:
+                TypeOut("You attack first, what move would you like to use?")
+            else: 
+                TypeOut("Yout turn to attack, what move would you like to use?")
             print("(1): Punch")
             print("(2): Kick")
             print("(3): Dodge")
@@ -67,7 +69,12 @@ class BigDikman:
                         inputStr.append('/')
                 inputStr.append(')')
                 move = ValidInput(inputStr, inputVals)
-            attackDict(move)
+            attackDict[move]
+        if(self.hp > 0):
+            TypeOut("Haha! You got rekt by my dik!")
+            player.Die()
+        else:
+            self.Die()
 
     def Die(self):
         TypeOut(self.name + ": Ouch. That one hurt my dik.")
