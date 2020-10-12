@@ -109,10 +109,15 @@ while 1:
                         break
                 except:
                     pass
+            
+            if Player.inventory[itemChoice-1] not in items:
+                items.update({Player.inventory[itemChoice-1] : "An item."})
 
-            if "Tunnel" in Player.inventory[itemChoice-1]: # special case for tunnel, bc item name is different across players.
-                items[Player.inventory[itemChoice-1][0:6]]()
+            if "Tunnel" in Player.inventory[itemChoice-1]: # special case for tunnel bc the tunnel pass will rarely be the same across players games
+                ClearConsole()
+                items["Tunnel"]()
             else:
-                items[Player.inventory[itemChoice-1]]() 
+                ClearConsole()
+                items[Player.inventory[itemChoice-1]]() if type(items[Player.inventory[itemChoice-1]]) != str else TypeOut(items[Player.inventory[itemChoice-1]])
             
             input("\nPress any key to continue..")
