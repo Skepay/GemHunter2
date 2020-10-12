@@ -30,6 +30,7 @@ while 1:
             except (NameError, TypeError):
                 travelTo = ValidInput("-> ",["u","d","l","r"])
         
+        
         if Player.room.door and Player.room.door[0] == room.name:
             ClearConsole()
 
@@ -53,6 +54,7 @@ while 1:
         else: # if there is not a door
             Player.room = room
 
+
         if Player.room.npc: # if there is an npc in the room
             ClearConsole()
             TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
@@ -66,6 +68,7 @@ while 1:
             else:
                 TypeOut("%s sadly sits alone."%Player.room.npc)
                 time.sleep(1.5) 
+
 
     # Menu
     else:
@@ -89,7 +92,6 @@ while 1:
             else:  # if there is not an item
                 TypeOut("There aren't any items in this room..")
                 time.sleep(1.5)
-
 
 
         # Inspect inventory items.

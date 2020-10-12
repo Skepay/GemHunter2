@@ -76,7 +76,7 @@ class PewDiePie:
 
         triviaQuestion = random.randint(0,len(self.pdpTrivia)-1) # gets a random question from the dictionary
         answerList = list(self.pdpTrivia.items())[triviaQuestion][1].copy() # gets the answers for that questions and copies it (first item is correct answer)
-        random.shuffle(list(self.pdpTrivia.items())[triviaQuestion][1]) # shuffles the original answers
+        random.shuffle(list(self.pdpTrivia.items())[triviaQuestion][1]) # shuffles the original answers TODO: it doesnt shuffle
         ColorPrint(list(self.pdpTrivia.items())[triviaQuestion][0])  # prints the question
         
         # print answers

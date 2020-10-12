@@ -9,14 +9,14 @@ screen = pygame.display.set_mode((1500, 800))
 font = pygame.font.Font('freesansbold.ttf',10)
 
 class Room: # stores attributes of each room
-    name = None # int
-    item = None # str
-    door = None # int
-    up = None   # room
-    down = None # room
-    left = None # room
+    name = None  # int
+    item = None  # str
+    door = None  # int
+    up = None    # room
+    down = None  # room
+    left = None  # room
     right = None # room
-    npc = None # str
+    npc = None   # str
 
 class RoomDisplay:
     def __init__(self, coords, roomNum):

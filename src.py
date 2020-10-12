@@ -106,7 +106,6 @@ def openDoor(keys, doorName):
         Player.room.door = None
         for key in keys:
             Player.inventory.remove(key)
-
         time.sleep(1)
         return True
 
@@ -199,6 +198,7 @@ def Tunnel():
         ClearConsole()
         TypeOut("*tunnel noises*")
         time.sleep(1)
+
 
 # Dictionary for the items
 items = {
