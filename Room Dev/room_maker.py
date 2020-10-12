@@ -178,14 +178,22 @@ while not done:
 
             print('Change settings for room %g:'%rooms[selectedRoomNum].room.name)
 
+            validDoor = True
             door = input('Door = ')
             if door != '':
+                door = door.split(',')
+                door = door[:3]
+                if len(door) != 3:
+                    validDoor = False
                 try:
-                    rooms[selectedRoomNum].room.door = int(door)
+                    door[0] = int(door[0])
                 except:
-                    rooms[selectedRoomNum].room.door = None
-            else:
-                rooms[selectedRoomNum].room.door = None
+                    validDoor = False
+                for i in range(1, len(door)):
+                    if type(door[i]) == str:
+                        door[i] = door[i].strip()
+                if validDoor:
+                    rooms[selectedRoomNum].room.door = door
 
             item = input('Item = ')
             if item != '':
@@ -258,6 +266,8 @@ print('Saved room maker map data under name %s_RM_DATA.dat'%fileName)
 for roomNum in range(len(rooms)):
     if rooms[roomNum].room.item != None:
         rooms[roomNum].room.item = '\'%s\''%rooms[roomNum].room.item
+    if rooms[roomNum].room.door != None:
+        rooms[roomNum].room.door = '[%s, \'%s\', \'%s\']'%(str(rooms[roomNum].room.door[0]), rooms[roomNum].room.door[1], rooms[roomNum].room.door[2])
     if rooms[roomNum].room.npc != None:
             rooms[roomNum].room.npc = '\'%s\''%rooms[roomNum].room.npc
 
