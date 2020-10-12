@@ -202,11 +202,19 @@ def Tunnel():
         time.sleep(1)
 
 
+
+# Function for the ssh key
+def ssh():
+    TypeOut("Here is a link to the Gem Hunter 2 Github repository!")
+    ColorPrint("https://github.com/Skepay/GemHunter2", TextColor.darkblue)
+    
+
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
-    'Tunnel' : Tunnel
+    'Tunnel' : Tunnel,
+    'SSH Key' : ssh
 }
 
 

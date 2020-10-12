@@ -47,6 +47,7 @@ if fileName != '':
         try:
             fileName = input('Enter name of map file (leave blank for new map): ')
             inFile = open(fileName + '_RM_DATA.dat', 'rb')
+            break
         except FileNotFoundError:
             pass
 

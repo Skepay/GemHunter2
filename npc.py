@@ -181,24 +181,25 @@ class Isaiah:
         if not play:
             TypeOut('ISAIAH: Frick you.')
             return
+        ClearConsole()
         TypeOut('ISAIAH: Awesome! ', newline = False)
         time.sleep(0.5)
-        TypeOut('You start work on the game, Im gonna go put my name in the credits and then watch some silicon valley...')
-        ColorPrint('\n\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
+        TypeOut('You start work on the game, I\'m gonna go put my name in the credits and then watch some silicon valley...')
+        ColorPrint('\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
         input()
         self.Code()
     
     def Greeting(self):
         ClearConsole()
-        TypeOut('ISAIAH: EYYYUHH yo waddup its me Isaiah.')
+        TypeOut('ISAIAH: EYYYUHH yo waddup its me Isaiah.\n',newline=False)
         time.sleep(0.5)
-        TypeOut('ISAIAH: Listen... I need some help fixing bugs in my poopy code for Gem Hunter 2.')
+        TypeOut('ISAIAH: Listen... I need some help fixing bugs in my poopy code for Gem Hunter 2.\n',newline=False)
         time.sleep(0.5)
         TypeOut('ISAIAH: Whatdya say?', newline = False)
         time.sleep(1)
-        TypeOut(' Will you help me?\n')
+        TypeOut(' Will you help me?\n',newline=False)
         time.sleep(0.5)
-        return ValidInput("(y/n)\n-> ",['y', 'n']) == 'y'
+        return ValidInput("(y/n)\n\n-> ",['y', 'n']) == 'y'
 
     def Code(self):
         ClearConsole()
@@ -217,11 +218,13 @@ class Isaiah:
         TypeOut('ISAIAH: Nice work!, looks pretty good... let me just finish it up and then we\'ll be done.')
         time.sleep(0.5)
         ColorPrint('21:\t', TextColor.blue, newLine = False)
-        TypeOut('if startGame():', newline = False)
+        TypeOut('if startGame():\n', newline = False)
         ColorPrint('22:\t', TextColor.blue, newLine = False)
         TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
         TypeOut('ISAIAH: Perfect! I think it may be ready to release.')
         time.sleep(3)
+        TypeOut("You recieved a.. "); ColorPrint("Gem Hunter SSH key!", TextColor.yellow)
+        Player.inventory.append("SSH Key")
         Player.room.npc = None
 
 
@@ -231,24 +234,27 @@ class Maya:
         self.name = "Maya"
         self.lostRooms = [random.choice(rooms), random.choice(rooms)]
         
-        play = self.Greeting()
-        if play == 1:
-            self.FindItem()
-        elif play == 2:
+        findEye = self.Greeting()
+        if findEye == "1":
             self.GameOver()
+        elif findEye == "2":
+            self.FindItem()
         else:
             TypeOut("*sad maya face*")
             time.sleep(1)
 
     def Greeting(self):
-        TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n", newline=False)
+        ClearConsole()
+        TypeOut("MAYA: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.  Can you help me find it, please?\nI could bring PewDiePie back for you!", newline=False)
         findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
         return findEye
     
     def FindItem(self):
         ClearConsole()
+        random.choice(self.lostRooms).item = "Maya's Eyepatch"
+
         TypeOut("MAYA: Awesome!  Thank you.")
-        TypeOut("I think I left it in Room %s or maybe Room %s.  Come back here when you find it!"%(self.lostRooms[0].name, self.lostRooms[1].name))
+        TypeOut("I think I left it in Room %s or maybe even Room %s.  Come back here when you find it!"%(self.lostRooms[0].name, self.lostRooms[1].name))
         input("\n\nPress any key to continue..")
 
     def GameOver(self):
@@ -257,7 +263,11 @@ class Maya:
             TypeOut("Just for you.. I respawned PewDiePie in a random room.. go and find him!")
 
             newPdpRoom = random.choice(self.lostRooms)
-            newPdpRoom.npc = "PewDiePie"
+            if newPdpRoom.npc == None:
+                newPdpRoom.npc = "PewDiePie"
+            else:
+                rooms[0].npc = "PewDiePie"
+
             Player.room.npc = None
             time.sleep(2)
         else:
