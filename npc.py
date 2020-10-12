@@ -174,6 +174,7 @@ class Elon:
         Player.room.npc = None
 
 
+# ISAIAH
 class Isaiah:
     def __init__(self):
         play = self.Greeting()
@@ -220,6 +221,7 @@ class Isaiah:
         time.sleep(0.5)
         TypeOut('\n\n\nif startGame():\n\tprint(\'Credits: Isaiah Harville\')\n\n', pause = 0.2)
         TypeOut('Isaiah: Perfect! I think it may be ready to release')
+
 
 # MAYA
 class Maya:
