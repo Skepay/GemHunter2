@@ -45,7 +45,8 @@ class PewDiePie:
             "What year was it when I reached 50,000,000 subs?" :  ["2016", "2015", "2013"],
             "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
-            "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"]
+            "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
+            "question" : ["answers"]
             }
     
     def Greeting(self):
@@ -60,7 +61,7 @@ class PewDiePie:
         pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
         return random.choice(pewdsResponses)
     
-    def PrintQuestions(self):
+    def Questions(self):
         ClearConsole()
 
         triviaQuestion = random.randint(0,len(self.pdpTrivia)-1) # gets a random question from the dictionary
@@ -90,16 +91,15 @@ class PewDiePie:
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..")
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
             TypeOut("To use the chair, interact with it in your inventory from the menu.")
-            time.sleep(2)
             Player.inventory.append("PewDiePie 100M Edition Clutch Chair")
-        
+            time.sleep(2)
+
         else: # player loss
             TypeOut("PEWDIEPIE: No, you know what.. you're a sucky gamer, you can't have my chair.  Get out of my sight.")
             time.sleep(2)
         # Removes npc from room.
         Player.room.NPC = None
 
-    
 
 # ELON MUSK TODO: test
 class Elon:
@@ -116,6 +116,7 @@ class Elon:
         return False # dont play
 
     def driveRoadster(self):
+        ClearConsole()
         maze = ['########## #########', '#        #    # #  #', '#### ### #### # ## #', '#      # #       # #', '## ### #   #####   #', '#    # #####     ###', '#### # #     ###   #', '#    ### ## ##   # #', '#    # #  #  # ### #', '###### ## # #    # #', '# #     # #  ##### #', '# # ##### ##  # #  #', '#          ## # # ##', '# #############   ##', '#  #    # #   ######', '## ###    # #   #  #', '#       # ###   #  #', '####### #     #   ##', '#       ### # #    #', '####################']
         player = [18,11]
         while player != [0,10]:
@@ -138,6 +139,7 @@ class Elon:
         return True
 
     def GameOver(self):
+        ClearConsole()
         TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\n", newline=False)
         ColorPrint("You have recieved a Tunnel Card.  This tunnel beings at %s", TextColor.lightpurple)
         Player.inventory.append("Tunnel Card: %s"%self.room.name)
@@ -145,8 +147,17 @@ class Elon:
         Player.room.npc = None
 
 
+# Runs each npc
+def callNpc():
+    npcNames = {
+        "PewDiePie" : PewDiePie,
+        "BigDikman" : BigDikman,
+        "Elon Musk" : Elon
+    }
+
+
 #TODO: call npcs here
 npc = {
-    "PewDiePie" : None,
-    "BigDikman" : None,
+    "PewDiePie" : callNpc,
+    "BigDikman" : callNpc,
 }
