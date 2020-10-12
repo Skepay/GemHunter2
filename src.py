@@ -41,17 +41,6 @@ def openDoor(keys, doorName):
         time.sleep(1)
         return True
 
-key = {
-    'Red Door' : ['Red Key'],
-    'Orange Door' : ['Orange Key'],
-    'Yellow Door' : ['Yellow Key'],
-    'Green Door' : ['Green Key'],
-    'Blue Door' : ['Blue Key'],
-    'Indigo Door' : ['Indigo Key'],
-    'Violet Door' : ['Violet Key'],
-    'Gemstone Door' : ['Red Key', 'Orange Key', 'Yellow Key', 'Green Key', 'Blue Key', 'Indigo Key', 'Violet Key']
-}
-
 
 #~/ Item Functions\~#
 # Informational message about gfuel.
@@ -135,7 +124,7 @@ def Tunnel():
     ValidInput("Use Tunnel? (y/n)\n\n-> ", "y", "n")
     if ValidInput == "y":
         ClearConsole()
-        TypeOut("ZOOOOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.",.03)
+        TypeOut("ZOOOOMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM.", .03)
         for room in rooms:
             if room.name == endRoom:
                 Player.room = room
@@ -150,7 +139,7 @@ def Tunnel():
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
-    'Tunnel' : Tunnel,
+    'Tunnel' : Tunnel
 }
 
 
@@ -228,7 +217,7 @@ def InfoMessages():
     ColorPrint("LOCATION:", TextColor.blue)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint(str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
-    TypeOut("%s"%', '.join(Player.inventory),0.010)
+    TypeOut(', '.join(Player.inventory),0.010)
     print("Where would you like to travel to?",end =''); ColorPrint(" (u/d/l/r/m)",TextColor.lightpurple)
     
 

@@ -1,8 +1,6 @@
 # Main Game File for gemhunter
 from npc import *
 
-# TODO: puzzles, more mpcs, more items, room: key member
-
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
 
@@ -29,26 +27,25 @@ while 1:
                 'l' : rooms[roomIndex].left,
                 'r' : rooms[roomIndex].right
             }
-        for room in rooms:
-            if room.name == keystrokes[travelTo]:
-                if room.door: # if there is a door
-                    ClearConsole()
+        room = rooms[keystrokes[travelTo]]
 
-                    doorKeys = ', '.join(key[room.door])
-                    doorName = room.key[0:-4] # removes " Key" from key name
+        if room.door:
+            ClearConsole()
 
-                    TypeOut("There is a %s Door in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(doorName, doorKeys))
-                    openDoorInp = ValidInput("-> ","y","n")
+            doorKeys = ', '.join(room.door[2])
 
-                    if openDoorInp == "y":
-                        opened = openDoor(key[room.door], doorName=doorName)
-                        if opened:
-                            Player.room = room
-                            break
-                    TypeOut("The door remains locked.")
-                    time.sleep(1)
-                else: # if there is not a door
+            TypeOut("There is a %s Door in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door[1], doorKeys))
+            openDoorInp = ValidInput("-> ","y","n")
+
+            if openDoorInp == "y":
+                opened = openDoor(room.door[2], doorName=room.door[1])
+                if opened:
                     Player.room = room
+                    break
+            TypeOut("The door remains locked.")
+            time.sleep(1)
+        else: # if there is not a door
+            Player.room = room
 
 
     # Menu
