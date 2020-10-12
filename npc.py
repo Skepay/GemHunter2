@@ -75,7 +75,7 @@ class BigDikman:
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
 
 
-# PEWDIEPIE TODO: TESTTTTTT
+# PEWDIEPIE
 class PewDiePie:
     def __init__(self):
         self.name = "PewDiePie"
@@ -156,7 +156,7 @@ class PewDiePie:
         Player.room.NPC = None
 
 
-# ELON MUSK TODO: test
+# ELON MUSK
 class Elon:
     def __init__(self):
         self.name = "Elon Musk"
