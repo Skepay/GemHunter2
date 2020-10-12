@@ -118,15 +118,16 @@ def Tunnel():
 
     # if there isnt
     else:
+        TypeOut("MR. TUNNEL BUILDER: Please keep in mind, after you make a tunnel, that is permanent and can not be changed.")
         while True:
             ClearConsole()
             try:
                 endRoom = int(input("What is the number of the room you want to tunnel to?\n-> "))
-                if endRoom in range(0,len(rooms)):
+                if endRoom in range(0,len(rooms)-1):
                     break
-            except:
+            except ValueError:
                 pass
-        Player.inventory.append("%s (USED TO: %s"%(Player.inventory[CardNum], endRoom))
+        Player.inventory.append("%s (CONNTECTED TO: %s"%(Player.inventory[CardNum], endRoom))
         Player.inventory.remove(Player.inventory[CardNum])
 
     ClearConsole()
@@ -149,7 +150,7 @@ def Tunnel():
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
-    'Tunnel Card' : Tunnel
+    'Tunnel' : Tunnel,
 }
 
 

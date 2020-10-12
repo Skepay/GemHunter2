@@ -4,7 +4,7 @@ from src import *
 
 
 #~/ NPCS \~#
-# COLINS WEIRD GUY // BIGDIKMAN
+# COLIN'S BIGDIKMAN TODO: TEST
 class BigDikman:
     def __init__(self):
         self.name = self.GetDikmanName()
@@ -48,7 +48,15 @@ class PewDiePie:
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"]
             }
     
-    def RandomResponse():
+    def Greeting(self):
+        TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.")
+        TypeOut("Wanna play a little trivia?  If you win I'll give you my chair.")
+        playTrivia = ValidInput("(y/n)\n\n-> ","y","n")
+        if playTrivia == "y":
+            return True # play
+        return False # dont play
+
+    def RandomResponse(self):
         pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
         return random.choice(pewdsResponses)
     
@@ -93,16 +101,48 @@ class PewDiePie:
 
     
 
-# NPC TODO: test
+# ELON MUSK TODO: test
 class Elon:
     def __init__(self):
         self.name = "Elon Musk"
         self.room = rooms.index(Player.room)
 
-    def TunnelCard(self):
-        TypeOut("ELON MUSK: Thanks, this is exactly what I needed.  Heres a card to use the tunnel.\n", newline=False)
+    def Greeting(self):
+        TypeOut("???: H-h-h hey.  I'm Elon.")
+        TypeOut("ELON MUSK:  Can you drive my roadster through these martian mountains?  I'll let you build and use the next Boring Company tunnel if you do.")
+        driveRoadster = ValidInput("(y/n)\n\n->", "y", "n")
+        if driveRoadster == "y":
+            return True # play
+        return False # dont play
+
+    def driveRoadster(self):
+        maze = ['########## #########', '#        #    # #  #', '#### ### #### # ## #', '#      # #       # #', '## ### #   #####   #', '#    # #####     ###', '#### # #     ###   #', '#    ### ## ##   # #', '#    # #  #  # ### #', '###### ## # #    # #', '# #     # #  ##### #', '# # ##### ##  # #  #', '#          ## # # ##', '# #############   ##', '#  #    # #   ######', '## ###    # #   #  #', '#       # ###   #  #', '####### #     #   ##', '#       ### # #    #', '####################']
+        player = [18,11]
+        while player != [0,10]:
+            mazes = ''
+            for i in range(len(maze)):
+                for j in range(len(maze[i])):
+                    if i == player[0] and j == player[1]:
+                        mazes += '0'
+                    else:
+                        mazes += maze[i][j]
+                mazes += '\n'
+            print(mazes)
+            directions = {'w':[-1,0], 's':[1,0], 'a':[0,-1], 'd':[0,1]}
+            direction = input('Enter direction (wasd)\n').lower()
+            if direction in directions:
+                if maze[player[0] + directions[direction][0]][player[1] + directions[direction][1]] != '#':
+                    player[0] += directions[direction][0]
+                    player[1] += directions[direction][1]
+            ClearConsole()
+        return True
+
+    def GameOver(self):
+        TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\n", newline=False)
         ColorPrint("You have recieved a Tunnel Card.  This tunnel beings at %s", TextColor.lightpurple)
         Player.inventory.append("Tunnel Card: %s"%self.room.name)
+        # Removes npc from room.
+        Player.room.npc = None
 
 
 #TODO: call npcs here

@@ -4,7 +4,7 @@ from npc import *
 # TODO: puzzles, more mpcs, more items, room: key member
 
 # Intro to Game
-#Introduction()
+# TODO: Uncomment this for production -> Introduction()
 
 #~/ Main Loop \~#
 while 1:
@@ -110,6 +110,9 @@ while 1:
                 except:
                     pass
 
-            items[Player.inventory[itemChoice-1]]() # passes item in dictionary
-
+            if "Tunnel" in Player.inventory[itemChoice-1]: # special case for tunnel, bc item name is different across players.
+                items[Player.inventory[itemChoice-1][0:6]]()
+            else:
+                items[Player.inventory[itemChoice-1]]() 
+            
             input("\nPress any key to continue..")
