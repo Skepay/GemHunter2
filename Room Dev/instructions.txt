@@ -1,0 +1,3 @@
+Your .py file containing all the rooms MUST be in the main directory with src and main.
+Right click to bring up room customization.
+For door: seperate arguements with a "," first arg should be the room num that it leads to, its str name, and then the str name of the key it takes.
