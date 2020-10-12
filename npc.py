@@ -53,7 +53,9 @@ class PewDiePie:
         if play:
             while len(self.pdpTrivia) > 0:
                 self.Questions()
-        self.GameOver()
+            self.GameOver()
+        else:
+            TypeOut('Get out of my sight. atoo I spit on you')
 
     
     def Greeting(self):
@@ -155,17 +157,11 @@ class Elon:
         Player.room.npc = None
 
 
-# Runs each npc
-def callNpc():
-    npcNames = {
-        "PewDiePie" : PewDiePie,
-        "BigDikman" : BigDikman,
-        "Elon Musk" : Elon
-    }
 
 
 #TODO: call npcs here
 npc = {
-    "PewDiePie" : callNpc,
-    "BigDikman" : callNpc,
+    "PewDiePie" : PewDiePie,
+    "BigDikman" : BigDikman,
+    "Elon Musk" : Elon
 }
