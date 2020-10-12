@@ -227,6 +227,11 @@ class Player:
     room = rooms[0]
 
     def punch(enemy):
-        item = enemy.Damage(random.randint(0,4))
+        item = enemy.Damage(random.randint(2,5))
+        if(item):
+            inventory.append(item)
+
+    def kick(enemy):
+        item = enemy.Damage(random.ranint(0,7))
         if(item):
             inventory.append(item)
