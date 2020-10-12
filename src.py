@@ -10,85 +10,12 @@ from Map import rooms
 
 
 # Valid Input function
-def ValidInput(string, []):
-    validInputs = [param1,param2,param3,param4,param5,param6]
+def ValidInput(string, params):
     inp = str(input(string))
     while 1:
-        if inp in validInputs:
+        if inp in params:
             return inp
         inp = str(input(string))
-
-<<<<<<< HEAD
-=======
-# Get windows username of player.
-def GetName():
-    return os.getlogin()
-
-# Loading bar animation.
-def LoadingBar():
-    progress = 0
-    while progress <= 100:
-        ClearConsole()
-        progressBars = progress // 5
-        print('Searching Room%s'%('.' * (progress % 4)))
-        print('[%s%s] %g%%'%('#' * progressBars, '-' * (20 - progressBars), progress))
-        progress += 1
-        time.sleep(random.uniform(0.0075,.100))
-        
-# Clear the console
-def ClearConsole(newline = False):
-    os.system('cls')
-    if newline:
-        print()
-
-# Type Out messages.
-def TypeOut(string, pause = 0.045, newline = True):
-    for letter in string:
-        print(letter, end='')
-        sys.stdout.flush()
-        time.sleep(pause)
-
-    if newline:
-        print("\n")
-
-# Print Colored messages.
-def ColorPrint(string, inputColor = TextColor.white):
-    print(color(string, inputColor))
-
-# OG welcome message for gem hunter.
-def Introduction():
-    ClearConsole()
-    TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
-    time.sleep(0.75)
-    TypeOut('G E M    H U N T E R',0.075)
-    time.sleep(3)
-    ClearConsole()
-    ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
-    time.sleep(5)
-    InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
-    Instructions() if InfoInp else print()
-
-# List of keybinds for the game.
-def Instructions():
-    print("""
-        "W" -> Moves up\n
-        "S" -> Moves down\n
-        "A" -> Moves left\n
-        "D" -> Moves right\n
-        "M" or "menu" -> Opens the menu.
-        """)
-    input("\n\nPress any key to continue.")
-
-# Prints informational messages.
-def InfoMessages():
-    ClearConsole()
-    ColorPrint("LOCATION:", TextColor.blue)
-    TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
-    ColorPrint("\nINVENTORY:", TextColor.blue)
-    TypeOut(', '.join(Player.inventory),0.010)
-    print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
-
->>>>>>> 5f9242cac1a0e0245022c641c58be4a7dbcd0041
 
 #~/ Doors \~#
 def openDoor(keys, doorName): 

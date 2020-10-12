@@ -174,6 +174,7 @@ class Elon:
         Player.room.npc = None
 
 
+# ISAIAH
 class Isaiah:
     def __init__(self):
         play = self.Greeting()
@@ -221,6 +222,7 @@ class Isaiah:
         TypeOut('\n\n\nif startGame():\n\tprint(\'Credits: Isaiah Harville\')\n\n', pause = 0.2)
         TypeOut('Isaiah: Perfect! I think it may be ready to release')
 
+
 # MAYA
 class Maya:
     def __init__(self):
@@ -235,6 +237,10 @@ class Maya:
     def Greeting(self):
         TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n", newline=False)
         findEye = ValidInput("(y/n)\n\n-> ", ["y","n"])
+        if findEye == "y":
+            return True
+        return False
+
 
 
 #TODO: call npcs here
