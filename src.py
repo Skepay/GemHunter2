@@ -17,7 +17,6 @@ def ValidInput(string, params):
             return inp
         inp = str(input(string))
 
-
 #~/ Doors \~#
 def openDoor(keys, doorName): 
     missingKeys = []

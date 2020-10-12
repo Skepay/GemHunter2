@@ -235,8 +235,12 @@ class Maya:
             TypeOut("*sad maya face*")
 
     def Greeting(self):
-        TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n"newline=False)
+        TypeOut("MAYA: Hi, I'm PewDiePie's pug.  I lost my eyepatch.  Can you help me find it please?\n", newline=False)
         findEye = ValidInput("(y/n)\n\n-> ", ["y","n"])
+        if findEye == "y":
+            return True
+        return False
+
 
 
 #TODO: call npcs here
