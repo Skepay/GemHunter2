@@ -5,7 +5,7 @@ from msvcrt import getch
 
 
 #~/ NPCS \~#
-# COLIN'S BIGDIKMAN TODO: TEST
+# COLIN'S BIGDIKMAN TODO: KILL ISAIAH
 class BigDikman:
     def __init__(self):
         self.name = self.GetDikmanName()
@@ -16,6 +16,11 @@ class BigDikman:
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = random.choice(firstName), random.choice(lastName)
         return name
+
+    def Greeting(self):
+        ClearConsole()
+        TypeOut("???: YOU'RE GONNA HAVE TO FIGHT ME IF YOU WANNA GET PAST MY ELASTIC DIK.\n", newline=False)
+        TypeOut(self.name + ":", self.GetRandomLine())
 
     def GetRandomLine(self):
         lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
@@ -28,6 +33,41 @@ class BigDikman:
             return 0
         else:
             return self.Die()
+
+    def Battle(self, player):
+        ct = 0
+        attackDict = {"1" : player.Punch(self), "2" : player.Kick(self)}
+        while(self.hp > 0 and player.hp > 0):
+
+            ct+=1
+            print("ROUND",ct)
+
+            TypeOut(self.name + "HP: " + self.hp)
+            TypeOut(player.name + "HP: " + player.hp)
+            print('\n\n\n')
+
+            TypeOut("You attack first, what move would you like to use?")
+            print("(1): Punch")
+            print("(2): Kick")
+            print("(3): Dodge")
+            print("(4): Go for the [REDACTED]")
+
+            if(not (player.hasSpecialItems)):
+                move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
+            else:
+                for item in range(player.attackItems):
+                    print("("+item+"): " + player.attackItems[i].name)
+                num = len(player.attackItems)
+                inputVals = ["1","2","3","4"]
+                inputStr = "("
+                for i in range(num):
+                    inputVals.append(str(i))
+                    inputStr.append(i)
+                    if i < num-1:
+                        inputStr.append('/')
+                inputStr.append(')')
+                move = ValidInput(inputStr, inputVals)
+            attackDict(move)
 
     def Die(self):
         TypeOut(self.name + ": Ouch. That one hurt my dik.")
