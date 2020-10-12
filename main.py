@@ -34,14 +34,13 @@ while 1:
 
             doorKeys = ', '.join(room.door[2])
 
-            TypeOut("There is a %s Door in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door[1], doorKeys))
+            TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(room.door[1], doorKeys))
             openDoorInp = ValidInput("-> ","y","n")
 
             if openDoorInp == "y":
                 opened = openDoor(room.door[2], doorName=room.door[1])
                 if opened:
                     Player.room = room
-                    break
             TypeOut("The door remains locked.")
             time.sleep(1)
         else: # if there is not a door

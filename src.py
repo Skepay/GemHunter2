@@ -34,7 +34,7 @@ def openDoor(keys, doorName):
 
     else:  # if the player has the keys
         ClearConsole()
-        TypeOut("The %s Door opened!"%doorName, 0.06)
+        TypeOut("The %s opened!"%doorName, 0.06)
         for key in keys:
             Player.inventory.remove(key)
 
