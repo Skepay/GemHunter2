@@ -224,6 +224,79 @@ class Elon:
         # Removes npc from room.
         Player.room.npc = None
 
+class DrSnafu:
+    def __init__(self):
+        
+        self.introduction()
+        time.sleep(3)
+        play = self.IsaiahIntroduction()
+        if not play:
+            TypeOut('ISAIAH: Frick you')
+            time.sleep(1)
+            return
+        TypeOut('\nISAIAH: Awesome! Just launch python and get to work')
+        ColorPrint('\nPress enter to launch python IDLE 3.8.7', TextColor.green, newLine = False)
+        input()
+        self.Code()
+
+    def introduction(self):
+        playsound(foundSound, block = False)
+        input('Would you like to interact with Dr Snafu? (y/n)\n-> ')
+        playsound(foundSound, block = False)
+        input('Would you like to interact with Dr Snafu? (y/n)\n-> ')
+        playsound(foundSound, block = False)
+        input('ct with Dr Snafu? (y/n)-> Would you like to intera\n-> ')
+        playsound(foundSound, block = False)
+        input('Wct would you like aith to interDr Snafu? (n/n)\n>- ')
+        playsound(foundSound, block = False)
+        input('Wuld yoeract witafu? (y/n)h Dor u like to intSn\n<- ')
+
+        ColorPrint('\n\n\nTraceback(most recent call last):\n\tFile "C:\\Python38\\GemHunter\\main.py", Line 358, in DrSnafu.run()\n\nFATAL_ERROR: CALL_AND_RETRY_LAST Allocation failed. out of memory', TextColor.red)
+        for i in range(5):
+            playsound(error, block = False)
+            time.sleep(0.1)
+    
+    def IsaiahIntroduction(self):
+        TypeOut('\nISAIAH: WHAT HAPPENED?\n', newline = False)
+        time.sleep(0.5)
+        TypeOut('ISAIAH: Dr snafu crashed?', newline = False)
+        time.sleep(1)
+        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I shouldve delayed the release\n', newline = False)
+        time.sleep(0.5)
+        TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC\n', newline = False)
+        time.sleep(0.5)
+        TypeOut('ISAIAH: If you can help me that would be fantastic.', newline = False)
+        time.sleep(0.5)
+        TypeOut(' All you gotta do is write some python code to fix the bugs in the main file\n', newline = False)
+        time.sleep(0.75)
+        TypeOut('ISAIAH: Whatdya say?', newline = False)
+        time.sleep(0.5)
+        TypeOut(' Will you help me?')
+        return ValidInput('(y/n): ', ['y', 'n']) == 'y'
+
+    def Code(self):
+        ClearConsole()
+        ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n', TextColor.green)
+        code = open('bugFixer.py').read()
+        
+        ColorPrint(' 1:\t', TextColor.blue, newLine = False)
+        lineNum = 1
+        for char in code:
+            getch()
+            print(char, end = '')
+            if char == '\n':
+                lineNum += 1
+                ColorPrint('%2g:\t'%lineNum, TextColor.blue, newLine = False)
+            sys.stdout.flush()
+
+        print('\n' * 3)
+        TypeOut('ISAIAH: Wow great job, You\'re pretty good at coding.', newline = False)
+        time.sleep(0.5)
+        TypeOut(' You didnt even have to copy and paste anything')
+        
+
+
+
 
 # ISAIAH
 class Isaiah:
@@ -402,5 +475,10 @@ npc = {
     "Elon Musk" : Elon,
     "Isaiah"    : Isaiah,
     "Maya" : Maya,
+<<<<<<< HEAD
     "TypeRace" : TypeRace
 }
+=======
+    'Dr Snafu'  : DrSnafu
+}
+>>>>>>> 3b8df79... stuff

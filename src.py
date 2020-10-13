@@ -25,6 +25,7 @@ introSong = "%s\intro_song.mp3"%soundPath
 winSound = "%s\win.mp3"%soundPath
 newItem = "%s\_newItem.mp3"%soundPath
 foundSound = "%s\_found.mp3"%soundPath
+error = "%s\error.mp3"%soundPath
 
 #~/ Functions \~#
 # Valid Input function
@@ -105,7 +106,7 @@ def InfoMessages():
     playsound(boopSound, block=False)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
-    TypeOut(', '.join(Player.inventory),0.060)
+    TypeOut(', '.join(Player.inventory),0.010)
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 
