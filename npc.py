@@ -10,6 +10,7 @@ class BigDikman:
     def __init__(self):
         self.name = self.GetDikmanName()
         self.hp = random.randint(15,20)
+        self.Battle(self)
 
     def GetDikmanName(self):
         firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
@@ -34,45 +35,52 @@ class BigDikman:
         else:
             return self.Die()
 
-    def Battle(self, player):
+    def Battle(self):
         ct = 0
-        attackDict = {"1" : player.Punch(self), "2" : player.Kick(self)}
-        while(self.hp > 0 and player.hp > 0):
+        attackDict = {"1" : Player.Punch(self), "2" : player.Kick(self)}
+        while(self.hp > 0 and Player.health > 0):
 
             ct+=1
             print("ROUND",ct)
 
             TypeOut(self.name + "HP: " + self.hp)
-            TypeOut(player.name + "HP: " + player.hp)
+            TypeOut(Player.name + "HP: " + player.hp)
             print('\n\n\n')
             if ct == 1:
                 TypeOut("You attack first, what move would you like to use?")
             else: 
                 TypeOut("Yout turn to attack, what move would you like to use?")
+
             print("(1): Punch")
             print("(2): Kick")
             print("(3): Dodge")
             print("(4): Go for the [REDACTED]")
 
-            if(not (player.hasSpecialItems)):
+            if(not (Player.hasSpecialItems)):
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
-                for item in range(player.attackItems):
-                    print("("+item+"): " + player.attackItems[i].name)
-                num = len(player.attackItems)
+                for item in range(Player.attackItems):
+                    print("("+item+"): " + Player.attackItems[i].name)
+
+                num = len(Player.attackItems)
                 inputVals = ["1","2","3","4"]
                 inputStr = "("
+
                 for i in range(num):
                     inputVals.append(str(i))
                     inputStr.append(i)
+
                     if i < num-1:
                         inputStr.append('/')
+
                 inputStr.append(')')
                 move = ValidInput(inputStr, inputVals)
+
             attackDict[move]
+
         if(self.hp > 0):
             TypeOut("Haha! You got rekt by my dik!")
-            player.Die()
+            Player.Die()
         else:
             self.Die()
 

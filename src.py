@@ -221,10 +221,11 @@ items = {
 
 #~/ Player \~#
 class Player:
-    name = GetName()
-    health = 20
-    inventory = ["GFUEL"]
-    room = rooms[0]
+    def __init__(self):
+        self.name = GetName()
+        self.health = 20
+        self.inventory = ["GFUEL"]
+        self.room = rooms[0]
 
     def punch(enemy):
         item = enemy.Damage(random.randint(2,5))
@@ -235,3 +236,5 @@ class Player:
         item = enemy.Damage(random.ranint(0,7))
         if(item):
             inventory.append(item)
+    def Die(self):
+        pass
