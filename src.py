@@ -17,8 +17,8 @@ finally:
 
 #~/ Sounds \~#
 # set second arguement to be False, so it will run async
-soundPath = "%s\Sounds"%os.path.abspath(__file__)[0:-6]
-
+soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
+spitSound = "%s\spit.mp3"%soundPath
 
 #~/ Functions \~#
 # Valid Input function

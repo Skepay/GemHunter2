@@ -103,7 +103,10 @@ class PewDiePie:
                 self.Questions()
             self.GameOver()
         else:
+            ClearConsole()
+            playsound(spitSound, False)
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
+            time.sleep(1.5)
     
     def Greeting(self):
         ClearConsole()
