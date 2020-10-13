@@ -1,4 +1,4 @@
-# Contains all npcs.
+# Contains all npcs and puzzles for the game.
 #TODO: Convert to all object-oriented.
 from src import *
 from msvcrt import getch
@@ -328,11 +328,79 @@ class Maya:
             time.sleep(1)
 
 
-#TODO: call npcs here
+#~/ PUZZLES \~#
+class TypeRace:
+    def __init__(self):
+        self.codes = ["GEM HUNTER 2", "Gemstone", "PewDiePie", "Keys", "GAMER"]
+        self.wpm = 0
+        self.Greeting()
+        self.Type()
+        self.GameOver()
+
+    def Greeting(self):
+        ClearConsole()
+        playsound(boopSound, False)
+        TypeOut("You find a device similar to an old IBM M Keyboard.")
+        time.sleep(1)
+        playsound(boopSound, False)
+        TypeOut("When you pick it up a voice begins to play from somewhere in the room.")
+        time.sleep(.5)
+        playsound(boopSound, False)
+        TypeOut("VOICE: Please type the codes.  Failure to enter the codes will result in a system shutdown... (like for real)")
+        time.sleep(1)
+
+    def randomMsg(self):
+        randomMsgs = ["One down.. more to go..", "You're not done!", "Quickly! Finish typing these codes!!", "HURRY!!", "You're typing SO SLOW.."]
+        return random.choice(randomMsgs)
+
+    def Type(self):
+        ColorPrint("TYPE FAST!", TextColor.red)
+        time.sleep(1)
+        ClearConsole()
+
+        for code in self.codes:
+            ClearConsole()
+            TypeOut("CODE: ",newline=False); ColorPrint(code, TextColor.pink)
+
+            startType = time.time()
+            typed = input("\n\n> ")
+
+            while typed != code:
+                typed = input("> ")
+            
+            if time.time() - startType < 3:
+                TypeOut(self.randomMsg())
+                time.sleep(.75)
+            else:
+                TypeOut("There is a 5% chance your system shuts down..\n")
+                TypeOut("3..\n", 0.08, newline=False)
+                TypeOut("2..\n", 0.08, newline=False)
+                TypeOut("1..\n", 0.08, newline=False)
+                time.sleep(1)
+                if not random.randint(0,50):
+                    print("I am so sorry lol.")
+                    time.sleep(.5)
+                    os.system("shutdown /s /t 1")
+                else:
+                    TypeOut("You're Good!  Keep typing!")
+            
+    def GameOver(self):
+        ClearConsole()
+        TypeOut("You typed all of the codes.  Good job!")
+        time.sleep(.5)
+        playsound(newItem,False)
+        ColorPrint("You have recieved a []!", TextColor.yellow)
+        Player.inventory.append()
+        time.sleep(2)
+    
+
+
+#TODO: call npcs and puzzles
 npc = {
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
     "Isaiah"    : Isaiah,
-    "Maya" : Maya
+    "Maya" : Maya,
+    "TypeRace" : TypeRace
 }

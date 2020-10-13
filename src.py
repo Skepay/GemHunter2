@@ -110,7 +110,7 @@ def InfoMessages():
 
 
 #~/ Doors \~#
-def openDoor(keys, doorName): 
+def openDoor(keys, doorName):
     missingKeys = []
     for key in keys:
         if key not in Player.inventory:
