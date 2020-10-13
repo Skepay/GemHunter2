@@ -235,6 +235,7 @@ class DrSnafu:
             TypeOut('ISAIAH: Frick you')
             time.sleep(1)
             return
+        ClearConsole()
         TypeOut('\nISAIAH: Awesome! Just launch python and get to work')
         ColorPrint('\nPress enter to launch python IDLE 3.8.7', TextColor.green, newLine = False)
         input()
@@ -272,13 +273,13 @@ class DrSnafu:
         time.sleep(0.75)
         TypeOut('ISAIAH: Whatdya say?', newline = False)
         time.sleep(0.5)
-        TypeOut(' Will you help me?')
-        return ValidInput('(y/n): ', ['y', 'n']) == 'y'
+        TypeOut(' Will you help me?\n',newline=False)
+        return ValidInput('(y/n)\n\n-> ', ['y', 'n']) == 'y'
 
     def Code(self):
         ClearConsole()
         ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n', TextColor.green)
-        code = open('bugFixer.py').read()
+        code = open(r"files\bugFixer.py").read()
         
         ColorPrint(' 1:\t', TextColor.blue, newLine = False)
         lineNum = 1
@@ -417,7 +418,6 @@ npc = {
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
-    "Isaiah"    : Isaiah,
     "Maya" : Maya,
     "TypeRace" : TypeRace,
     "Dr Snafu" : DrSnafu

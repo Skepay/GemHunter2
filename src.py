@@ -238,7 +238,8 @@ items = {
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
     'SSH Key' : ssh,
-    'Maya\'s Eyepatch' : "Return this item to Maya!"
+    'Maya\'s Eyepatch' : "Return this item to Maya!",
+    'SSH Key' : ''
 }
 
 
