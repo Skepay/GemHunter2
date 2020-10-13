@@ -75,11 +75,12 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
 # OG welcome message for gem hunter.
 def Introduction():
     playsound(introSong, block=False)
+    time.sleep(.5)
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
-    time.sleep(0.75)
+    time.sleep(0.60)
     TypeOut('G E M    H U N T E R',0.075)
-    time.sleep(3)
+    time.sleep(2.15)
     ClearConsole()
     ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
     time.sleep(5)
