@@ -50,7 +50,8 @@ while 1:
             else:
                 ClearConsole()
                 TypeOut("The door remains locked.")
-            time.sleep(1)
+            time.sleep(
+                1)
 
         else: # if there is not a door
             player.room = room
@@ -59,7 +60,9 @@ while 1:
         if player.room.npc: # if there is an npc in the room
             ClearConsole()
             playsound(foundSound,block=False)
-            TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%player.room.npc, TextColor.yellow)
+            TypeOut("You found.. ",0.06,newline=False); 
+            time.sleep(.1)
+            ColorPrint(" %s!\n\n"%player.room.npc, TextColor.yellow)
             time.sleep(2)
 
             interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%player.room.npc, ["y","n"])

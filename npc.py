@@ -273,7 +273,7 @@ class DrSnafu:
         time.sleep(0.5)
         TypeOut('ISAIAH: Dr snafu crashed?', newline = False)
         time.sleep(1)
-        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I shouldve delayed the release.\n', newline = False)
+        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I should\'ve delayed the release.\n', newline = False)
         time.sleep(0.5)
         TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC.\n', newline = False)
         time.sleep(0.5)
@@ -289,7 +289,7 @@ class DrSnafu:
     def Code(self):
         ClearConsole()
         ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n', TextColor.green)
-        code = open(r"files\bugFixer.py").read()
+        code = open(r"files\drSnafu.txt").read()
         
         ColorPrint(' 1:\t', TextColor.blue, newLine = False)
         lineNum = 1
