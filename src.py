@@ -22,6 +22,9 @@ spitSound = "%s\spit.mp3"%soundPath
 boopSound = "%s\Sboop.mp3"%soundPath
 teleportSound = "%s\teleportSound.mp3"%soundPath
 introSong = "%s\intro_song.mp3"%soundPath
+winSound = "%s\win.mp3"%soundPath
+newItem = "%s\_newItem.mp3"%soundPath
+foundSound = "%s\_found.mp3"%soundPath
 
 #~/ Functions \~#
 # Valid Input function

@@ -77,6 +77,7 @@ class BigDikman:
             self.Die()
 
     def Die(self):
+        playsound(newItem,block=False)
         TypeOut(self.name + ": Ouch. That one hurt my dik.")
         TypeOut(self.name + " HAS DIED.")
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
@@ -153,6 +154,7 @@ class PewDiePie:
 
         if self.pdpScore >= len(list(self.pdpTrivia)):  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..\nPEWDIEPIE: Be seeing you, gamer.")
+            playsound(newItem,block=False)
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
             time.sleep(1)
             TypeOut("To use the chair, interact with it in your inventory from the menu.")
@@ -215,6 +217,7 @@ class Elon:
         ClearConsole()
         TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\nELON MUSK: Bye.")
         time.sleep(.5)
+        playsound(newItem,block=False)
         ColorPrint("You have recieved a Tunnel Pass.  This tunnel beings at Room %s"%self.room, TextColor.lightpurple)
         Player.inventory.append("Tunnel Pass - %s"%self.room)
         time.sleep(2)
@@ -271,6 +274,7 @@ class Isaiah:
         TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
         TypeOut('ISAIAH: Perfect! I think it may be ready to release.')
         time.sleep(3)
+        playsound(newItem,block=False)
         TypeOut("You recieved a.. "); ColorPrint("Gem Hunter SSH key!", TextColor.yellow)
         Player.inventory.append("SSH Key")
         Player.room.npc = None
@@ -299,6 +303,7 @@ class Maya:
     
     def FindItem(self):
         ClearConsole()
+        playsound(newItem,block=False)
         random.choice(self.lostRooms).item = "Maya's Eyepatch"
 
         TypeOut("MAYA: Awesome!  Thank you.")

@@ -58,6 +58,7 @@ while 1:
 
         if Player.room.npc: # if there is an npc in the room
             ClearConsole()
+            playsound(foundSound,block=False)
             TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
             time.sleep(2)
 
@@ -86,6 +87,7 @@ while 1:
             ClearConsole()
             #Room Items.
             if Player.room.item: # if there is a item in the room
+                playsound(newItem,block=False)
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
                 Player.inventory.append(Player.room.item)
                 Player.room.item = None
