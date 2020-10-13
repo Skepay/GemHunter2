@@ -3,10 +3,6 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-<<<<<<< HEAD
-=======
-# Introduction()
->>>>>>> 3b8df79... stuff
 
 #~/ Main Loop \~#
 while 1:

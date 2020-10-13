@@ -225,6 +225,7 @@ class Elon:
         Player.room.npc = None
 
 class DrSnafu:
+    #Player.inventory.append("SSH Key")
     def __init__(self):
         
         self.introduction()
@@ -261,13 +262,13 @@ class DrSnafu:
         time.sleep(0.5)
         TypeOut('ISAIAH: Dr snafu crashed?', newline = False)
         time.sleep(1)
-        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I shouldve delayed the release\n', newline = False)
+        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I shouldve delayed the release.\n', newline = False)
         time.sleep(0.5)
-        TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC\n', newline = False)
+        TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC.\n', newline = False)
         time.sleep(0.5)
         TypeOut('ISAIAH: If you can help me that would be fantastic.', newline = False)
         time.sleep(0.5)
-        TypeOut(' All you gotta do is write some python code to fix the bugs in the main file\n', newline = False)
+        TypeOut(' All you gotta do is write some python code to fix the bugs in the main file.\n', newline = False)
         time.sleep(0.75)
         TypeOut('ISAIAH: Whatdya say?', newline = False)
         time.sleep(0.5)
@@ -292,65 +293,8 @@ class DrSnafu:
         print('\n' * 3)
         TypeOut('ISAIAH: Wow great job, You\'re pretty good at coding.', newline = False)
         time.sleep(0.5)
-        TypeOut(' You didnt even have to copy and paste anything')
-        
-
-
-
-
-# ISAIAH
-class Isaiah:
-    def __init__(self):
-        play = self.Greeting()
-        if not play:
-            TypeOut('ISAIAH: Frick you.')
-            return
-        ClearConsole()
-        TypeOut('ISAIAH: Awesome! ', newline = False)
-        time.sleep(0.5)
-        TypeOut('You start work on the game, I\'m gonna go watch some silicon valley...')
-        ColorPrint('\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
-        input()
-        self.Code()
-    
-    def Greeting(self):
-        ClearConsole()
-        TypeOut('ISAIAH: EYYYUHH yo waddup its me Isaiah.\n',newline=False)
-        time.sleep(0.5)
-        TypeOut('ISAIAH: Listen.. I need some help fixing bugs in my code for Gem Hunter 2.\n',newline=False)
-        time.sleep(0.5)
-        TypeOut('ISAIAH: Whatdya say?', newline = False)
+        TypeOut(' You didnt even have to copy and paste anything!')
         time.sleep(1)
-        TypeOut(' Will you help me?\n',newline=False)
-        time.sleep(0.5)
-        return ValidInput("(y/n)\n\n-> ",['y', 'n']) == 'y'
-
-    def Code(self):
-        ClearConsole()
-        ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n\n\n', TextColor.green)
-        code = '\n'.join(open('main.py').read().split('\n')[:20])
-        lineNum = 1
-        ColorPrint('1:\t', TextColor.blue, newLine = False)
-        for char in code:
-            getch()
-            print(char, end='')
-            if char == '\n':
-                lineNum += 1
-                ColorPrint('%g:\t'%lineNum, TextColor.blue, newLine = False)
-            sys.stdout.flush()
-        print('\n' * 3)
-        TypeOut('ISAIAH: Nice work!, looks pretty good.. let me just finish it up and then we\'ll be done.')
-        time.sleep(0.5)
-        ColorPrint('21:\t', TextColor.blue, newLine = False)
-        TypeOut('if startGame():\n', newline = False)
-        ColorPrint('22:\t', TextColor.blue, newLine = False)
-        TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
-        TypeOut('ISAIAH: Perfect! I think it may be ready to release.')
-        time.sleep(3)
-        playsound(newItem,block=False)
-        TypeOut("You recieved a.. "); ColorPrint("Gem Hunter SSH key!", TextColor.yellow)
-        Player.inventory.append("SSH Key")
-        Player.room.npc = None
 
 
 # MAYA
@@ -475,10 +419,6 @@ npc = {
     "Elon Musk" : Elon,
     "Isaiah"    : Isaiah,
     "Maya" : Maya,
-<<<<<<< HEAD
-    "TypeRace" : TypeRace
+    "TypeRace" : TypeRace,
+    "Dr Snafu" : DrSnafu
 }
-=======
-    'Dr Snafu'  : DrSnafu
-}
->>>>>>> 3b8df79... stuff

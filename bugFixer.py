@@ -1,7 +1,7 @@
 import numpy as pd 
 import pandas as np
 
-codeToFix = open('main.py', 'r').read().split('\n')
+codeToFix = open(main.py, 'r').read().split('\n')
 fixedCode = ''
 for line in codeToFix:
     for char in line:
