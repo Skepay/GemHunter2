@@ -74,11 +74,12 @@ while 1:
     # Menu
     else:
         ClearConsole()
+        playsound(boopSound, block=False)
         print("Menu:\n1. Search Room." # prints a menu of options
             "\n2. Open Inventory.\n"
         )
         menuOption = input("-> ")
-
+        playsound(boopSound, block=False)
         # Search Room
         if menuOption == "1":
             LoadingBar() 

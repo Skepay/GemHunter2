@@ -19,6 +19,9 @@ finally:
 # set second arguement to be False, so it will run async
 soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
 spitSound = "%s\spit.mp3"%soundPath
+boopSound = "%s\Sboop.mp3"%soundPath
+teleportSound = "%s\teleportSound.mp3"%soundPath
+introSong = "%s\intro_song.mp3"%soundPath
 
 #~/ Functions \~#
 # Valid Input function
@@ -68,6 +71,7 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
 
 # OG welcome message for gem hunter.
 def Introduction():
+    playsound(introSong, block=False)
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
     time.sleep(0.75)
@@ -94,6 +98,7 @@ def Instructions():
 def InfoMessages():
     ClearConsole()
     ColorPrint("LOCATION:", TextColor.blue)
+    playsound(boopSound, block=False)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
     TypeOut(', '.join(Player.inventory),0.060)
@@ -153,7 +158,9 @@ def Chair():
             if room.name == teleportLocation:
                 Player.room = room
                 Player.inventory.remove("PewDiePie 100M Edition Clutch Chair")
+                playsound(teleportSound, block=False)
                 TypeOut("You have arrived in Room %s!\n"%Player.room.name,0.06)
+                time.sleep(1)
                 break
     else:
         ClearConsole()
