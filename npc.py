@@ -58,16 +58,16 @@ class BigDikman:
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
                 for item in range(player.attackItems):
-                    print("("+item+"): " + player.attackItems[i].name)
+                    print("("+item+"): " + player.attackItems[item].name)
                 num = len(player.attackItems)
                 inputVals = ["1","2","3","4"]
                 inputStr = "("
                 for i in range(num):
                     inputVals.append(str(i))
-                    inputStr.append(i)
+                    inputStr += i
                     if i < num-1:
-                        inputStr.append('/')
-                inputStr.append(')')
+                        inputStr += '/'
+                inputStr += ')'
                 move = ValidInput(inputStr, inputVals)
             attackDict[move]
         if(self.hp > 0):

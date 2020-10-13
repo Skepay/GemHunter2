@@ -125,3 +125,5 @@ while 1:
                 items[Player.inventory[itemChoice-1]]() if type(items[Player.inventory[itemChoice-1]]) != str else TypeOut(items[Player.inventory[itemChoice-1]])
             
             input("\nPress any key to continue..")
+
+
