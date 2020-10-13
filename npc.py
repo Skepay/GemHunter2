@@ -7,43 +7,39 @@ from msvcrt import getch
 #~/ NPCS \~#
 # COLIN'S BIGDIKMAN TODO: KILL ISAIAH
 class BigDikman:
-    def __init__(self):
-        self.name = self.GetDikmanName()
+    def __init__(self, player):
         self.hp = random.randint(15,20)
+        self.name = self.GetDikmanName()
+        self.Greeting()
+        self.Battle(player)
 
     def GetDikmanName(self):
         firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
-        name = random.choice(firstName), random.choice(lastName)
+        name = (random.choice(firstName) + " " + random.choice(lastName))
         return name
 
     def Greeting(self):
         ClearConsole()
         TypeOut("???: YOU'RE GONNA HAVE TO FIGHT ME IF YOU WANNA GET PAST MY ELASTIC DIK.\n", newline=False)
-        TypeOut(self.name + ":", self.GetRandomLine())
+        TypeOut((self.name, ": ", self.GetRandomLine()))
+        return
 
     def GetRandomLine(self):
         lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
         return random.choice(lines)
 
-    def Damage(self, dmg):
-        self.hp -= dmg
-        if(self.hp > 0):
-            TypeOut(self.name + ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!")
-            return 0
-        else:
-            return self.Die()
-
     def Battle(self, player):
         ct = 0
-        attackDict = {"1" : player.Punch(self), "2" : player.Kick(self)}
-        while(self.hp > 0 and player.hp > 0):
+        attackDict = {"1" : player.Punch, "2" : player.Kick}
+        while(self.hp > 0 and player.GetHealth(player) > 0):
+            ClearConsole()
 
             ct+=1
             print("ROUND",ct)
 
-            TypeOut(self.name + "HP: " + self.hp)
-            TypeOut(player.name + "HP: " + player.hp)
+            TypeOut((self.name," HP: ", self.hp))
+            TypeOut((player.name, " HP: ", player.GetHealth(player)))
             print('\n\n\n')
             if ct == 1:
                 TypeOut("You attack first, what move would you like to use?")
@@ -54,7 +50,9 @@ class BigDikman:
             print("(3): Dodge")
             print("(4): Go for the [REDACTED]")
 
-            if(not (player.hasSpecialItems)):
+            print(self.hp)
+
+            if(not (player.HasSpecialItems())):
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
                 for item in range(player.attackItems):
@@ -69,17 +67,29 @@ class BigDikman:
                         inputStr += '/'
                 inputStr += ')'
                 move = ValidInput(inputStr, inputVals)
-            attackDict[move]
+            attackDict[move](self)
+            print("PRESS ANY KEY TO CONTINUE")
+            getch()
         if(self.hp > 0):
             TypeOut("Haha! You got rekt by my dik!")
             player.Die()
         else:
             self.Die()
 
+
+    def Damage(self, dmg):
+        TypeOut (("YOU DAMAGED ", self.name, " FOR ", dmg, "."))
+        self.hp -= dmg
+        if(self.hp > 0):
+            TypeOut((self.name, ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!"))
+            return 0
+        else:
+            return self.Die()
+
     def Die(self):
         playsound(newItem,block=False)
-        TypeOut(self.name + ": Ouch. That one hurt my dik.")
-        TypeOut(self.name + " HAS DIED.")
+        TypeOut((self.name,": Ouch. That one hurt my dik."))
+        TypeOut((self.name, "HAS DIED."))
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
 
 
@@ -416,7 +426,7 @@ class TypeRace:
 #TODO: call npcs and puzzles
 npc = {
     "PewDiePie" : PewDiePie,
-    "BigDikman" : BigDikman,
+    "BigDikman" : BigDikman(player),
     "Elon Musk" : Elon,
     "Maya" : Maya,
     "TypeRace" : TypeRace,

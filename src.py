@@ -246,16 +246,25 @@ items = {
 #~/ Player \~#
 class Player:
     name = GetName()
-    health = 20
+    hp = 20
     inventory = ["GFUEL"]
     room = rooms[0]
-    
-    def punch(enemy):
+
+    def Punch(self, enemy):
         item = enemy.Damage(random.randint(2,5))
         if(item):
-            inventory.append(item)
+            self.inventory.append(item)
 
-    def kick(enemy):
-        item = enemy.Damage(random.ranint(0,7))
+    def Kick(self, enemy):
+        item = enemy.Damage(random.randint(0,7))
         if(item):
-            inventory.append(item)
+            self.inventory.append(item)
+
+    def GetHealth(self):
+        return self.hp
+
+    def HasSpecialItems():
+        return False
+
+
+player = Player
