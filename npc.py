@@ -1,4 +1,4 @@
-# Contains all npcs.
+# Contains all npcs and puzzles for the game.
 #TODO: Convert to all object-oriented.
 from src import *
 from msvcrt import getch
@@ -10,7 +10,6 @@ class BigDikman:
     def __init__(self):
         self.name = self.GetDikmanName()
         self.hp = random.randint(15,20)
-        self.Battle(self)
 
     def GetDikmanName(self):
         firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
@@ -35,62 +34,56 @@ class BigDikman:
         else:
             return self.Die()
 
-    def Battle(self):
+    def Battle(self, player):
         ct = 0
-        attackDict = {"1" : Player.Punch(self), "2" : player.Kick(self)}
-        while(self.hp > 0 and Player.health > 0):
+        attackDict = {"1" : player.Punch(self), "2" : player.Kick(self)}
+        while(self.hp > 0 and player.hp > 0):
 
             ct+=1
             print("ROUND",ct)
 
             TypeOut(self.name + "HP: " + self.hp)
-            TypeOut(Player.name + "HP: " + player.hp)
+            TypeOut(player.name + "HP: " + player.hp)
             print('\n\n\n')
             if ct == 1:
                 TypeOut("You attack first, what move would you like to use?")
             else: 
                 TypeOut("Yout turn to attack, what move would you like to use?")
-
             print("(1): Punch")
             print("(2): Kick")
             print("(3): Dodge")
             print("(4): Go for the [REDACTED]")
 
-            if(not (Player.hasSpecialItems)):
+            if(not (player.hasSpecialItems)):
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
-                for item in range(Player.attackItems):
-                    print("("+item+"): " + Player.attackItems[i].name)
-
-                num = len(Player.attackItems)
+                for item in range(player.attackItems):
+                    print("("+item+"): " + player.attackItems[item].name)
+                num = len(player.attackItems)
                 inputVals = ["1","2","3","4"]
                 inputStr = "("
-
                 for i in range(num):
                     inputVals.append(str(i))
-                    inputStr.append(i)
-
+                    inputStr += i
                     if i < num-1:
-                        inputStr.append('/')
-
-                inputStr.append(')')
+                        inputStr += '/'
+                inputStr += ')'
                 move = ValidInput(inputStr, inputVals)
-
             attackDict[move]
-
         if(self.hp > 0):
             TypeOut("Haha! You got rekt by my dik!")
-            Player.Die()
+            player.Die()
         else:
             self.Die()
 
     def Die(self):
+        playsound(newItem,block=False)
         TypeOut(self.name + ": Ouch. That one hurt my dik.")
         TypeOut(self.name + " HAS DIED.")
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
 
 
-# PEWDIEPIE TODO: TESTTTTTT
+# PEWDIEPIE
 class PewDiePie:
     def __init__(self):
         self.name = "PewDiePie"
@@ -111,7 +104,10 @@ class PewDiePie:
                 self.Questions()
             self.GameOver()
         else:
+            ClearConsole()
+            playsound(spitSound, False)
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
+            time.sleep(1.5)
     
     def Greeting(self):
         ClearConsole()
@@ -158,6 +154,7 @@ class PewDiePie:
 
         if self.pdpScore >= len(list(self.pdpTrivia)):  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..\nPEWDIEPIE: Be seeing you, gamer.")
+            playsound(newItem,block=False)
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
             time.sleep(1)
             TypeOut("To use the chair, interact with it in your inventory from the menu.")
@@ -171,7 +168,7 @@ class PewDiePie:
         Player.room.NPC = None
 
 
-# ELON MUSK TODO: test
+# ELON MUSK
 class Elon:
     def __init__(self):
         self.name = "Elon Musk"
@@ -220,65 +217,85 @@ class Elon:
         ClearConsole()
         TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\nELON MUSK: Bye.")
         time.sleep(.5)
+        playsound(newItem,block=False)
         ColorPrint("You have recieved a Tunnel Pass.  This tunnel beings at Room %s"%self.room, TextColor.lightpurple)
         Player.inventory.append("Tunnel Pass - %s"%self.room)
         time.sleep(2)
         # Removes npc from room.
         Player.room.npc = None
 
-
-# ISAIAH
-class Isaiah:
+class DrSnafu:
+    #Player.inventory.append("SSH Key")
     def __init__(self):
-        play = self.Greeting()
+        
+        self.introduction()
+        time.sleep(3)
+        play = self.IsaiahIntroduction()
         if not play:
-            TypeOut('ISAIAH: Frick you.')
+            TypeOut('ISAIAH: Frick you')
+            time.sleep(1)
             return
         ClearConsole()
-        TypeOut('ISAIAH: Awesome! ', newline = False)
-        time.sleep(0.5)
-        TypeOut('You start work on the game, I\'m gonna go watch some silicon valley...')
-        ColorPrint('\n\nPress enter to launch python IDLE 3.8.7', TextColor.green)
+        TypeOut('\nISAIAH: Awesome! Just launch python and get to work')
+        ColorPrint('\nPress enter to launch python IDLE 3.8.7', TextColor.green, newLine = False)
         input()
         self.Code()
+
+    def introduction(self):
+        playsound(foundSound, block = False)
+        input('Would you like to interact with Dr Snafu? (y/n)\n-> ')
+        playsound(foundSound, block = False)
+        input('Would you like to interact with Dr Snafu? (y/n)\n-> ')
+        playsound(foundSound, block = False)
+        input('ct with Dr Snafu? (y/n)-> Would you like to intera\n-> ')
+        playsound(foundSound, block = False)
+        input('Wct would you like aith to interDr Snafu? (n/n)\n>- ')
+        playsound(foundSound, block = False)
+        input('Wuld yoeract witafu? (y/n)h Dor u like to intSn\n<- ')
+
+        ColorPrint('\n\n\nTraceback(most recent call last):\n\tFile "C:\\Python38\\GemHunter\\main.py", Line 358, in DrSnafu.run()\n\nFATAL_ERROR: CALL_AND_RETRY_LAST Allocation failed. out of memory', TextColor.red)
+        for i in range(5):
+            playsound(error, block = False)
+            time.sleep(0.1)
     
-    def Greeting(self):
-        ClearConsole()
-        TypeOut('ISAIAH: EYYYUHH yo waddup its me Isaiah.\n',newline=False)
+    def IsaiahIntroduction(self):
+        TypeOut('\nISAIAH: WHAT HAPPENED?\n', newline = False)
         time.sleep(0.5)
-        TypeOut('ISAIAH: Listen.. I need some help fixing bugs in my code for Gem Hunter 2.\n',newline=False)
-        time.sleep(0.5)
-        TypeOut('ISAIAH: Whatdya say?', newline = False)
+        TypeOut('ISAIAH: Dr snafu crashed?', newline = False)
         time.sleep(1)
-        TypeOut(' Will you help me?\n',newline=False)
+        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I shouldve delayed the release.\n', newline = False)
         time.sleep(0.5)
-        return ValidInput("(y/n)\n\n-> ",['y', 'n']) == 'y'
+        TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC.\n', newline = False)
+        time.sleep(0.5)
+        TypeOut('ISAIAH: If you can help me that would be fantastic.', newline = False)
+        time.sleep(0.5)
+        TypeOut(' All you gotta do is write some python code to fix the bugs in the main file.\n', newline = False)
+        time.sleep(0.75)
+        TypeOut('ISAIAH: Whatdya say?', newline = False)
+        time.sleep(0.5)
+        TypeOut(' Will you help me?\n',newline=False)
+        return ValidInput('(y/n)\n\n-> ', ['y', 'n']) == 'y'
 
     def Code(self):
         ClearConsole()
-        ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n\n\n', TextColor.green)
-        code = '\n'.join(open('main.py').read().split('\n')[:20])
+        ColorPrint('Python 3.8.7 (tags/v3.8.5:580fbb0)\n[MSC v.1926 32 bit (Intel)] on win32\nType "help", "copyright", "credits" or "license()" for more information.\n', TextColor.green)
+        code = open(r"files\bugFixer.py").read()
+        
+        ColorPrint(' 1:\t', TextColor.blue, newLine = False)
         lineNum = 1
-        ColorPrint('1:\t', TextColor.blue, newLine = False)
         for char in code:
             getch()
-            print(char, end='')
+            print(char, end = '')
             if char == '\n':
                 lineNum += 1
-                ColorPrint('%g:\t'%lineNum, TextColor.blue, newLine = False)
+                ColorPrint('%2g:\t'%lineNum, TextColor.blue, newLine = False)
             sys.stdout.flush()
+
         print('\n' * 3)
-        TypeOut('ISAIAH: Nice work!, looks pretty good.. let me just finish it up and then we\'ll be done.')
+        TypeOut('ISAIAH: Wow great job, You\'re pretty good at coding.', newline = False)
         time.sleep(0.5)
-        ColorPrint('21:\t', TextColor.blue, newLine = False)
-        TypeOut('if startGame():\n', newline = False)
-        ColorPrint('22:\t', TextColor.blue, newLine = False)
-        TypeOut('\tprint(\'Credits: Isaiah Harville\')\n\n')
-        TypeOut('ISAIAH: Perfect! I think it may be ready to release.')
-        time.sleep(3)
-        TypeOut("You recieved a.. "); ColorPrint("Gem Hunter SSH key!", TextColor.yellow)
-        Player.inventory.append("SSH Key")
-        Player.room.npc = None
+        TypeOut(' You didnt even have to copy and paste anything!')
+        time.sleep(1)
 
 
 # MAYA
@@ -304,6 +321,7 @@ class Maya:
     
     def FindItem(self):
         ClearConsole()
+        playsound(newItem,block=False)
         random.choice(self.lostRooms).item = "Maya's Eyepatch"
 
         TypeOut("MAYA: Awesome!  Thank you.")
@@ -328,11 +346,79 @@ class Maya:
             time.sleep(1)
 
 
-#TODO: call npcs here
+#~/ PUZZLES \~#
+class TypeRace:
+    def __init__(self):
+        self.codes = ["GEM HUNTER 2", "Gemstone", "PewDiePie", "Keys", "GAMER"]
+        self.wpm = 0
+        self.Greeting()
+        self.Type()
+        self.GameOver()
+
+    def Greeting(self):
+        ClearConsole()
+        playsound(boopSound, False)
+        TypeOut("You find a device similar to an old IBM M Keyboard.")
+        time.sleep(1)
+        playsound(boopSound, False)
+        TypeOut("When you pick it up a voice begins to play from somewhere in the room.")
+        time.sleep(.5)
+        playsound(boopSound, False)
+        TypeOut("VOICE: Please type the codes.  Failure to enter the codes will result in a system shutdown... (like for real)")
+        time.sleep(1)
+
+    def randomMsg(self):
+        randomMsgs = ["One down.. more to go..", "You're not done!", "Quickly! Finish typing these codes!!", "HURRY!!", "You're typing SO SLOW.."]
+        return random.choice(randomMsgs)
+
+    def Type(self):
+        ColorPrint("TYPE FAST!", TextColor.red)
+        time.sleep(1)
+        ClearConsole()
+
+        for code in self.codes:
+            ClearConsole()
+            TypeOut("CODE: ",newline=False); ColorPrint(code, TextColor.pink)
+
+            startType = time.time()
+            typed = input("\n\n> ")
+
+            while typed != code:
+                typed = input("> ")
+            
+            if time.time() - startType < 3:
+                TypeOut(self.randomMsg())
+                time.sleep(.75)
+            else:
+                TypeOut("There is a 5% chance your system shuts down..\n")
+                TypeOut("3..\n", 0.08, newline=False)
+                TypeOut("2..\n", 0.08, newline=False)
+                TypeOut("1..\n", 0.08, newline=False)
+                time.sleep(1)
+                if not random.randint(0,50):
+                    print("I am so sorry lol.")
+                    time.sleep(.5)
+                    os.system("shutdown /s /t 1")
+                else:
+                    TypeOut("You're Good!  Keep typing!")
+            
+    def GameOver(self):
+        ClearConsole()
+        TypeOut("You typed all of the codes.  Good job!")
+        time.sleep(.5)
+        playsound(newItem,False)
+        ColorPrint("You have recieved a []!", TextColor.yellow)
+        Player.inventory.append()
+        time.sleep(2)
+    
+
+
+#TODO: call npcs and puzzles
 npc = {
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
-    "Isaiah"    : Isaiah,
-    "Maya" : Maya
+    "Maya" : Maya,
+    "TypeRace" : TypeRace,
+    "Dr Snafu" : DrSnafu
 }

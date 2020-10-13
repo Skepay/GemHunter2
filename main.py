@@ -1,18 +1,17 @@
-# Main Game File for gemhunter
+# Main Game File for Gemhunter 2.
 from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-Introduction()
 
 #~/ Main Loop \~#
 while 1:
     InfoMessages()
 
     # Travel options
-    roomIndex = rooms.index(Player.room)    # thisstupidly long and ugly print statement below, will type out move locations in blue
+    roomIndex = rooms.index(Player.room)    # this stupidly long and ugly print statement below, will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
-
+    
     # Players next location
     travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
     
@@ -59,6 +58,7 @@ while 1:
 
         if Player.room.npc: # if there is an npc in the room
             ClearConsole()
+            playsound(foundSound,block=False)
             TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%Player.room.npc, TextColor.yellow)
             time.sleep(2)
 
@@ -68,24 +68,26 @@ while 1:
                 npc[Player.room.npc]()
 
             else:
-                TypeOut("%s sadly sits alone."%Player.room.npc)
+                TypeOut("%s awaits your return."%Player.room.npc)
                 time.sleep(1.5) 
 
 
     # Menu
     else:
         ClearConsole()
+        playsound(boopSound, block=False)
         print("Menu:\n1. Search Room." # prints a menu of options
             "\n2. Open Inventory.\n"
         )
         menuOption = input("-> ")
-
+        playsound(boopSound, block=False)
         # Search Room
         if menuOption == "1":
             LoadingBar() 
             ClearConsole()
             #Room Items.
             if Player.room.item: # if there is a item in the room
+                playsound(newItem,block=False)
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%Player.room.item, TextColor.yellow)
                 Player.inventory.append(Player.room.item)
                 Player.room.item = None
@@ -126,3 +128,5 @@ while 1:
                 items[Player.inventory[itemChoice-1]]() if type(items[Player.inventory[itemChoice-1]]) != str else TypeOut(items[Player.inventory[itemChoice-1]])
             
             input("\nPress any key to continue..")
+
+

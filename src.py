@@ -8,6 +8,24 @@ import time
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
 
+try:
+    from playsound import playsound
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", 'playsound'])
+finally:
+    from playsound import playsound
+
+#~/ Sounds \~#
+# set second arguement to be False, so it will run async
+soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
+spitSound = "%s\spit.mp3"%soundPath
+boopSound = "%s\Sboop.mp3"%soundPath
+teleportSound = "%s\teleportSound.mp3"%soundPath
+introSong = "%s\intro_song.mp3"%soundPath
+winSound = "%s\win.mp3"%soundPath
+newItem = "%s\_newItem.mp3"%soundPath
+foundSound = "%s\_found.mp3"%soundPath
+error = "%s\error.mp3"%soundPath
 
 #~/ Functions \~#
 # Valid Input function
@@ -57,11 +75,13 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
 
 # OG welcome message for gem hunter.
 def Introduction():
+    playsound(introSong, block=False)
+    time.sleep(.5)
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
-    time.sleep(0.75)
+    time.sleep(0.60)
     TypeOut('G E M    H U N T E R',0.075)
-    time.sleep(3)
+    time.sleep(2.15)
     ClearConsole()
     ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
     time.sleep(5)
@@ -83,6 +103,7 @@ def Instructions():
 def InfoMessages():
     ClearConsole()
     ColorPrint("LOCATION:", TextColor.blue)
+    playsound(boopSound, block=False)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
     TypeOut(', '.join(Player.inventory),0.010)
@@ -90,7 +111,7 @@ def InfoMessages():
 
 
 #~/ Doors \~#
-def openDoor(keys, doorName): 
+def openDoor(keys, doorName):
     missingKeys = []
     for key in keys:
         if key not in Player.inventory:
@@ -142,7 +163,9 @@ def Chair():
             if room.name == teleportLocation:
                 Player.room = room
                 Player.inventory.remove("PewDiePie 100M Edition Clutch Chair")
+                playsound(teleportSound, block=False)
                 TypeOut("You have arrived in Room %s!\n"%Player.room.name,0.06)
+                time.sleep(1)
                 break
     else:
         ClearConsole()
@@ -215,18 +238,18 @@ items = {
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
     'SSH Key' : ssh,
-    'Maya\'s Eyepatch' : "Return this item to Maya!"
+    'Maya\'s Eyepatch' : "Return this item to Maya!",
+    'SSH Key' : ''
 }
 
 
 #~/ Player \~#
 class Player:
-    def __init__(self):
-        self.name = GetName()
-        self.health = 20
-        self.inventory = ["GFUEL"]
-        self.room = rooms[0]
-
+    name = GetName()
+    health = 20
+    inventory = ["GFUEL"]
+    room = rooms[0]
+    
     def punch(enemy):
         item = enemy.Damage(random.randint(2,5))
         if(item):
@@ -236,5 +259,3 @@ class Player:
         item = enemy.Damage(random.ranint(0,7))
         if(item):
             inventory.append(item)
-    def Die(self):
-        pass
