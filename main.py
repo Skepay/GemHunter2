@@ -1,4 +1,4 @@
-# Main Game File for gemhunter
+# Main Game File for Gemhunter 2.
 from npc import *
 
 # Intro to Game

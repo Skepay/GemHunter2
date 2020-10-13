@@ -247,7 +247,7 @@ class Player:
     health = 20
     inventory = ["GFUEL"]
     room = rooms[0]
-
+    
     def punch(enemy):
         item = enemy.Damage(random.randint(2,5))
         if(item):
