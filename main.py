@@ -11,7 +11,7 @@ while 1:
     # Travel options
     roomIndex = rooms.index(Player.room)    # this stupidly long and ugly print statement below, will type out move locations in blue
     print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
-
+    
     # Players next location
     travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
     

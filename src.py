@@ -8,6 +8,17 @@ import time
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
 
+try:
+    from playsound import playsound
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", 'playsound'])
+finally:
+    from playsound import playsound
+
+#~/ Sounds \~#
+# set second arguement to be False, so it will run async
+soundPath = "%s\Sounds"%os.path.abspath(__file__)[0:-6]
+
 
 #~/ Functions \~#
 # Valid Input function
@@ -85,7 +96,7 @@ def InfoMessages():
     ColorPrint("LOCATION:", TextColor.blue)
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(Player.room.name),TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY:", TextColor.blue)
-    TypeOut(', '.join(Player.inventory),0.010)
+    TypeOut(', '.join(Player.inventory),0.060)
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 
