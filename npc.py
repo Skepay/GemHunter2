@@ -115,7 +115,7 @@ class PewDiePie:
             self.GameOver(player)
         else:
             ClearConsole()
-            playsound(spitSound, False)
+            playsound(spitSound, block=False)
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
             time.sleep(1.5)
     
@@ -250,6 +250,12 @@ class DrSnafu:
         ColorPrint('\nPress enter to launch python IDLE 3.8.7', TextColor.green, newLine = False)
         input()
         self.Code()
+        ClearConsole()
+        ColorPrint("You have earned 10 coins!", TextColor.yellow)
+        player.coins += 10
+        time.sleep(1)
+        input("\n\nPress any key to continue..")
+
 
     def introduction(self):
         playsound(foundSound, block = False)
@@ -367,14 +373,18 @@ class TypeRace:
 
     def Greeting(self):
         ClearConsole()
-        playsound(boopSound, False)
-        TypeOut("You find a device similar to an old IBM M Keyboard.")
+        playsound(boopSound, block=False)
+        TypeOut("The room you walk into is surprisingly modern, unlike the other rooms you have been.")
+        playsound(boopSound, block=False)
+        TypeOut("It appears to be the old control room for the labrynth you are helplessly condemned to.")
+        playsound(boopSound, block=False)
+        TypeOut("You find a device similar to a keyboard.. except with a lot of keys...")
         time.sleep(1)
-        playsound(boopSound, False)
+        playsound(boopSound, block=False)
         TypeOut("When you pick it up a voice begins to play from somewhere in the room.")
         time.sleep(.5)
-        playsound(boopSound, False)
-        TypeOut("VOICE: Please type the codes.  Failure to enter the codes will result in a system shutdown... (like for real)")
+        playsound(boopSound, block=False)
+        TypeOut("VOICE: Please type the codes.  Failure to enter the codes in time could result in a system failure.")
         time.sleep(1)
 
     def randomMsg(self):

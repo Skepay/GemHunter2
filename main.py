@@ -3,6 +3,7 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
+Introduction()
 
 #~/ Main Loop \~#
 while 1:
@@ -17,6 +18,7 @@ while 1:
     
     # Travel.
     if "m" not in travelTo:
+
         keystrokes = {
                 'w' : rooms[roomIndex].up,
                 's' : rooms[roomIndex].down,
@@ -36,7 +38,7 @@ while 1:
             ClearConsole()
 
             doorKeys = ', '.join(player.room.door[2])
-
+            playsound(boopSound, block=False)
             TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(player.room.door[1], doorKeys))
             openDoorInp = ValidInput("-> ",["y","n"])
 
@@ -50,8 +52,7 @@ while 1:
             else:
                 ClearConsole()
                 TypeOut("The door remains locked.")
-            time.sleep(
-                1)
+            time.sleep(1)
 
         else: # if there is not a door
             player.room = room
@@ -69,7 +70,7 @@ while 1:
 
             if interact == "y":
                 npc[player.room.npc](player)
-
+                
             else:
                 TypeOut("%s awaits your return."%player.room.npc)
                 time.sleep(1.5) 

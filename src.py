@@ -73,12 +73,35 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
     if newLine:
         print('')
 
+def Story():
+    ClearConsole()
+    TypeOut("You wake up on a bed in the middle of a 10' x 10' room with no memory of anything before that very minute.")
+    time.sleep(1)
+    TypeOut("When looking around the room, you see a cracked mirror, and ivy growing along the walls.")
+    time.sleep(.5)
+    TypeOut("After tapping the screen of your watch a display comes up.")
+    time.sleep(.5)
+    TypeOut("On the display there is a number.. and a list of items..")
+    time.sleep(.5)
+    TypeOut("You open your door and walk into another room, the number on your watch incriments, and it displays the words \"Labyrinth Test No. 9\"")
+    time.sleep(3)
+    input("\n\nPress any key to continue..")
+    ClearConsole()
+    TypeOut("After looking in other rooms, you realize the rooms are all practically identical with random objects in each room.")
+    time.sleep(.5)
+    TypeOut("Upon entering Room 0, you see writing engraved into the metal wall..")
+    time.sleep(.5)
+    TypeOut("\tGEM HUNT\nTASK: Find all Gems.\nGOAL: Do not sustain damage.\nBONUS: Leave with a healthy mental state.\n\nTEST SUBJECT: Dr. %s%player.name)
+    time.sleep(3)
+    input("Press any key to continue to the game..")
+
+
 # OG welcome message for gem hunter.
 def Introduction():
     playsound(introSong, block=False)
     time.sleep(.5)
     ClearConsole()
-    TypeOut('Welcome %s, to the text based adventure game...'%Player.name)
+    TypeOut('Welcome %s, to the text based adventure game...'%player.name)
     time.sleep(0.60)
     TypeOut('G E M    H U N T E R',0.075)
     time.sleep(2.15)
@@ -86,7 +109,7 @@ def Introduction():
     ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
     time.sleep(5)
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
-    Instructions() if InfoInp else print()
+    Instructions() if InfoInp else Story()
 
 # List of keybinds for the game.
 def Instructions():
@@ -102,11 +125,12 @@ def Instructions():
 # Prints informational messages.
 def InfoMessages():
     ClearConsole()
-    ColorPrint("LOCATION:", TextColor.blue)
+    ColorPrint("LOCATION", TextColor.blue)
     playsound(boopSound, block=False)
-    TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %s"%str(player.room.name),TextColor.blue) # types out the name of color in blue
-    ColorPrint("\nINVENTORY:", TextColor.blue)
+    TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %g"%player.room.name,TextColor.blue) # types out the name of color in blue
+    ColorPrint("\nINVENTORY", TextColor.blue)
     TypeOut(', '.join(player.inventory),0.010)
+    ColorPrint("COINS: %g\n"%player.coins, TextColor.blue)
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 
@@ -225,21 +249,12 @@ def Tunnel():
         time.sleep(1)
 
 
-
-# Function for the ssh key
-def ssh():
-    TypeOut("Here is a link to the Gem Hunter 2 Github repository!")
-    ColorPrint("https://github.com/Skepay/GemHunter2", TextColor.darkblue)
-
-
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
-    'SSH Key' : ssh,
     'Maya\'s Eyepatch' : "Return this item to Maya!",
-    'SSH Key' : ''
 }
 
 
@@ -250,6 +265,7 @@ class Player:
         self.name = GetName()
         self.inventory = ["GFUEL"]
         self.room = rooms[0]
+        self.coins = 0
 
     def Punch(self, enemy):
         item = enemy.Damage(random.randint(2,5))
