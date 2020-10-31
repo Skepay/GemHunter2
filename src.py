@@ -76,24 +76,24 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
 
 def Story():
     ClearConsole()
-    TypeOut("You wake up on a bed in the middle of a 10' x 10' room with no memory of anything before that very minute.")
-    time.sleep(1)
-    TypeOut("When looking around the room, you see a cracked mirror, and ivy growing along the walls.")
-    time.sleep(.5)
-    TypeOut("After tapping the screen of your watch a display comes up.")
-    time.sleep(.5)
-    TypeOut("On the display there is a number.. and a list of items..")
-    time.sleep(.5)
-    TypeOut("You open your door and walk into another room, the number on your watch incriments, and it displays the words \"Labyrinth Test No. %g\""%random.randint(1,500))
-    time.sleep(3)
-    input("\n\nPress any key to continue..")
-    ClearConsole()
-    TypeOut("After looking in other rooms, you realize the rooms are all practically identical with random objects in each room.")
-    time.sleep(.5)
-    TypeOut("Upon entering Room 0, you see writing engraved into the metal wall..")
-    time.sleep(.5)
-    TypeOut("\tGEM HUNT\nTASK: Find all Gems.\nGOAL: Do not sustain damage.\nBONUS: Leave with a healthy mental state.\n\nTEST SUBJECT: Dr. %s"%player.name)
-    time.sleep(3)
+    with open("files/story.txt", "r") as sf:
+        sdata = sf.read().splitlines()
+    
+    for i in sdata:
+        if i != "NEW":
+            TypeOut(i)
+            time.sleep(1)
+        else:
+            time.sleep(2)
+            input("\nPress any key to continue..")
+            ClearConsole()
+    print()
+    time.sleep(2)
+    ColorPrint("TEST SUBJECT: ", TextColor.red, newLine=False)
+    time.sleep(1.75)
+    ColorPrint("Dr. %s"%player.name, TextColor.red)
+    time.sleep(2)
+
     input("Press any key to continue to the game..")
 
 
