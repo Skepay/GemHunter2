@@ -3,6 +3,81 @@
 from src import *
 from msvcrt import getch
 
+#~/ SHOP \~#
+class WanderingTrader:
+    def __init__(self, player):
+        ClearConsole()
+        TypeOut("Wandering Trader: Welcome to my shop!")
+        time.sleep(1.25)
+        self.name = "Wandering Trader"
+        self.shopItems = {
+            10 : "Very yummy Hot Dog",
+            15 : "Small Health Potion",
+            30 : "Large Health Potion"
+        }
+
+        while 1:
+            sg = self.Greeting()
+            if sg:
+                sg = self.Greeting()
+            else:
+                break
+        self.Leave()
+        return
+    
+    def Greeting(self):
+        ClearConsole()
+        TypeOut("Wandering Trader: Would you like to purchase something?\n(y/n)")
+        shop = ValidInput("->", ["y","n"])
+        if shop == "y":
+            self.Shop(player)
+
+            TypeOut("Wandering Trader: Would you like to purchase something?\n(y/n)")
+            shopAgain = ValidInput("->", ["y","n"])
+            if shopAgain == "y":
+                return 1
+            return 0
+        else: TypeOut("Wandering Trader: Ok.. farewell thy lost player!"); time.sleep(1)
+        return 0
+
+    def Shop(self,player):
+        ClearConsole()
+        validItems = []
+        
+        # Print shop
+        print("\tSHOP ITEMS")
+        for index, key in enumerate(self.shopItems):
+            print("%g. %s    $%g coins"%(index+1, self.shopItems[key], key))
+            validItems.append(str(index+1))
+        print("Balance: %g"%player.coins)
+        print("\n")
+        playsound(boopSound, block=False)
+        purchase = ValidInput("What would you like to buy?\n->", validItems)
+        purchase = list(self.shopItems)[int(purchase)-1]
+
+        if purchase > player.coins:
+            ClearConsole()
+            playsound(boopSound, block=False)
+            TypeOut("Wandering Trader: It doesn't seem like you can afford that.")
+            time.sleep(1)
+            return
+        
+        player.coins -= purchase
+        player.inventory.append(self.shopItems[purchase])
+        ClearConsole()
+        playsound(newItem,block=False)
+        TypeOut("%s has been added to your inventory.."%self.shopItems[purchase])
+        input("\n\nPress any key to continue...")
+        return
+
+
+    def Leave(self):
+        ClearConsole()
+        playsound(boopSound, block=False)
+        TypeOut("Wandering Travler: I'm off to explore some more, maybe I'll see you again!")
+        time.sleep(1.5)
+        return
+    
 
 #~/ NPCS \~#
 # COLIN'S BIGDIKMAN TODO: KILL ISAIAH
@@ -186,7 +261,7 @@ class Elon:
 
         play = self.Greeting()
         if play:
-            self.driveRoadster()
+            self.driveRoadster(player)
             self.GameOver()
         else:
             TypeOut("ELON MUSK: ...")
@@ -270,7 +345,7 @@ class DrSnafu:
         input('Wuld yoeract witafu? (y/n)h Dor u like to intSn\n<- ')
 
         ColorPrint('\n\n\nTraceback(most recent call last):\n\tFile "C:\\Python38\\GemHunter\\main.py", Line 358, in DrSnafu.run()\n\nFATAL_ERROR: CALL_AND_RETRY_LAST Allocation failed. out of memory', TextColor.red)
-        for i in range(5):
+        for _ in range(5):
             playsound(error, block = False)
             time.sleep(0.1)
     
@@ -322,7 +397,7 @@ class Maya:
         
         findEye = self.Greeting()
         if findEye == "1":
-            self.GameOver()
+            self.GameOver(player)
         elif findEye == "2":
             self.FindItem()
         else:
@@ -435,6 +510,7 @@ class TypeRace:
 
 #TODO: call npcs and puzzles
 npc = {
+    "Wandering Trader" : WanderingTrader,
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,

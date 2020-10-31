@@ -32,6 +32,7 @@ error = "%s\error.mp3"%soundPath
 def ValidInput(string, params):
     inp = str(input(string))
     while 1:
+        playsound(boopSound, block=False) #TODO: remove this if there is weird stuff
         if inp in params:
             return inp
         inp = str(input(string))
@@ -83,7 +84,7 @@ def Story():
     time.sleep(.5)
     TypeOut("On the display there is a number.. and a list of items..")
     time.sleep(.5)
-    TypeOut("You open your door and walk into another room, the number on your watch incriments, and it displays the words \"Labyrinth Test No. 9\"")
+    TypeOut("You open your door and walk into another room, the number on your watch incriments, and it displays the words \"Labyrinth Test No. %g\""%random.randint(1,500))
     time.sleep(3)
     input("\n\nPress any key to continue..")
     ClearConsole()
@@ -91,7 +92,7 @@ def Story():
     time.sleep(.5)
     TypeOut("Upon entering Room 0, you see writing engraved into the metal wall..")
     time.sleep(.5)
-    TypeOut("\tGEM HUNT\nTASK: Find all Gems.\nGOAL: Do not sustain damage.\nBONUS: Leave with a healthy mental state.\n\nTEST SUBJECT: Dr. %s%player.name)
+    TypeOut("\tGEM HUNT\nTASK: Find all Gems.\nGOAL: Do not sustain damage.\nBONUS: Leave with a healthy mental state.\n\nTEST SUBJECT: Dr. %s"%player.name)
     time.sleep(3)
     input("Press any key to continue to the game..")
 

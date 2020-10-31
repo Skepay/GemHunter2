@@ -3,7 +3,6 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-Introduction()
 
 #~/ Main Loop \~#
 while 1:
@@ -72,7 +71,7 @@ while 1:
                 npc[player.room.npc](player)
                 
             else:
-                TypeOut("%s awaits your return."%player.room.npc)
+                TypeOut("%s watches you leave."%player.room.npc)
                 time.sleep(1.5) 
 
 
