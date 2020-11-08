@@ -4,12 +4,12 @@ from src import *
 from msvcrt import getch
 
 #~/ SHOP \~#
-class WanderingTrader:
+class WanderingTraveler:
     def __init__(self, player):
         ClearConsole()
-        TypeOut("Wandering Trader: Welcome to my shop!")
+        TypeOut("Wandering Traveler: Welcome to my shop!")
         time.sleep(1.25)
-        self.name = "Wandering Trader"
+        self.name = "Wandering Traveler"
         self.shopItems = {
             10 : "Very yummy Hot Dog",
             15 : "Small Health Potion",
@@ -27,17 +27,17 @@ class WanderingTrader:
     
     def Greeting(self):
         ClearConsole()
-        TypeOut("Wandering Trader: Would you like to purchase something?\n(y/n)")
+        TypeOut("Wandering Traveler: Would you like to purchase something?\n(y/n)")
         shop = ValidInput("->", ["y","n"])
         if shop == "y":
             self.Shop(player)
-
-            TypeOut("Wandering Trader: Would you like to purchase something?\n(y/n)")
+            ClearConsole()
+            TypeOut("Wandering Traveler: Would you like to purchase something?\n(y/n)")
             shopAgain = ValidInput("->", ["y","n"])
             if shopAgain == "y":
                 return 1
             return 0
-        else: TypeOut("Wandering Trader: Ok.. farewell thy lost player!"); time.sleep(1)
+        else: TypeOut("Wandering Traveler: Ok.. farewell thy lost player!"); time.sleep(1)
         return 0
 
     def Shop(self,player):
@@ -58,7 +58,7 @@ class WanderingTrader:
         if purchase > player.coins:
             ClearConsole()
             playsound(boopSound, block=False)
-            TypeOut("Wandering Trader: It doesn't seem like you can afford that.")
+            TypeOut("Wandering Traveler: It doesn't seem like you can afford that.")
             time.sleep(1)
             return
         
@@ -74,7 +74,11 @@ class WanderingTrader:
     def Leave(self):
         ClearConsole()
         playsound(boopSound, block=False)
-        TypeOut("Wandering Travler: I'm off to explore some more, maybe I'll see you again!")
+        TypeOut("Wandering Traveler: I'm off to explore some more, maybe I'll see you again!")
+        for room in rooms:
+            if not room.npc:
+                room.npc = "Wandering Traveler"
+        player.room.npc = None
         time.sleep(1.5)
         return
     
@@ -328,6 +332,7 @@ class DrSnafu:
         ClearConsole()
         ColorPrint("You have earned 10 coins!", TextColor.yellow)
         player.coins += 10
+        player.room.npc = None
         time.sleep(1)
         input("\n\nPress any key to continue..")
 
@@ -424,11 +429,9 @@ class Maya:
             TypeOut("Oh yay!  Thank you so much.")
             TypeOut("Just for you.. I respawned PewDiePie in a random room.. go and find him!")
 
-            newPdpRoom = random.choice(self.lostRooms)
-            if newPdpRoom.npc == None:
-                newPdpRoom.npc = "PewDiePie"
-            else:
-                rooms[0].npc = "PewDiePie"
+            for room in rooms:
+                if not room.npc:
+                    room.npc = "PewDiePie"
 
             player.room.npc = None
             time.sleep(2)
@@ -503,6 +506,7 @@ class TypeRace:
         time.sleep(.5)
         playsound(newItem,False)
         ColorPrint("You have recieved a []!", TextColor.yellow)
+        player.room.npc = None
         player.inventory.append()
         time.sleep(2)
     
@@ -510,7 +514,7 @@ class TypeRace:
 
 #TODO: call npcs and puzzles
 npc = {
-    "Wandering Trader" : WanderingTrader,
+    "Wandering Traveler" : WanderingTraveler,
     "PewDiePie" : PewDiePie,
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,

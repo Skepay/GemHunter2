@@ -3,7 +3,7 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-Introduction()
+#Introduction()
 
 
 #~/ Main Loop \~#
@@ -61,7 +61,7 @@ while 1:
         if player.room.npc: # if there is an npc in the room
             ClearConsole()
             playsound(foundSound,block=False)
-            TypeOut("You found.. ",0.06,newline=False); 
+            TypeOut("You found.. ",0.06,newline=False)
             time.sleep(.1)
             ColorPrint(" %s!\n\n"%player.room.npc, TextColor.yellow)
             time.sleep(2)

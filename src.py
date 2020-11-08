@@ -131,7 +131,7 @@ def InfoMessages():
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %g"%player.room.name,TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY", TextColor.blue)
     TypeOut(', '.join(player.inventory),0.010)
-    ColorPrint("COINS: %g\n"%player.coins, TextColor.blue)
+    ColorPrint("HEALTH: %g  COINS: %g\n"%(player.hp, player.coins), TextColor.blue)
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 
@@ -250,13 +250,32 @@ def Tunnel():
         time.sleep(1)
 
 
+# Function for health potions.
+def HealthPotion():
+    try:
+        potionType = player.inventory.index('Large Health Potion')
+        healAmount = 10
+    except ValueError:
+        potionType = player.inventory.index('Small Health Potion')
+        healAmount = 5
+    
+    player.hp += healAmount
+    if player.hp > 20:
+        player.hp = 20
+
+    TypeOut('You used a %s and restored your hp to %g!'%(player.inventory[potionType], player.hp))
+    player.inventory.remove(player.inventory[potionType])
+
+
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
     'Maya\'s Eyepatch' : "Return this item to Maya!",
-}
+    'Large Health Potion' : HealthPotion,
+    'Small Health Potion' : HealthPotion
+    }
 
 
 #~/ Player \~#
@@ -266,7 +285,7 @@ class Player:
         self.name = GetName()
         self.inventory = ["GFUEL"]
         self.room = rooms[0]
-        self.coins = 0
+        self.coins = 30
 
     def Punch(self, enemy):
         item = enemy.Damage(random.randint(2,5))
