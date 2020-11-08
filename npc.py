@@ -25,6 +25,7 @@ class WanderingTraveler:
         self.Leave()
         return
     
+
     def Greeting(self):
         ClearConsole()
         TypeOut("Wandering Traveler: Would you like to purchase something?\n(y/n)")
@@ -39,6 +40,7 @@ class WanderingTraveler:
             return 0
         else: TypeOut("Wandering Traveler: Ok.. farewell thy lost player!"); time.sleep(1)
         return 0
+
 
     def Shop(self,player):
         ClearConsole()
