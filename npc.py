@@ -165,7 +165,7 @@ class BigDikman:
 
 
     def Damage(self, dmg):
-        TypeOut (("YOU DAMAGED ", self.name, " FOR ", dmg, "."))
+        TypeOut(("YOU DAMAGED ", self.name, " FOR ", dmg, "."))
         self.hp -= dmg
         if(self.hp > 0):
             TypeOut((self.name, ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!"))
@@ -334,7 +334,6 @@ class Elon:
 
 
 class DrSnafu:
-    #player.inventory.append("SSH Key")
     def __init__(self, player):   
         self.introduction()
         time.sleep(3)
@@ -351,9 +350,18 @@ class DrSnafu:
         ClearConsole()
         ColorPrint("You have earned 10 coins!", TextColor.yellow)
         player.coins += 10
-        player.room.npc = None
         time.sleep(1)
         input("\n\nPress any key to continue..")
+        ClearConsole()
+        time.sleep(.25)
+        TypeOut("Dr Snafu: WAIT! WAIT!")
+        TypeOut("Dr Snafu: I wanted to thank you for fixing me.")
+        time.sleep(.25)
+        ColorPrint("Cesium-137 ", TextColor.red, newLine=False); ColorPrint("has been added to your inventory!", TextColor.yellow, newLine=False)
+        player.inventory.append("Cesium")
+        time.sleep(2)
+        input("\n\nPress any key to continue..\n(for real this time)")
+        player.room.npc = None
 
 
     def introduction(self):
@@ -379,7 +387,7 @@ class DrSnafu:
         time.sleep(0.5)
         TypeOut('ISAIAH: Dr snafu crashed?', newline = False)
         time.sleep(1)
-        TypeOut(' Shoot I didnt have time to test that NPC out... I knew I should\'ve delayed the release.\n', newline = False)
+        TypeOut(' Shoot, I didnt have time to test that NPC out... I knew I should\'ve delayed the release.\n', newline = False)
         time.sleep(0.5)
         TypeOut('ISAIAH: Alright, I need to patch this code up before anyone else gets to this NPC.\n', newline = False)
         time.sleep(0.5)
@@ -469,7 +477,7 @@ class Maya:
 #~/ PUZZLES \~#
 class TypeRace:
     def __init__(self, player):
-        self.codes = ["GEM HUNTER 2", "Gemstone", "PewDiePie", "Keys", "GAMER"]
+        self.codes = ["GEM HUNTER 2", "Gemstone", "Computer", "Keys", "Labrynth", "Trapped", "No Exit"]
         self.wpm = 0
         self.Greeting()
         self.Type()
@@ -479,7 +487,7 @@ class TypeRace:
     def Greeting(self):
         ClearConsole()
         playsound(boopSound, block=False)
-        TypeOut("The room you walk into is surprisingly modern, unlike the other rooms you have been.")
+        TypeOut("The room you walk into is surprisingly modern, unlike the other rooms you have been in.")
         playsound(boopSound, block=False)
         TypeOut("It appears to be the old control room for the labrynth you are helplessly condemned to.")
         playsound(boopSound, block=False)
@@ -517,17 +525,19 @@ class TypeRace:
                 TypeOut(self.randomMsg())
                 time.sleep(.75)
             else:
-                TypeOut("There is a 5% chance your system shuts down..\n")
+                TypeOut("Memory error. . .\n", random.uniform(0.4, 1.0))
                 TypeOut("3..\n", 0.08, newline=False)
                 TypeOut("2..\n", 0.08, newline=False)
                 TypeOut("1..\n", 0.08, newline=False)
                 time.sleep(1)
                 if not random.randint(0,50):
-                    print("I am so sorry lol.")
-                    time.sleep(.5)
-                    os.system("shutdown /s /t 1")
+                    ClearConsole()
+                    time.sleep(10)
+                    TypeOut("Back online.")
+                    time.sleep(1)
+                    ClearConsole()
                 else:
-                    TypeOut("You're Good!  Keep typing!")
+                    TypeOut("Fixed.  Continue..")
             
             
     def GameOver(self, player):
@@ -535,9 +545,9 @@ class TypeRace:
         TypeOut("You typed all of the codes.  Good job!")
         time.sleep(.5)
         playsound(newItem,False)
-        ColorPrint("You have recieved a []!", TextColor.yellow)
+        ColorPrint("You have recieved a Hazmat Suit!", TextColor.yellow)
         player.room.npc = None
-        player.inventory.append()
+        player.inventory.append("Hazmat Suit")
         time.sleep(2)
     
 
@@ -549,6 +559,6 @@ npc = {
     "BigDikman" : BigDikman,
     "Elon Musk" : Elon,
     "Maya" : Maya,
-    "TypeRace" : TypeRace,
+    "Computer" : TypeRace,
     "Dr Snafu" : DrSnafu
 }

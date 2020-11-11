@@ -279,6 +279,45 @@ def HealthPotion():
     player.inventory.remove(player.inventory[potionType])
 
 
+# Function for Cesium.
+def Cesium():
+    ClearConsole()
+    TypeOut("What would you like to mix this with?\n", newline=False)
+    for index, i in enumerate(player.inventory):
+        print("%g. %s"%(index+1, i))
+    print()
+    while True: # gets index input of the items
+        try:
+            itemChoice = int(input("-> "))
+            if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
+                break
+        except:
+            pass
+
+    if player.inventory[itemChoice].lower() == "water":
+        ClearConsole()
+        player.inventory.remove(player.inventory[itemChoice])
+        player.inventory.remove('Cesium')
+        TypeOut("You made a Cesium bomb by mixing Cesium-137 with H2O!\n", newline=False)
+        if "Hazmat Suit" in player.inventory:
+            TypeOut("Thanks to your Hazmat Suit, you aren't affected by the radiation.")
+        else:
+            TypeOut("The radiation is toxic to your health and you take significant damage.")
+            player.hp = player.hp/2
+
+        if player.room.door:
+            player.room.door = None
+            TypeOut("Somehow.. you managed to blow up a door!")
+            time.sleep(1)
+        time.sleep(1)
+        return
+    else:
+        TypeOut("Well.. that won't do much..")
+        time.sleep(1)
+        return
+            
+        
+
 # Dictionary for the items
 items = {
     'GFUEL' : Gfuel,
@@ -286,7 +325,9 @@ items = {
     'Tunnel' : Tunnel,
     'Maya\'s Eyepatch' : "Return this item to Maya!",
     'Large Health Potion' : HealthPotion,
-    'Small Health Potion' : HealthPotion
+    'Small Health Potion' : HealthPotion,
+    'Cesium' : Cesium,
+    'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . ."
     }
 
 
