@@ -83,7 +83,8 @@ class WanderingTraveler:
         player.room.npc = None
         time.sleep(1.5)
         return
-    
+ 
+
 
 #~/ NPCS \~#
 # COLIN'S BIGDIKMAN TODO: KILL ISAIAH
@@ -94,11 +95,13 @@ class BigDikman:
         self.Greeting()
         self.Battle(player)
 
+
     def GetDikmanName(self):
         firstName = ["Alfred", "Charlie", "Betty", "Billy", "Hughbert", "Home", "Homie", "Cox", "Guy", "Frackles", "Adolf"]
         lastName = ["CheezyDix", "Salsadeek", "Python", "Veenis", "Weiner", "Butch", "Longdong", "Girthman", "Snakerotch", "Moobs"]
         name = (random.choice(firstName) + " " + random.choice(lastName))
         return name
+
 
     def Greeting(self):
         ClearConsole()
@@ -106,9 +109,11 @@ class BigDikman:
         TypeOut((self.name, ": ", self.GetRandomLine()))
         return
 
+
     def GetRandomLine(self):
         lines = [f"Whats up baby cakes? Its {self.name} time!", f"{self.name} is here to give you children! Through your nose!", "Time to choke!", "Smell the cheese?", "Do you like yogurt?", "It's long dong time!", "Yeah, I have a super power. A really long [REDACTED]", "Mine is longer than yours."]
         return random.choice(lines)
+
 
     def Battle(self, player):
         ct = 0
@@ -151,6 +156,7 @@ class BigDikman:
             attackDict[move](self)
             print("PRESS ANY KEY TO CONTINUE")
             getch()
+
         if(self.hp > 0):
             TypeOut("Haha! You got rekt by my dik!")
             player.Die()
@@ -167,11 +173,13 @@ class BigDikman:
         else:
             return self.Die()
 
+
     def Die(self):
         playsound(newItem,block=False)
         TypeOut((self.name,": Ouch. That one hurt my dik."))
         TypeOut((self.name, "HAS DIED."))
         return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
+
 
 
 # PEWDIEPIE
@@ -200,6 +208,7 @@ class PewDiePie:
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
             time.sleep(1.5)
     
+
     def Greeting(self):
         ClearConsole()
         TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.\n",newline=False)
@@ -209,10 +218,12 @@ class PewDiePie:
             return True # play
         return False # dont play
 
+
     def RandomResponse(self):
         pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
         return random.choice(pewdsResponses)
     
+
     def Questions(self):
         ClearConsole()
 
@@ -238,6 +249,7 @@ class PewDiePie:
             time.sleep(1)
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
 
+
     def GameOver(self, player):
         ClearConsole()
         TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
@@ -259,6 +271,7 @@ class PewDiePie:
         player.room.NPC = None
 
 
+
 # ELON MUSK
 class Elon:
     def __init__(self, player):
@@ -272,6 +285,7 @@ class Elon:
         else:
             TypeOut("ELON MUSK: ...")
 
+
     def Greeting(self):
         ClearConsole()
         TypeOut("???: H-h-h hey.  I'm Elon.\n",newline=False)
@@ -280,6 +294,7 @@ class Elon:
         if driveRoadster == "y":
             return True # play
         return False # dont play
+
 
     def driveRoadster(self, player):
         ClearConsole()
@@ -304,6 +319,7 @@ class Elon:
             ClearConsole()
         time.sleep(1)
 
+
     def GameOver(self):
         ClearConsole()
         TypeOut("ELON MUSK: Thanks, I hope the drive wasn't too bad.  Heres the access card to use the tunnel.\nELON MUSK: Bye.")
@@ -315,10 +331,11 @@ class Elon:
         # Removes npc from room.
         player.room.npc = None
 
+
+
 class DrSnafu:
     #player.inventory.append("SSH Key")
-    def __init__(self, player):
-        
+    def __init__(self, player):   
         self.introduction()
         time.sleep(3)
         play = self.IsaiahIntroduction()
@@ -356,6 +373,7 @@ class DrSnafu:
             playsound(error, block = False)
             time.sleep(0.1)
     
+
     def IsaiahIntroduction(self):
         TypeOut('\nISAIAH: WHAT HAPPENED?\n', newline = False)
         time.sleep(0.5)
@@ -373,6 +391,7 @@ class DrSnafu:
         time.sleep(0.5)
         TypeOut(' Will you help me?\n',newline=False)
         return ValidInput('(y/n)\n\n-> ', ['y', 'n']) == 'y'
+
 
     def Code(self):
         ClearConsole()
@@ -396,6 +415,7 @@ class DrSnafu:
         time.sleep(1)
 
 
+
 # MAYA
 class Maya:
     def __init__(self, player):
@@ -411,12 +431,14 @@ class Maya:
             TypeOut("*sad maya face*")
             time.sleep(1)
 
+
     def Greeting(self):
         ClearConsole()
         TypeOut("MAYA: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.  Can you help me find it, please?\nI could bring PewDiePie back for you!", newline=False)
         findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
         return findEye
     
+
     def FindItem(self):
         ClearConsole()
         playsound(newItem,block=False)
@@ -425,6 +447,7 @@ class Maya:
         TypeOut("MAYA: Awesome!  Thank you.")
         TypeOut("I think I left it in Room %s or maybe even Room %s.  Come back here when you find it!"%(self.lostRooms[0].name, self.lostRooms[1].name))
         input("\n\nPress any key to continue..")
+
 
     def GameOver(self,player):
         if "Maya's Eyepatch" in player.inventory:
@@ -442,6 +465,7 @@ class Maya:
             time.sleep(1)
 
 
+
 #~/ PUZZLES \~#
 class TypeRace:
     def __init__(self, player):
@@ -450,6 +474,7 @@ class TypeRace:
         self.Greeting()
         self.Type()
         self.GameOver(player)
+
 
     def Greeting(self):
         ClearConsole()
@@ -467,9 +492,11 @@ class TypeRace:
         TypeOut("VOICE: Please type the codes.  Failure to enter the codes in time could result in a system failure.")
         time.sleep(1)
 
+
     def randomMsg(self):
         randomMsgs = ["One down.. more to go..", "You're not done!", "Quickly! Finish typing these codes!!", "HURRY!!", "You're typing SO SLOW.."]
         return random.choice(randomMsgs)
+
 
     def Type(self):
         ColorPrint("TYPE FAST!", TextColor.red)
@@ -501,6 +528,7 @@ class TypeRace:
                     os.system("shutdown /s /t 1")
                 else:
                     TypeOut("You're Good!  Keep typing!")
+            
             
     def GameOver(self, player):
         ClearConsole()

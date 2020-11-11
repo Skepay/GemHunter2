@@ -27,6 +27,8 @@ newItem = "%s\_newItem.mp3"%soundPath
 foundSound = "%s\_found.mp3"%soundPath
 error = "%s\error.mp3"%soundPath
 
+
+
 #~/ Functions \~#
 # Valid Input function
 def ValidInput(string, params):
@@ -37,9 +39,11 @@ def ValidInput(string, params):
             return inp
         inp = str(input(string))
 
+
 # Get windows username of player.
 def GetName():
     return os.getlogin()
+
 
 # Loading bar animation.
 def LoadingBar():
@@ -52,11 +56,13 @@ def LoadingBar():
         progress += 1
         time.sleep(random.uniform(0.0075,.100))
         
+
 # Clear the console
 def ClearConsole(newline = False):
     os.system('cls')
     if newline:
         print()
+
 
 # Type Out messages.
 def TypeOut(string, pause = 0.045, newline = True):
@@ -68,11 +74,13 @@ def TypeOut(string, pause = 0.045, newline = True):
     if newline:
         print("\n")
 
+
 # Print Colored messages.
 def ColorPrint(string, inputColor = TextColor.white, newLine = True):
     print(color(string, inputColor), end = '')
     if newLine:
         print('')
+
 
 def Story():
     ClearConsole()
@@ -112,6 +120,7 @@ def Introduction():
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
     Instructions() if InfoInp else Story()
 
+
 # List of keybinds for the game.
 def Instructions():
     print("""
@@ -123,6 +132,7 @@ def Instructions():
         """)
     input("\n\nPress any key to continue.")
 
+
 # Prints informational messages.
 def InfoMessages():
     ClearConsole()
@@ -133,6 +143,7 @@ def InfoMessages():
     TypeOut(', '.join(player.inventory),0.010)
     ColorPrint("HEALTH: %g  COINS: %g\n"%(player.hp, player.coins), TextColor.blue)
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
+
 
 
 #~/ Doors \~#
@@ -156,6 +167,7 @@ def openDoor(keys, doorName):
             player.inventory.remove(key)
         time.sleep(1)
         return True
+
 
 
 #~/ Item Functions\~#
@@ -276,6 +288,7 @@ items = {
     'Large Health Potion' : HealthPotion,
     'Small Health Potion' : HealthPotion
     }
+
 
 
 #~/ Player \~#

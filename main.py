@@ -54,8 +54,7 @@ while 1:
                 TypeOut("The door remains locked.")
             time.sleep(1)
 
-        else: # if there is not a door
-            player.room = room
+        else: player.room = room
 
 
         if player.room.npc: # if there is an npc in the room
@@ -80,7 +79,7 @@ while 1:
     else:
         ClearConsole()
         playsound(boopSound, block=False)
-        print("Menu:\n1. Search Room." # prints a menu of options
+        print("\tMenu\n1. Search Room." # prints a menu of options
             "\n2. Open Inventory.\n"
         )
         menuOption = input("-> ")
@@ -127,7 +126,6 @@ while 1:
                 ClearConsole()
                 items["Tunnel"]()
             else:
-
                 ClearConsole()
                 items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
             
