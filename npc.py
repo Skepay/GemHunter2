@@ -454,6 +454,9 @@ class Maya:
 
         TypeOut("MAYA: Awesome!  Thank you.")
         TypeOut("I think I left it in Room %s or maybe even Room %s.  Come back here when you find it!"%(self.lostRooms[0].name, self.lostRooms[1].name))
+        time.sleep(1)
+        ColorPrint("You have recieved a new quest!  View it from your menu.", TextColor.yellow)
+        player.quests.append("Find Maya's eyepatch. (Room %s / Room %s)"%(self.lostRooms[0].name, self.lostRooms[1].name))
         input("\n\nPress any key to continue..")
 
 
@@ -472,6 +475,47 @@ class Maya:
             TypeOut("Why are you lying to me?")
             time.sleep(1)
 
+
+
+class MrWhite:
+    def __init__(self, player):
+        if 'Blue Ice Gfuel' not in player.inventory:
+            while True:
+                gfuelLocation = rooms.index(random.choice(rooms))
+                if not rooms[gfuelLocation].item and not rooms[gfuelLocation].door:
+                    rooms[gfuelLocation].item = 'Blue Ice Gfuel'
+                    break
+            
+            self.Greeting(gfuelLocation)
+        else:
+            self.ReturnGfuel()
+
+
+    def Greeting(self, gfuelRoomLocation):
+        ClearConsole()
+        TypeOut("Walter White: Jesse, I need you to bring me my Blue Ice, Jesse.")
+        time.sleep(1)
+        TypeOut("Walter White: Oh, wait, you're not Jesse!\n",newline=False); time.sleep(.5)
+        time.sleep(1)
+        TypeOut("*Heisenberg's phone rings*\n",newline=False)
+        TypeOut("Heisenberg: Argh, it is my whore wife Skyler.. listen, I need you to bring me my Blue Ice!!")
+        time.sleep(1)
+        TypeOut("Heisenberg: This is not a negotiation."); time.sleep(1)
+        ColorPrint("You have recieved a new quest!  View it from your menu.", TextColor.yellow)
+        player.quests.append("Get Walter White's Blue Ice from Room %g and deliver it to him."%gfuelRoomLocation.name)
+        input("\n\nPress any key to continue..")
+
+
+    def ReturnGfuel(self):
+        ClearConsole()
+        player.inventory.remove("Blue Ice Gfuel")
+        TypeOut("Walter White: Thank you.  My junkie partner misplaced it, I'm sorry for raising my voice earlier.")
+        TypeOut("Walter White: Here is this pizza, I was going to give it to Skyler, but shes a whore.")
+        player.inventory.append("Walter's 24\" Pizza")
+        ColorPrint("You have recieved Walter White's Pizza!", TextColor.yellow)
+        time.sleep(1.5)
+        TypeOut("Walter White: Satisfaction Guaranteed.. or its on the house!")
+        time.sleep(2)
 
 
 #~/ PUZZLES \~#
@@ -560,5 +604,6 @@ npc = {
     "Elon Musk" : Elon,
     "Maya" : Maya,
     "Computer" : TypeRace,
-    "Dr Snafu" : DrSnafu
+    "Dr Snafu" : DrSnafu,
+    "Walter White" : MrWhite
 }

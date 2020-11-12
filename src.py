@@ -327,7 +327,8 @@ items = {
     'Large Health Potion' : HealthPotion,
     'Small Health Potion' : HealthPotion,
     'Cesium' : Cesium,
-    'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . ."
+    'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . .",
+    'Blue Ice Gfuel' : "Deliver this item to Walter White."
     }
 
 
@@ -339,7 +340,8 @@ class Player:
         self.name = GetName()
         self.inventory = ["GFUEL"]
         self.room = rooms[0]
-        self.coins = 30
+        self.coins = 0
+        self.quests = []
 
     def Punch(self, enemy):
         item = enemy.Damage(random.randint(2,5))

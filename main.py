@@ -80,10 +80,13 @@ while 1:
         ClearConsole()
         playsound(boopSound, block=False)
         print("\tMenu\n1. Search Room." # prints a menu of options
-            "\n2. Open Inventory.\n"
+            "\n2. Open Inventory."
+            "\n3. View Quests.\n"
         )
-        menuOption = input("-> ")
+        menuOption = ValidInput("-> ",["1","2","3"])
         playsound(boopSound, block=False)
+
+
         # Search Room
         if menuOption == "1":
             LoadingBar() 
@@ -130,5 +133,10 @@ while 1:
                 items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
             
             input("\nPress any key to continue..")
+        
 
-
+        elif menuOption == "3":
+            ClearConsole()
+            for index,name in enumerate(player.quests):
+                print("%g. %s"%(index+1, str(name)))
+            input("\n\nPress any key to continue..")
