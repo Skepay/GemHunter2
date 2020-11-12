@@ -26,6 +26,7 @@ winSound = "%s\win.mp3"%soundPath
 newItem = "%s\_newItem.mp3"%soundPath
 foundSound = "%s\_found.mp3"%soundPath
 error = "%s\error.mp3"%soundPath
+phoneRing = "%s\walterWhitesRingtone.mp3"%soundPath
 
 
 
@@ -328,7 +329,8 @@ items = {
     'Small Health Potion' : HealthPotion,
     'Cesium' : Cesium,
     'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . .",
-    'Blue Ice Gfuel' : "Deliver this item to Walter White."
+    'Blue Ice Gfuel' : "Deliver this item to Walter White.",
+    "Walter's 24\" Pizza" : "A pizza Walter White gave to you because his wife is a whore."
     }
 
 
