@@ -18,10 +18,8 @@ class WanderingTraveler:
 
         while 1:
             sg = self.Greeting()
-            if sg:
-                sg = self.Greeting()
-            else:
-                break
+            if sg: sg = self.Greeting()
+            else: break
         self.Leave()
         return
     
@@ -266,7 +264,9 @@ class PewDiePie:
             time.sleep(2)
 
         else: # player loss
-            TypeOut("PEWDIEPIE: No, you know what.. you're a sucky gamer, you can't have my chair.  Get out of my sight.")
+            TypeOut("PEWDIEPIE: No, you know what.. you're a sucky gamer, you can't have my chair.")
+            playsound(spitSound, block=False)
+            TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
             time.sleep(2)
         # Removes npc from room.
         player.room.NPC = None
@@ -616,5 +616,5 @@ npc = {
     "Maya" : Maya,
     "Computer" : TypeRace,
     "Dr Snafu" : DrSnafu,
-    "Walter White" : MrWhite
+    "Walter White" : MrWhite 
 }

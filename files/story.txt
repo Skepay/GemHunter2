@@ -5,7 +5,7 @@ On the display there is a number and a list of items.
 You open your door and walk into another room, the number on your watch incriments, and it displays the words "Labyrinth Test No. 9"
 NEW
 After looking in other rooms, you realize the rooms are all practically identical with random objects in each room.
-Upon entering Room 0, you see writing engraved into the metal wall..
+Upon entering Room 0 you see writing engraved into the metal wall..
      GEM HUNT
 TASK: Find all Keys.
       Open the doors.

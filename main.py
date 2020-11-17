@@ -3,7 +3,7 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-Introduction()
+
 
 #~/ Main Loop \~#
 while 1:
@@ -22,8 +22,7 @@ while 1:
                 'w' : rooms[roomIndex].up,
                 's' : rooms[roomIndex].down,
                 'a' : rooms[roomIndex].left,
-                'd' : rooms[roomIndex].right,
-                
+                'd' : rooms[roomIndex].right
             }
 
         while 1:

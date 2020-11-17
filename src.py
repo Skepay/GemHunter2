@@ -6,7 +6,7 @@ import sys
 import time
 
 from color_source import ColorsFG, TextColor, color
-from Map import rooms
+from Mao import rooms
 
 try:
     from playsound import playsound
@@ -118,7 +118,6 @@ def Story():
             time.sleep(2)
             input("\nPress any key to continue..")
             ClearConsole()
-    print()
     time.sleep(2)
     ColorPrint("TEST SUBJECT: ", TextColor.red, newLine=False)
     time.sleep(1.75)
@@ -135,7 +134,6 @@ def Introduction():
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%player.name)
     time.sleep(0.60)
-    #TypeOut('G E M    H U N T E R',0.075)
     TitlePrint()
     time.sleep(4.5)
     ClearConsole()
