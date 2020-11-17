@@ -3,8 +3,7 @@ from npc import *
 
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
-#Introduction()
-
+Introduction()
 
 #~/ Main Loop \~#
 while 1:
@@ -23,7 +22,8 @@ while 1:
                 'w' : rooms[roomIndex].up,
                 's' : rooms[roomIndex].down,
                 'a' : rooms[roomIndex].left,
-                'd' : rooms[roomIndex].right
+                'd' : rooms[roomIndex].right,
+                
             }
 
         while 1:
@@ -32,7 +32,6 @@ while 1:
                 break
             except (NameError, TypeError):
                 travelTo = ValidInput("-> ",["w","a","s","d"])
-        
         
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()
@@ -55,7 +54,6 @@ while 1:
             time.sleep(1)
 
         else: player.room = room
-
 
         if player.room.npc: # if there is an npc in the room
             ClearConsole()
@@ -98,6 +96,11 @@ while 1:
                 player.inventory.append(player.room.item)
                 player.room.item = None
                 time.sleep(2)
+
+            elif not player.room.item and not random.randint(0,10):
+                coinsAmount = random.randint(2,10)
+                TypeOut("You found %g coins!"%coinsAmount)
+                player.coins += coinsAmount
 
             else:  # if there is not an item
                 TypeOut("There aren't any items in this room..")

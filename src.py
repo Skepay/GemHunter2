@@ -15,6 +15,15 @@ except ImportError:
 finally:
     from playsound import playsound
 
+try:
+    from pyfiglet import Figlet
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", 'pyfiglet'])
+finally:
+    from pyfiglet import Figlet
+
+
+
 #~/ Sounds \~#
 # set second arguement to be False, so it will run async
 soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
@@ -78,11 +87,24 @@ def TypeOut(string, pause = 0.045, newline = True):
 
 # Print Colored messages.
 def ColorPrint(string, inputColor = TextColor.white, newLine = True):
-    print(color(string, inputColor), end = '')
-    if newLine:
-        print('')
+    if inputColor == "rainbow":
+        textColors = [TextColor.red, TextColor.orange, TextColor.yellow, TextColor.green, TextColor.blue, TextColor.purple, TextColor.white]
+        for i in string:
+            print(color(i, random.choice(textColors)), end='')
+        print()
+    else:
+        print(color(string, inputColor), end = '')
+        if newLine:
+            print('')
 
 
+# Print Title.
+def TitlePrint():
+    ft = Figlet(font="slant")
+    ColorPrint(str(ft.renderText("GEM HUNTER")), inputColor=TextColor.green)
+
+
+# Cringe Back story.
 def Story():
     ClearConsole()
     with open("files/story.txt", "r") as sf:
@@ -109,12 +131,13 @@ def Story():
 # OG welcome message for gem hunter.
 def Introduction():
     playsound(introSong, block=False)
-    time.sleep(.5)
+    time.sleep(.6)
     ClearConsole()
     TypeOut('Welcome %s, to the text based adventure game...'%player.name)
     time.sleep(0.60)
-    TypeOut('G E M    H U N T E R',0.075)
-    time.sleep(2.15)
+    #TypeOut('G E M    H U N T E R',0.075)
+    TitlePrint()
+    time.sleep(4.5)
     ClearConsole()
     ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
     time.sleep(5)
@@ -246,7 +269,7 @@ def Tunnel():
     if player.room.name != ElonRoom:
         ClearConsole()
         TypeOut("You are not in the tunnel's starting room so you can not travel in this tunnel.")
-        return None
+        return
 
     ClearConsole()
     TypeOut("The start of the tunnel is located in Room %s.  The tunnel leads to Room %s.\n"%(ElonRoom, endRoom), newline=False)
@@ -304,7 +327,7 @@ def Cesium():
             TypeOut("Thanks to your Hazmat Suit, you aren't affected by the radiation.")
         else:
             TypeOut("The radiation is toxic to your health and you take significant damage.")
-            player.hp = player.hp/2
+            player.hp = player.hp  / 2
 
         if player.room.door:
             player.room.door = None
@@ -354,9 +377,6 @@ class Player:
         item = enemy.Damage(random.randint(0,7))
         if(item):
             self.inventory.append(item)
-
-    def GetHealth(self):
-        return self.hp
 
     def HasSpecialItems(self):
         return False

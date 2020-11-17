@@ -118,14 +118,14 @@ class BigDikman:
     def Battle(self, player):
         ct = 0
         attackDict = {"1" : player.Punch, "2" : player.Kick}
-        while(self.hp > 0 and player.GetHealth() > 0):
+        while(self.hp > 0 and player.hp > 0):
             ClearConsole()
 
             ct+=1
             print("ROUND",ct)
 
             TypeOut((self.name," HP: ", self.hp))
-            TypeOut((player.name, " HP: ", player.GetHealth()))
+            TypeOut((player.name, " HP: ", player.hp))
             print('\n\n\n')
             if ct == 1:
                 TypeOut("You attack first, what move would you like to use?")
@@ -220,8 +220,9 @@ class PewDiePie:
 
 
     def RandomResponse(self):
-        pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com']
-        return random.choice(pewdsResponses)
+        pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com', 'Is for me?', 'Become a member today and get acess to special videos!', 'www.youtube.com/pewdiepie']
+        TypeOut("PEWDIEPIE: %s"%random.choice(pewdsResponses))
+        return
     
 
     def Questions(self):
@@ -240,12 +241,12 @@ class PewDiePie:
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
             self.pdpScore += 1
-            TypeOut(self.RandomResponse())
+            self.RandomResponse()
             time.sleep(1)
 
         else:                               # if their guess was wrong
             self.pdpScore -= 1
-            TypeOut(self.RandomResponse())
+            self.RandomResponse()
             time.sleep(1)
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
 
@@ -509,7 +510,7 @@ class MrWhite:
         playsound(boopSound,block=False)
         ColorPrint("You have recieved a new quest!  View it from your menu.", TextColor.yellow)
         playsound(newItem,block=False)
-        player.quests.append("Get Walter White's Blue Ice from Room %g and deliver it to him."%gfuelRoomLocation.name)
+        player.quests.append("Get Walter White's Blue Ice from Room %g and deliver it to him."%rooms[gfuelRoomLocation].name)
         input("\n\nPress any key to continue..")
 
 
