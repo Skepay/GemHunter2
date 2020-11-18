@@ -30,6 +30,7 @@ while 1:
                 room = rooms[keystrokes[travelTo]]
                 break
             except (NameError, TypeError):
+                print("You can't travel in that direction.")
                 travelTo = ValidInput("-> ",["w","a","s","d"])
         
         if player.room.door and player.room.door[0] == room.name:
@@ -121,8 +122,8 @@ while 1:
                     itemChoice = int(input("-> "))
                     if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
                         break
-                except:
-                    pass
+                except: pass
+
             
             if player.inventory[itemChoice-1] not in items:
                 items.update({player.inventory[itemChoice-1] : "An item."})

@@ -11,9 +11,11 @@ class WanderingTraveler:
         time.sleep(1.25)
         self.name = "Wandering Traveler"
         self.shopItems = {
-            10 : "Very yummy Hot Dog",
+            5 : "Very yummy Hot Dog",
+            10 : "Dope Jacket",
             15 : "Small Health Potion",
-            30 : "Large Health Potion"
+            30 : "Large Health Potion",
+            50 : "Sword"
         }
 
         while 1:
@@ -85,13 +87,15 @@ class WanderingTraveler:
 
 
 #~/ NPCS \~#
-# COLIN'S BIGDIKMAN TODO: KILL ISAIAH
+# COLIN'S BIGDIKMAN
 class BigDikman:
     def __init__(self, player):
-        self.hp = random.randint(15,20)
+        self.hp = random.choice([15,20])
         self.name = self.GetDikmanName()
         self.Greeting()
-        self.Battle(player)
+
+        if "Sword" in player.inventory: self.Battle(player,"Use Sword")
+        else: self.Battle(player,"Punch")
 
 
     def GetDikmanName(self):
@@ -105,6 +109,7 @@ class BigDikman:
         ClearConsole()
         TypeOut("???: YOU'RE GONNA HAVE TO FIGHT ME IF YOU WANNA GET PAST MY ELASTIC DIK.\n", newline=False)
         TypeOut((self.name, ": ", self.GetRandomLine()))
+        time.sleep(1)
         return
 
 
@@ -113,29 +118,28 @@ class BigDikman:
         return random.choice(lines)
 
 
-    def Battle(self, player):
+    def Battle(self, player, swordOrPunch):
         ct = 0
         attackDict = {"1" : player.Punch, "2" : player.Kick}
         while(self.hp > 0 and player.hp > 0):
             ClearConsole()
 
             ct+=1
-            print("ROUND",ct)
+            ColorPrint("ROUND %g"%ct, inputColor=TextColor.red)
 
-            TypeOut((self.name," HP: ", self.hp))
-            TypeOut((player.name, " HP: ", player.hp))
-            print('\n\n\n')
+            ColorPrint("%s HP: "%self.name, newLine=False); ColorPrint("%g"%self.hp, inputColor=TextColor.red)
+            ColorPrint("%s HP: "%player.name, newLine=False); ColorPrint("%g\n"%player.hp, inputColor=TextColor.red)
+            print('\n')
             if ct == 1:
-                TypeOut("You attack first, what move would you like to use?")
+                print("You attack first, what move would you like to use?")
             else: 
-                TypeOut("Yout turn to attack, what move would you like to use?")
-            print("(1): Punch")
-            print("(2): Kick")
-            print("(3): Dodge")
-            print("(4): Go for the [REDACTED]")
+                print("Your turn to attack, what move would you like to use?")
+            ColorPrint("1.",TextColor.red, newLine=False); ColorPrint(" %s"%swordOrPunch)
+            ColorPrint("2.", TextColor.red, newLine=False); ColorPrint(" Kick")
 
-            print(self.hp)
 
+            move = ValidInput("\n-> ", ["1","2","3","4"])
+            """
             if(not (player.HasSpecialItems())):
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
@@ -151,32 +155,47 @@ class BigDikman:
                         inputStr += '/'
                 inputStr += ')'
                 move = ValidInput(inputStr, inputVals)
+            """
             attackDict[move](self)
-            print("PRESS ANY KEY TO CONTINUE")
+            print("Press any key to continue...")
             getch()
-
-        if(self.hp > 0):
-            TypeOut("Haha! You got rekt by my dik!")
-            player.Die()
-        else:
-            self.Die()
 
 
     def Damage(self, dmg):
-        TypeOut(("YOU DAMAGED ", self.name, " FOR ", dmg, "."))
+        ColorPrint("YOU DAMAGED %s FOR %s."%(self.name, dmg), TextColor.red)
         self.hp -= dmg
+        time.sleep(1.5)
         if(self.hp > 0):
-            TypeOut((self.name, ": Hmmm. That didn't hurt, retard. Get strangled by my [REDACTED]!"))
+            ClearConsole()
+            ColorPrint("%s: Hmmm. That didn't hurt, retard."%self.name)
+            ColorPrint(self.GetRandomLine())
+            attackDmg = random.randint(1,3)
+            ColorPrint("YOU TOOK %g DAMAGE"%attackDmg, TextColor.red)
+            player.hp -= attackDmg
+            if player.hp <= 0:
+                ClearConsole()
+                player.room = rooms[0]
+                diedFont = Figlet(font="slant")
+                ColorPrint(str(diedFont.renderText("YOU DIED")), inputColor=TextColor.red)
+                time.sleep(2.5)
+                player.hp = 20
+            time.sleep(1)
             return 0
         else:
+            ClearConsole()
             return self.Die()
 
 
     def Die(self):
         playsound(newItem,block=False)
         TypeOut((self.name,": Ouch. That one hurt my dik."))
-        TypeOut((self.name, "HAS DIED."))
-        return random.choice(['Health Potion', 'Dik Whip', 'Gold Bar'])
+        TypeOut((self.name, " HAS DIED."))
+        time.sleep(1.5)
+        playsound(newItem,block=False)
+        bdItem = random.choice(['Large Health Potion', 'Dik Whip'])
+        ColorPrint("You have recieved a %s!"%bdItem, inputColor=TextColor.yellow)
+        player.inventory.append(bdItem)
+        player.room.npc = None
 
 
 

@@ -6,7 +6,7 @@ import sys
 import time
 
 from color_source import ColorsFG, TextColor, color
-from Mao import rooms
+from Map import rooms
 
 try:
     from playsound import playsound
@@ -95,7 +95,7 @@ def ColorPrint(string, inputColor = TextColor.white, newLine = True):
     else:
         print(color(string, inputColor), end = '')
         if newLine:
-            print('')
+            print()
 
 
 # Print Title.
@@ -146,11 +146,11 @@ def Introduction():
 # List of keybinds for the game.
 def Instructions():
     print("""
-        "W" -> Moves up\n
-        "S" -> Moves down\n
-        "A" -> Moves left\n
-        "D" -> Moves right\n
-        "M" or "menu" -> Opens the menu.
+        "w" -> Moves up\n
+        "s" -> Moves down\n
+        "a" -> Moves left\n
+        "d" -> Moves right\n
+        "m" or "menu" -> Opens the menu.
         """)
     input("\n\nPress any key to continue.")
 
@@ -193,12 +193,6 @@ def openDoor(keys, doorName):
 
 
 #~/ Item Functions\~#
-# Informational message about gfuel.
-def Gfuel():
-    ClearConsole()
-    TypeOut("A tasty beverage.")
-
-
 # Function for the PewDiePie chair item.
 def Chair():
     ClearConsole()
@@ -214,8 +208,8 @@ def Chair():
                 teleportLocation = int(input("What is the number of the room you want to travel to?\n-> "))
                 if teleportLocation in range(0,len(rooms)):
                     break
-            except:
-                pass
+            except: pass
+
 
         # teleports the player to his desired location
         for room in rooms:
@@ -256,11 +250,12 @@ def Tunnel():
                 endRoom = int(input("What is the number of the room you want to tunnel to?\n-> "))
                 if endRoom in range(0,len(rooms)):
                     break
-            except ValueError:
-                pass
+            except ValueError: pass
+
         ElonRoom = int(player.inventory[Card][13:])  
         player.inventory.append("%s (CONNECTED TO: %s)"%(player.inventory[Card], endRoom))
         player.inventory.remove(player.inventory[Card])
+        #ElonRoom = int(player.inventory[Card][13:])  
     
 
     # if player is in the start tunnel room
@@ -294,8 +289,7 @@ def HealthPotion():
         healAmount = 5
     
     player.hp += healAmount
-    if player.hp > 20:
-        player.hp = 20
+    if player.hp > 20: player.hp = 20
 
     TypeOut('You used a %s and restored your hp to %g!'%(player.inventory[potionType], player.hp))
     player.inventory.remove(player.inventory[potionType])
@@ -313,8 +307,7 @@ def Cesium():
             itemChoice = int(input("-> "))
             if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
                 break
-        except:
-            pass
+        except: pass
 
     if player.inventory[itemChoice].lower() == "water":
         ClearConsole()
@@ -342,7 +335,7 @@ def Cesium():
 
 # Dictionary for the items
 items = {
-    'GFUEL' : Gfuel,
+    'GFUEL' : "A tasty beverage.",
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
     'Maya\'s Eyepatch' : "Return this item to Maya!",
@@ -351,7 +344,11 @@ items = {
     'Cesium' : Cesium,
     'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . .",
     'Blue Ice Gfuel' : "Deliver this item to Walter White.",
-    "Walter's 24\" Pizza" : "A pizza Walter White gave to you because his wife is a whore."
+    "Walter's 24\" Pizza" : "A pizza Walter White gave to you because his wife is a whore.",
+    "Very yummy Hot Dog" : "You know, a like, very yummy hotdog.",
+    "Dope Jacket" : "One DOPE jacket, son.",
+    "Sword" : "Increased damage when attacking.",
+    "Dik Whip" : "A trophy you recieved for defeating Big Dikman."
     }
 
 
@@ -367,17 +364,16 @@ class Player:
         self.quests = []
 
     def Punch(self, enemy):
-        item = enemy.Damage(random.randint(2,5))
-        if(item):
+        if "Sword" in self.inventory: damage = random.randint(7,10)
+        else: damage = random.randint(2,5)
+        item = enemy.Damage(damage)
+        if item:
             self.inventory.append(item)
 
     def Kick(self, enemy):
-        item = enemy.Damage(random.randint(0,7))
-        if(item):
+        item = enemy.Damage(random.randint(2,7))
+        if item:
             self.inventory.append(item)
-
-    def HasSpecialItems(self):
-        return False
 
 
 player = Player()
