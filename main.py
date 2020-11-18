@@ -120,8 +120,8 @@ while 1:
             while True: # gets index input of the items
                 try:
                     itemChoice = int(input("-> "))
-                    if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
-                        break
+                    player.inventory[itemChoice-1]
+                    break
                 except: pass
 
             

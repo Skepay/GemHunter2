@@ -108,8 +108,9 @@ class BigDikman:
     def Greeting(self):
         ClearConsole()
         TypeOut("???: YOU'RE GONNA HAVE TO FIGHT ME IF YOU WANNA GET PAST MY ELASTIC DIK.\n", newline=False)
+        time.sleep(.5)
         TypeOut((self.name, ": ", self.GetRandomLine()))
-        time.sleep(1)
+        time.sleep(1.5)
         return
 
 
@@ -247,7 +248,7 @@ class PewDiePie:
 
         triviaQuestion = random.randint(0,len(self.pdpTrivia)-1) # gets a random question from the dictionary
         answerList = list(self.pdpTrivia.items())[triviaQuestion][1].copy() # gets the answers for that questions and copies it (first item is correct answer)
-        random.shuffle(list(self.pdpTrivia.items())[triviaQuestion][1]) # shuffles the original answers TODO: it doesnt shuffle
+        random.shuffle(list(self.pdpTrivia.items())[triviaQuestion][1]) # shuffles the original answers
         ColorPrint(list(self.pdpTrivia.items())[triviaQuestion][0])  # prints the question
         
         # print answers
@@ -520,12 +521,14 @@ class MrWhite:
         playsound(boopSound,block=False)
         TypeOut("Walter White: Oh, wait, you're not Jesse!\n",newline=False); time.sleep(.5)
         time.sleep(1)
+        ColorPrint("*becomes Hesienberg*")
+        time.sleep(1.5)
         playsound(phoneRing,block=False)
         TypeOut("*Heisenberg's phone rings*\n",newline=False)
         TypeOut("Heisenberg: Argh, it is my whore wife Skyler.. listen, I need you to bring me my Blue Ice!!")
         time.sleep(1)
         playsound(boopSound,block=False)
-        TypeOut("Heisenberg: This is not a negotiation."); time.sleep(1)
+        TypeOut("Heisenberg: This is not a negotiation. I am the one who knocks."); time.sleep(1)
         playsound(boopSound,block=False)
         ColorPrint("You have recieved a new quest!  View it from your menu.", TextColor.yellow)
         playsound(newItem,block=False)

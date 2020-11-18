@@ -248,9 +248,9 @@ def Tunnel():
             ClearConsole()
             try:
                 endRoom = int(input("What is the number of the room you want to tunnel to?\n-> "))
-                if endRoom in range(0,len(rooms)):
-                    break
-            except ValueError: pass
+                rooms[endRoom]
+                break
+            except: pass
 
         ElonRoom = int(player.inventory[Card][13:])  
         player.inventory.append("%s (CONNECTED TO: %s)"%(player.inventory[Card], endRoom))
@@ -305,8 +305,8 @@ def Cesium():
     while True: # gets index input of the items
         try:
             itemChoice = int(input("-> "))
-            if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
-                break
+            player.inventory[itemChoice-1]
+            break
         except: pass
 
     if player.inventory[itemChoice].lower() == "water":
@@ -348,7 +348,14 @@ items = {
     "Very yummy Hot Dog" : "You know, a like, very yummy hotdog.",
     "Dope Jacket" : "One DOPE jacket, son.",
     "Sword" : "Increased damage when attacking.",
-    "Dik Whip" : "A trophy you recieved for defeating Big Dikman."
+    "Dik Whip" : "A trophy you recieved for defeating Big Dikman.",
+    "Red Key" : "Opens the Red Door.",
+    "Green Key" : "Opens the Green Door.",
+    "Violet Key" : "Opens the Violet Door.",
+    "Orange Key" : "Opens the Orange Door.",
+    "Yellow Key" : "Opens the Yellow Door.",
+    "Blue Key" : "Opens the Blue Door.",
+    "Indigo Key" : "Opens the Indigo Door."
     }
 
 
@@ -367,13 +374,11 @@ class Player:
         if "Sword" in self.inventory: damage = random.randint(7,10)
         else: damage = random.randint(2,5)
         item = enemy.Damage(damage)
-        if item:
-            self.inventory.append(item)
+        if item: self.inventory.append(item)
 
     def Kick(self, enemy):
         item = enemy.Damage(random.randint(2,7))
-        if item:
-            self.inventory.append(item)
+        if item: self.inventory.append(item)
 
 
 player = Player()
