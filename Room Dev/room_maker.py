@@ -1,7 +1,7 @@
 # Program for automating the development of rooms.
-import pickle
+import pickle # rick lol haha
 
-import pygame  # rick lol haha
+import pygame
 
 pygame.init()
 

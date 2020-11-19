@@ -131,6 +131,9 @@ while 1:
             if "Tunnel" in player.inventory[itemChoice-1]: # special case for tunnel bc the tunnel pass will rarely be the same across players games
                 ClearConsole()
                 items["Tunnel"]()
+            elif "Gem" in player.inventory[itemChoice-1]:
+                ClearConsole()
+                items["Gem"]()
             else:
                 ClearConsole()
                 items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
@@ -138,6 +141,7 @@ while 1:
             input("\nPress any key to continue..")
         
 
+        # View Quests.
         elif menuOption == "3":
             ClearConsole()
             for index,name in enumerate(player.quests):

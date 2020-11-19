@@ -217,6 +217,10 @@ class PewDiePie:
 
         play = self.Greeting()
         if play:
+            ClearConsole()
+            print("Please type your answers out.")
+            time.sleep(1)
+            ClearConsole()
             while len(self.pdpTrivia) > 0:
                 self.Questions()
             self.GameOver(player)
@@ -290,7 +294,7 @@ class PewDiePie:
             time.sleep(2)
         # Removes npc from room.
         player.room.NPC = None
-
+        input("Press any key to continue...")
 
 
 # ELON MUSK
@@ -464,7 +468,7 @@ class Maya:
 
     def Greeting(self):
         ClearConsole()
-        TypeOut("MAYA: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.  Can you help me find it, please?\nI could bring PewDiePie back for you!", newline=False)
+        TypeOut("???: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.\nMAYA: Can you help me find it, please?\nMAYA: I could bring PewDiePie back for you!\n", newline=False)
         findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
         return findEye
     
@@ -493,6 +497,10 @@ class Maya:
 
             player.room.npc = None
             time.sleep(2)
+            for i in player.quests:
+                if "Maya" in i:
+                    player.quests.remove(i)
+                    break
         else:
             TypeOut("Why are you lying to me?")
             time.sleep(1)
@@ -521,14 +529,14 @@ class MrWhite:
         playsound(boopSound,block=False)
         TypeOut("Walter White: Oh, wait, you're not Jesse!\n",newline=False); time.sleep(.5)
         time.sleep(1)
-        ColorPrint("*becomes Hesienberg*")
+        print("*becomes Hesienberg*")
         time.sleep(1.5)
         playsound(phoneRing,block=False)
         TypeOut("*Heisenberg's phone rings*\n",newline=False)
         TypeOut("Heisenberg: Argh, it is my whore wife Skyler.. listen, I need you to bring me my Blue Ice!!")
         time.sleep(1)
         playsound(boopSound,block=False)
-        TypeOut("Heisenberg: This is not a negotiation. I am the one who knocks."); time.sleep(1)
+        TypeOut("Heisenberg: This is not a negotiation, because I am the one who knocks."); time.sleep(1)
         playsound(boopSound,block=False)
         ColorPrint("You have recieved a new quest!  View it from your menu.", TextColor.yellow)
         playsound(newItem,block=False)
@@ -549,7 +557,10 @@ class MrWhite:
         time.sleep(1.5)
         TypeOut("Walter White: Satisfaction Guaranteed.. or its on the house!")
         time.sleep(2)
-
+        for i in player.quests:
+            if "Walter White" in i:
+                player.quests.remove(i)
+                break
 
 #~/ PUZZLES \~#
 class TypeRace:
@@ -599,7 +610,8 @@ class TypeRace:
                 typed = input("> ")
             
             if time.time() - startType < 3:
-                TypeOut(self.randomMsg())
+                if code != self.codes[-1]: # just make sure its not the last loop
+                    TypeOut(self.randomMsg())
                 time.sleep(.75)
             else:
                 TypeOut("Memory error. . .\n", random.uniform(0.4, 1.0))

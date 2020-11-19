@@ -29,7 +29,7 @@ finally:
 soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
 spitSound = "%s\spit.mp3"%soundPath
 boopSound = "%s\Sboop.mp3"%soundPath
-teleportSound = "%s\teleportSound.mp3"%soundPath
+teleportSound = "%s\_teleportSound.mp3"%soundPath
 introSong = "%s\intro_song.mp3"%soundPath
 winSound = "%s\win.mp3"%soundPath
 newItem = "%s\_newItem.mp3"%soundPath
@@ -355,7 +355,8 @@ items = {
     "Orange Key" : "Opens the Orange Door.",
     "Yellow Key" : "Opens the Yellow Door.",
     "Blue Key" : "Opens the Blue Door.",
-    "Indigo Key" : "Opens the Indigo Door."
+    "Indigo Key" : "Opens the Indigo Door.",
+    "Gem" : "Collect all the gems and use them to open the Gemstone Door."
     }
 
 
@@ -368,7 +369,7 @@ class Player:
         self.inventory = ["GFUEL"]
         self.room = rooms[0]
         self.coins = 0
-        self.quests = []
+        self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
 
     def Punch(self, enemy):
         if "Sword" in self.inventory: damage = random.randint(7,10)
