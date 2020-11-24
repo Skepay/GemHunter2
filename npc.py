@@ -491,8 +491,9 @@ class Maya:
             TypeOut("Oh yay!  Thank you so much.")
             TypeOut("Just for you.. I respawned PewDiePie in a random room.. go and find him!")
 
-            for room in rooms:
-                if not room.npc:
+            for i in range(len(rooms)):
+                room = random.choice(rooms)
+                if not room.npc and room != player.room:
                     room.npc = "PewDiePie"
 
             player.room.npc = None

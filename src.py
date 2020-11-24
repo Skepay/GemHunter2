@@ -192,6 +192,39 @@ def openDoor(keys, doorName):
 
 
 
+#~/ Doors \~#
+def WinGame():
+    st = Figlet(font="slant")
+    ClearConsole()
+    time.sleep(1)
+    TypeOut("You approach the exit door and see the bright sun.")
+    TypeOut("Without hesitation, you walk into the fresh outdoors.")
+    time.sleep(4)
+    playsound(winSound,block=False)
+    time.sleep(1)
+    ColorPrint(str(st.renderText("GAME OVER")), inputColor=TextColor.green)
+    time.sleep(3)
+    ClearConsole()
+    TypeOut("Thank you for playing",newline=False)
+    for i in "...":
+        print(i,end='')
+        time.sleep(.15)
+    print("\n\n")
+    time.sleep(1)
+    ColorPrint(str(st.renderText("GEM HUNTER")), inputColor=TextColor.green)
+    time.sleep(5)
+    input("\nPress any key to continue..")
+    ClearConsole()
+    time.sleep(.5)
+    TypeOut("Isaiah: Well this is the end, player.")
+    time.sleep(1)
+    TypeOut("Isaiah: I'm not making another one of these so I hope you enjoyed it.")
+    time.sleep(5)
+    input("Press any key to exit..")
+    exit()
+
+
+
 #~/ Item Functions\~#
 # Function for the PewDiePie chair item.
 def Chair():
@@ -366,7 +399,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ["GFUEL"]
+        self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']#["GFUEL"]
         self.room = rooms[0]
         self.coins = 0
         self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
@@ -374,6 +407,7 @@ class Player:
     def Punch(self, enemy):
         if "Sword" in self.inventory: damage = random.randint(7,10)
         else: damage = random.randint(2,5)
+        
         item = enemy.Damage(damage)
         if item: self.inventory.append(item)
 

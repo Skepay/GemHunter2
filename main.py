@@ -93,9 +93,13 @@ while 1:
             if player.room.item: # if there is a item in the room
                 playsound(newItem,block=False)
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%player.room.item, TextColor.yellow)
-                player.inventory.append(player.room.item)
-                player.room.item = None
-                time.sleep(2)
+                if player.room.item == "Exit Door": 
+                    input("Press any key to continue...")
+                    WinGame() # Player won the game by finding the exit door
+                else:
+                    player.inventory.append(player.room.item)
+                    player.room.item = None
+                    time.sleep(2)
 
             elif not player.room.item and not random.randint(0,10):
                 coinsAmount = random.randint(2,10)
@@ -133,7 +137,7 @@ while 1:
                 items["Tunnel"]()
             elif "Gem" in player.inventory[itemChoice-1]:
                 ClearConsole()
-                items["Gem"]()
+                items["Gem"]
             else:
                 ClearConsole()
                 items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])

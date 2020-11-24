@@ -14,7 +14,7 @@ rooms = []
 rooms.append(Room(0, None, None, 4, 3, 1, 2, None))                       # Room 0
 rooms.append(Room(1, None, None, None, 136, 5, 0, None))                  # Room 1
 rooms.append(Room(2, None, None, None, None, 0, 55, None))                # Room 2
-rooms.append(Room(3, None, [200, 'Gemstone Door', ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']], 0, 153, None, None, None))# Room 3
+rooms.append(Room(3, None, [153, 'Gemstone Door', ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']], 0, 153, None, None, None))# Room 3
 rooms.append(Room(4, None, None, 34, 0, 57, 58, None))                    # Room 4
 rooms.append(Room(5, None, None, 6, 8, 10, 1, None))                      # Room 5
 rooms.append(Room(6, None, None, None, 5, 7, None, None))                 # Room 6
@@ -164,7 +164,7 @@ rooms.append(Room(149, None, None, 144, 151, None, None, None))           # Room
 rooms.append(Room(150, None, None, 146, 154, None, None, None))           # Room 150
 rooms.append(Room(151, None, [152, 'Blue Door', ['Blue Key']], 149, 152, None, None, None))# Room 151
 rooms.append(Room(152, 'Blue Gem', None, 151, None, None, None, None))    # Room 152
-rooms.append(Room(153, None, None, 3, None, None, None, None))            # Room 153
+rooms.append(Room(153, 'Exit Door', None, 3, None, None, None, None))            # Room 153
 rooms.append(Room(154, None, None, 150, None, None, None, None))          # Room 154
 rooms.append(Room(155, None, None, 63, None, None, 156, None))            # Room 155
 rooms.append(Room(156, None, None, None, None, 155, 157, None))           # Room 156
