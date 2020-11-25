@@ -15,10 +15,9 @@ while 1:
     if rooms[roomIndex].down != None: print("down: %s  "%color("Room %s"%rooms[roomIndex].down, TextColor.blue), end = '')
     if rooms[roomIndex].left != None:  print("left: %s  "%color("Room %s"%rooms[roomIndex].left, TextColor.blue), end = '')
     if rooms[roomIndex].right != None: print("right: %s  "%color("Room %s"%rooms[roomIndex].right, TextColor.blue), end = '')
-    print("\n")
 
     # Players next location
-    travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
+    travelTo = ValidInput("\n-> ",["w","a","s","d","m","menu"])
     
     # Travel.
     if "m" not in travelTo:
