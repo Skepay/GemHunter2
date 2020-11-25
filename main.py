@@ -28,6 +28,7 @@ while 1:
                 'd' : rooms[roomIndex].right
             }
 
+
         while 1:
             try:
                 room = rooms[keystrokes[travelTo]]
@@ -38,7 +39,6 @@ while 1:
         
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()
-
             doorKeys = ', '.join(player.room.door[2])
             playsound(boopSound, block=False)
             TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(player.room.door[1], doorKeys))
@@ -57,6 +57,7 @@ while 1:
             time.sleep(1)
 
         else: player.room = room
+
 
         if player.room.npc: # if there is an npc in the room
             ClearConsole()
@@ -117,7 +118,6 @@ while 1:
         # Inspect inventory items.
         elif menuOption == "2":
             ClearConsole()
-
             ColorPrint("\nINVENTORY:", TextColor.blue)
             for index,name in enumerate(player.inventory):
                 print("%g. %s"%(index+1, str(name)))

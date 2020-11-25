@@ -8,6 +8,7 @@ import time
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
 
+# Install required libraries.
 try: from playsound import playsound
 except ImportError: subprocess.call([sys.executable, "-m", "pip", "install", 'playsound'])
 finally: from playsound import playsound
@@ -218,7 +219,7 @@ def WinGame():
     playsound(newItem,block=False)
     ColorPrint(str(st.renderText(str(score))), inputColor=TextColor.yellow)
     time.sleep(.5)
-    pyautogui.screenshot().save("%s\GemHunter2Score.png"%os.path.abspath(__file__)[0:-6])
+    pyautogui.screenshot().save("%s\GemHunter2Score.png"%os.path.abspath(__file__)[0:-6]) # take a screenshot of the player's score
     time.sleep(5)
     ClearConsole()
     time.sleep(.5)
