@@ -25,16 +25,16 @@ finally: import pyautogui
 
 #~/ Sounds \~#
 # set second arguement to be False, so it will run async
-soundPath = "%sSounds"%os.path.abspath(__file__)[0:-6]
-spitSound = "%s\spit.mp3"%soundPath
-boopSound = "%s\Sboop.mp3"%soundPath
-teleportSound = "%s\_teleportSound.mp3"%soundPath
-introSong = "%s\intro_song.mp3"%soundPath
-winSound = "%s\win.mp3"%soundPath
-newItem = "%s\_newItem.mp3"%soundPath
-foundSound = "%s\_found.mp3"%soundPath
-error = "%s\error.mp3"%soundPath
-phoneRing = "%s\walterWhitesRingtone.mp3"%soundPath
+soundPath = r"%sSounds"%os.path.abspath(__file__)[0:-6]
+spitSound = r"%s\spit.mp3"%soundPath
+boopSound = r"%s\Sboop.mp3"%soundPath
+teleportSound = r"%s\_teleportSound.mp3"%soundPath
+introSong = r"%s\intro_song.mp3"%soundPath
+winSound = r"%s\win.mp3"%soundPath
+newItem = r"%s\_newItem.mp3"%soundPath
+foundSound = r"%s\_found.mp3"%soundPath
+error = r"%s\error.mp3"%soundPath
+phoneRing = r"%s\walterWhitesRingtone.mp3"%soundPath
 
 
 
@@ -219,7 +219,7 @@ def WinGame():
     playsound(newItem,block=False)
     ColorPrint(str(st.renderText(str(score))), inputColor=TextColor.yellow)
     time.sleep(.5)
-    pyautogui.screenshot().save("%s\GemHunter2Score.png"%os.path.abspath(__file__)[0:-6]) # take a screenshot of the player's score
+    pyautogui.screenshot().save(r"%s\GemHunter2Score.png"%os.path.abspath(__file__)[0:-6]) # take a screenshot of the player's score
     time.sleep(5)
     ClearConsole()
     time.sleep(.5)
