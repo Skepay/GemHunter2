@@ -235,7 +235,7 @@ def WinGame():
 
 #~/ Item Functions\~#
 # Function for GFUEL.
-def Gfuel(died=False):
+def Gfuel():
     TypeOut("A tasty beverage.")
     time.sleep(1)
     TypeOut("Would you like to drink it? (y/n)")
@@ -425,7 +425,7 @@ class Player:
         self.inventory = ["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
-        self.coins = 100
+        self.coins = 0
         self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
         self.deaths = 0
 
@@ -450,7 +450,7 @@ class Player:
 
         else:
             self.deaths += 1
-            TypeOut("You have been returned to your starting location.  You have died %g times."%self.deaths)
+            TypeOut("You have been returned to your starting location.  You have died %g times."%(self.deaths))
             player.room = rooms[0]
             player.hp = 20
             time.sleep(2)
