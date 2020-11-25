@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-# TODO: Uncomment this for production -> Introduction()
+Introduction()
 
 
 #~/ Main Loop \~#

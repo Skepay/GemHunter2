@@ -405,7 +405,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']#["GFUEL"]
+        self.inventory = ["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
