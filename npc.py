@@ -97,8 +97,8 @@ class BigDikman:
         self.gameOver = False
         self.Greeting()
 
-        if "Sword" in player.inventory: self.Battle(player,"Use Sword")
-        else: self.Battle(player,"Punch")
+        if "Sword" in player.inventory: self.Battle(player)
+        else: self.Battle(player)
 
 
     def GetDikmanName(self):
