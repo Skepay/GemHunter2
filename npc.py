@@ -92,7 +92,7 @@ class WanderingTraveler:
 # COLIN'S BIGDIKMAN
 class BigDikman:
     def __init__(self, player):
-        self.hp = random.choice([15,20])
+        self.hp = random.choice([15,20,25])
         self.name = self.GetDikmanName()
         self.gameOver = False
         self.Greeting()
@@ -147,8 +147,14 @@ class BigDikman:
                 if(not (player.HasSpecialAttackItems())):
                     move = ValidInput("\n-> ", ["1","2","3"])
                 else:
-                    ColorPrint("4.",TextColor.red,newLine=False); ColorPrint(" Use Sword")
-                    move = ValidInput("\n->", ["1","2","3","4"])
+                    moveIndex = 4
+                    validMoves = ["1","2","3"]
+                    for i in player.attackItems:
+                        ColorPrint("%g."%moveIndex, TextColor.red,newLine=False); ColorPrint(" Use %s"%i)
+                        validMoves.append(str(moveIndex))
+                        moveIndex += 1
+
+                    move = ValidInput("\n->", validMoves)
                 
                 attackDict[move](self)
                 print("Press any key to continue...")
@@ -211,7 +217,8 @@ class PewDiePie:
             "What is my Wife's name?" : ["Marzia Kjellberg", "Martha Bisognin", "Merzia Kjellberg"],
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
-            "Where am I from?" : ["Sweden", "America", "UK"]
+            "Where am I from?" : ["Sweden", "America", "UK"],
+            "f"
             }
 
         play = self.Greeting()

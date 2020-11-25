@@ -364,7 +364,7 @@ def Cesium():
         time.sleep(1)
         return
     
-    
+
 
 # Dictionary for the items
 items = {
@@ -381,7 +381,7 @@ items = {
     "Very yummy Hot Dog" : "You know, a like, very yummy hotdog.",
     "Dope Jacket" : "One DOPE jacket, son.",
     "Sword" : "Increased damage when attacking.",
-    "Dik Whip" : "A trophy you recieved for defeating Big Dikman.",
+    "Dik Whip" : "A trophy you recieved for defeating Big Dikman.\nIt has his name written on the handle.",
     "Red Key" : "Opens the Red Door.",
     "Green Key" : "Opens the Green Door.",
     "Violet Key" : "Opens the Violet Door.",
@@ -450,6 +450,16 @@ class Player:
 
     def UseSword(self, enemy):
         item = enemy.Damage(random.randint(7,10))
+        if item: 
+            self.inventory.append(item)
+            try:
+                if(item.CanAttack()):
+                    self.attackItems.append(item)
+            except:
+                pass
+    
+    def UseDikWhip(self, enemy):
+        item = enemy.Damage(random.randint(7,12))
         if item: 
             self.inventory.append(item)
             try:
