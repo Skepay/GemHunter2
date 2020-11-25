@@ -65,6 +65,8 @@ class WanderingTraveler:
             return
         
         player.coins -= purchase
+        if self.shopItems[purchase] == "Sword":
+            player.attackItems.append(self.shopItems[purchase])
         player.inventory.append(self.shopItems[purchase])
         ClearConsole()
         playsound(newItem,block=False)
@@ -92,6 +94,7 @@ class BigDikman:
     def __init__(self, player):
         self.hp = random.choice([15,20])
         self.name = self.GetDikmanName()
+        self.gameOver = False
         self.Greeting()
 
         if "Sword" in player.inventory: self.Battle(player,"Use Sword")
@@ -119,68 +122,63 @@ class BigDikman:
         return random.choice(lines)
 
 
-    def Battle(self, player, swordOrPunch):
+    def Battle(self, player):
         ct = 0
-        attackDict = {"1" : player.Punch, "2" : player.Kick, "3" : player.GoForDik}
+        attackDict = {"1" : player.Punch, "2" : player.Kick, "3" : player.GoForDik, "4" : player.UseSword}
         while(self.hp > 0 and player.hp > 0):
-            ClearConsole()
+            if not self.gameOver:
+                ClearConsole()
 
-            ct+=1
-            ColorPrint("ROUND %g"%ct, inputColor=TextColor.red)
+                ct+=1
+                ColorPrint("ROUND %g"%ct, inputColor=TextColor.red)
 
-            ColorPrint("%s HP: "%self.name, newLine=False); ColorPrint("%g"%self.hp, inputColor=TextColor.red)
-            ColorPrint("%s HP: "%player.name, newLine=False); ColorPrint("%g\n"%player.hp, inputColor=TextColor.red)
-            print('\n')
-            if ct == 1:
-                print("You attack first, what move would you like to use?")
-            else: 
-                print("Your turn to attack, what move would you like to use?")
-            ColorPrint("1.",TextColor.red, newLine=False); ColorPrint(" Punch")
-            ColorPrint("2.", TextColor.red, newLine=False); ColorPrint(" Kick")
-            ColorPrint("3.", TextColor.red, newLine=False); ColorPrint(" Go for dik")
+                ColorPrint("%s HP: "%self.name, newLine=False); ColorPrint("%g"%self.hp, inputColor=TextColor.red)
+                ColorPrint("%s HP: "%player.name, newLine=False); ColorPrint("%g\n"%player.hp, inputColor=TextColor.red)
+                print('\n')
+                if ct == 1:
+                    print("You attack first, what move would you like to use?")
+                else: 
+                    print("Your turn to attack, what move would you like to use?")
+                ColorPrint("1.",TextColor.red, newLine=False); ColorPrint(" Punch")
+                ColorPrint("2.", TextColor.red, newLine=False); ColorPrint(" Kick")
+                ColorPrint("3.", TextColor.red, newLine=False); ColorPrint(" Go for dik")
 
-
-            move = ValidInput("\n-> ", ["1","2","3","4"])
-            
-            if(not (player.HasSpecialAttackItems())):
-                move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
-            else:
-                for item in range(player.attackItems):
-                    print("("+item+"): " + player.attackItems[item].name)
-                num = len(player.attackItems)
-                inputVals = ["1","2","3","4"]
-                inputStr = "("
-                for i in range(num):
-                    inputVals.append(str(i))
-                    inputStr += i
-                    if i < num-1:
-                        inputStr += '/'
-                inputStr += ')'
-                move = ValidInput(inputStr, inputVals)
-            
-            attackDict[move](self)
-            print("Press any key to continue...")
-            getch()
+                
+                if(not (player.HasSpecialAttackItems())):
+                    move = ValidInput("\n-> ", ["1","2","3"])
+                else:
+                    ColorPrint("4.",TextColor.red,newLine=False); ColorPrint(" Use Sword")
+                    move = ValidInput("\n->", ["1","2","3","4"])
+                
+                attackDict[move](self)
+                print("Press any key to continue...")
+                getch()
+            else: return
 
     def Damage(self, dmg):
+        ClearConsole()
         ColorPrint("YOU DAMAGED %s FOR %s."%(self.name, dmg), TextColor.red)
         self.hp -= dmg
         time.sleep(1.5)
+        ClearConsole()
         if(self.hp > 0):
             ClearConsole()
-            ColorPrint("%s: Hmmm. That didn't hurt, retard."%self.name)
+            ColorPrint("%s: Hmmm. That didn't hurt, retard.\n"%self.name)
+            time.sleep(.5)
             ColorPrint(self.GetRandomLine())
             attackDmg = random.randint(1,3)
-            ColorPrint("YOU TOOK %g DAMAGE"%attackDmg, TextColor.red)
+            time.sleep(.5)
+            ColorPrint("\nYOU TOOK %g DAMAGE.\n"%attackDmg, TextColor.red)
             player.hp -= attackDmg
+            time.sleep(1)
             if player.hp <= 0:
                 ClearConsole()
-                player.room = rooms[0]
                 diedFont = Figlet(font="slant")
+                time.sleep(1)
                 ColorPrint(str(diedFont.renderText("YOU DIED")), inputColor=TextColor.red)
                 time.sleep(2.5)
-                player.hp = 20
-            time.sleep(1)
+                player.PlayerDie()
+                self.gameOver = True
             return 0
         else:
             ClearConsole()
@@ -188,13 +186,14 @@ class BigDikman:
 
 
     def Die(self):
-        playsound(newItem,block=False)
-        TypeOut((self.name,": Ouch. That one hurt my dik."))
-        TypeOut((self.name, " HAS DIED."))
-        time.sleep(1.5)
+        playsound(boopSound,block=False)
+        ColorPrint("%s: Ouch. That one hurt my dik."%self.name)
+        time.sleep(.5)
+        ColorPrint("%s HAS DIED."%self.name, TextColor.red)
+        time.sleep(2)
         playsound(newItem,block=False)
         bdItem = random.choice(['Large Health Potion', 'Dik Whip'])
-        ColorPrint("You have recieved a %s!"%bdItem, inputColor=TextColor.yellow)
+        ColorPrint("You have recieved a %s!\n\n"%bdItem, inputColor=TextColor.yellow)
         player.inventory.append(bdItem)
         player.room.npc = None
 

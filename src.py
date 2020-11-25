@@ -363,28 +363,8 @@ def Cesium():
         TypeOut("Well.. that won't do much..")
         time.sleep(1)
         return
-            
-class DikWhip:
-    def __init__(self):
-        self.dmgMin = 3
-        self.dmgMax = 15
-    def GetMinDmg(self):
-        return self.dmgMin
-    def GetMaxDmg(self):
-        return self.dmgMax
-
-dikWhip = DikWhip()  
-
-class Sword:
-    def __init__(self):
-        self.dmgMin = 7
-        self.dmgMax = 10
-    def GetMinDmg(self):
-        return self.dmgMin
-    def GetMaxDmg(self):
-        return self.dmgMax
-
-sword = Sword() 
+    
+    
 
 # Dictionary for the items
 items = {
@@ -419,7 +399,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']#["GFUEL"]
+        self.inventory = ["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
@@ -428,9 +408,14 @@ class Player:
     def TakeDamage(self, dmg):
         self.hp -= dmg
         if(self.hp <= 0):
-            self.Die()
-    def Die(self):
-        TypeOut("YOU DIED")
+            self.PlayerDie()
+
+    def PlayerDie(self):
+        ClearConsole()
+        TypeOut("You have been returned to your starting location.")
+        player.room = rooms[0]
+        player.hp = 20
+        time.sleep(2)
 
     def Punch(self, enemy):
         damage = random.randint(2,5)
@@ -442,6 +427,7 @@ class Player:
                     self.attackItems.append(item)
             except:
                 pass
+
     def Kick(self, enemy):
         item = enemy.Damage(random.randint(2,7))
         if item: 
@@ -451,6 +437,7 @@ class Player:
                     self.attackItems.append(item)
             except:
                 pass
+
     def GoForDik(self, enemy):
         item = enemy.Damage(random.randint(0, 12))
         if item: 
@@ -460,8 +447,9 @@ class Player:
                     self.attackItems.append(item)
             except:
                 pass
-    def UseAttackItem(self, enemy, atkItem):
-        item = enemy.Damage(random.randInt(atkItem.GetMinDmg(), atkItem.GetMaxDmg()))
+
+    def UseSword(self, enemy):
+        item = enemy.Damage(random.randint(7,10))
         if item: 
             self.inventory.append(item)
             try:
@@ -469,6 +457,7 @@ class Player:
                     self.attackItems.append(item)
             except:
                 pass
+
     def HasSpecialAttackItems(self):
         if(self.attackItems):
             return True
