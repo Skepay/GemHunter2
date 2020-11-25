@@ -4,6 +4,7 @@ from npc import *
 # Intro to Game
 # TODO: Uncomment this for production -> Introduction()
 
+
 #~/ Main Loop \~#
 while 1:
     InfoMessages()
@@ -29,14 +30,14 @@ while 1:
                 room = rooms[keystrokes[travelTo]]
                 break
             except (NameError, TypeError):
+                print("You can't travel in that direction.")
                 travelTo = ValidInput("-> ",["w","a","s","d"])
-        
         
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()
 
             doorKeys = ', '.join(player.room.door[2])
-
+            playsound(boopSound, block=False)
             TypeOut("There is a %s in your path.  It requires: %s.\nWould you like to open it? (y/n)"%(player.room.door[1], doorKeys))
             openDoorInp = ValidInput("-> ",["y","n"])
 
@@ -52,23 +53,23 @@ while 1:
                 TypeOut("The door remains locked.")
             time.sleep(1)
 
-        else: # if there is not a door
-            player.room = room
-
+        else: player.room = room
 
         if player.room.npc: # if there is an npc in the room
             ClearConsole()
             playsound(foundSound,block=False)
-            TypeOut("You found.. ",0.06,newline=False); ColorPrint(" %s!\n\n"%player.room.npc, TextColor.yellow)
+            TypeOut("You found.. ",0.06,newline=False)
+            time.sleep(.1)
+            ColorPrint(" %s!\n\n"%player.room.npc, TextColor.yellow)
             time.sleep(2)
 
             interact = ValidInput("Would you like to interact with %s? (y/n)\n-> "%player.room.npc, ["y","n"])
 
             if interact == "y":
                 npc[player.room.npc](player)
-
+                
             else:
-                TypeOut("%s awaits your return."%player.room.npc)
+                TypeOut("%s watches you leave."%player.room.npc)
                 time.sleep(1.5) 
 
 
@@ -76,11 +77,14 @@ while 1:
     else:
         ClearConsole()
         playsound(boopSound, block=False)
-        print("Menu:\n1. Search Room." # prints a menu of options
-            "\n2. Open Inventory.\n"
+        print("\tMenu\n1. Search Room." # prints a menu of options
+            "\n2. Open Inventory."
+            "\n3. View Quests.\n"
         )
-        menuOption = input("-> ")
+        menuOption = ValidInput("-> ",["1","2","3"])
         playsound(boopSound, block=False)
+
+
         # Search Room
         if menuOption == "1":
             LoadingBar() 
@@ -89,9 +93,18 @@ while 1:
             if player.room.item: # if there is a item in the room
                 playsound(newItem,block=False)
                 TypeOut("You found a..",0.06, newline=False); ColorPrint(" %s!\n\n"%player.room.item, TextColor.yellow)
-                player.inventory.append(player.room.item)
-                player.room.item = None
-                time.sleep(2)
+                if player.room.item == "Exit Door": 
+                    input("Press any key to continue...")
+                    WinGame() # Player won the game by finding the exit door
+                else:
+                    player.inventory.append(player.room.item)
+                    player.room.item = None
+                    time.sleep(2)
+
+            elif not player.room.item and not random.randint(0,10):
+                coinsAmount = random.randint(2,10)
+                TypeOut("You found %g coins!"%coinsAmount)
+                player.coins += coinsAmount
 
             else:  # if there is not an item
                 TypeOut("There aren't any items in this room..")
@@ -111,10 +124,10 @@ while 1:
             while True: # gets index input of the items
                 try:
                     itemChoice = int(input("-> "))
-                    if int(itemChoice) in range(0,len(player.inventory)-1) or itemChoice == len(player.inventory):
-                        break
-                except:
-                    pass
+                    player.inventory[itemChoice-1]
+                    break
+                except: pass
+
             
             if player.inventory[itemChoice-1] not in items:
                 items.update({player.inventory[itemChoice-1] : "An item."})
@@ -122,11 +135,19 @@ while 1:
             if "Tunnel" in player.inventory[itemChoice-1]: # special case for tunnel bc the tunnel pass will rarely be the same across players games
                 ClearConsole()
                 items["Tunnel"]()
+            elif "Gem" in player.inventory[itemChoice-1]:
+                ClearConsole()
+                items["Gem"]
             else:
-
                 ClearConsole()
                 items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
             
             input("\nPress any key to continue..")
+        
 
-
+        # View Quests.
+        elif menuOption == "3":
+            ClearConsole()
+            for index,name in enumerate(player.quests):
+                print("%g. %s"%(index+1, str(name)))
+            input("\n\nPress any key to continue..")
