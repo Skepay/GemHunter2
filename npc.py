@@ -124,7 +124,7 @@ class BigDikman:
 
     def Battle(self, player):
         ct = 0
-        attackDict = {"1" : player.Punch, "2" : player.Kick, "3" : player.GoForDik, "4" : player.UseSword}
+        attackDict = {"1" : player.Punch, "2" : player.Kick, "3" : player.GoForDik, "4" : player.UseSword, "5" : player.UseDikWhip}
         while(self.hp > 0 and player.hp > 0):
             if not self.gameOver:
                 ClearConsole()
@@ -218,7 +218,8 @@ class PewDiePie:
             "Which games does the infamous word \"BARRELS\" come from?" : ["Amnesia", "Resident Evil", "Paranormal Activity"],
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
             "Where am I from?" : ["Sweden", "America", "UK"],
-            "f"
+            "What was he to me?" : ["A father", "A boyfriend", "A homie"],
+            "How old was I in 2014" : ["25", "21", "23"]
             }
 
         play = self.Greeting()
