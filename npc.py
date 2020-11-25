@@ -76,7 +76,6 @@ class BigDikman:
         else:
             self.Die()
 
-
     def Damage(self, dmg):
         TypeOut (("YOU DAMAGED ", self.name, " FOR ", dmg, "."))
         self.hp -= dmg
