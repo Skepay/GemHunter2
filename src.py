@@ -364,7 +364,27 @@ def Cesium():
         time.sleep(1)
         return
             
-        
+class DikWhip:
+    def __init__(self):
+        self.dmgMin = 3
+        self.dmgMax = 15
+    def GetMinDmg(self):
+        return self.dmgMin
+    def GetMaxDmg(self):
+        return self.dmgMax
+
+dikWhip = DikWhip()  
+
+class Sword:
+    def __init__(self):
+        self.dmgMin = 7
+        self.dmgMax = 10
+    def GetMinDmg(self):
+        return self.dmgMin
+    def GetMaxDmg(self):
+        return self.dmgMax
+
+sword = Sword() 
 
 # Dictionary for the items
 items = {
@@ -400,20 +420,59 @@ class Player:
         self.hp = 20
         self.name = GetName()
         self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']#["GFUEL"]
+        self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
         self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
 
-    def Punch(self, enemy):
-        if "Sword" in self.inventory: damage = random.randint(7,10)
-        else: damage = random.randint(2,5)
-        
-        item = enemy.Damage(damage)
-        if item: self.inventory.append(item)
+    def TakeDamage(self, dmg):
+        self.hp -= dmg
+        if(self.hp <= 0):
+            self.Die()
+    def Die(self):
+        TypeOut("YOU DIED")
 
+    def Punch(self, enemy):
+        damage = random.randint(2,5)
+        item = enemy.Damage(damage)
+        if item: 
+            self.inventory.append(item)
+            try:
+                if(item.CanAttack()):
+                    self.attackItems.append(item)
+            except:
+                pass
     def Kick(self, enemy):
         item = enemy.Damage(random.randint(2,7))
-        if item: self.inventory.append(item)
-
+        if item: 
+            self.inventory.append(item)
+            try:
+                if(item.CanAttack()):
+                    self.attackItems.append(item)
+            except:
+                pass
+    def GoForDik(self, enemy):
+        item = enemy.Damage(random.randint(0, 12))
+        if item: 
+            self.inventory.append(item)
+            try:
+                if(item.CanAttack()):
+                    self.attackItems.append(item)
+            except:
+                pass
+    def UseAttackItem(self, enemy, atkItem):
+        item = enemy.Damage(random.randInt(atkItem.GetMinDmg(), atkItem.GetMaxDmg()))
+        if item: 
+            self.inventory.append(item)
+            try:
+                if(item.CanAttack()):
+                    self.attackItems.append(item)
+            except:
+                pass
+    def HasSpecialAttackItems(self):
+        if(self.attackItems):
+            return True
+        else:
+            return False
 
 player = Player()

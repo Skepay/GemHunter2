@@ -121,7 +121,7 @@ class BigDikman:
 
     def Battle(self, player, swordOrPunch):
         ct = 0
-        attackDict = {"1" : player.Punch, "2" : player.Kick}
+        attackDict = {"1" : player.Punch, "2" : player.Kick, "3" : player.GoForDik}
         while(self.hp > 0 and player.hp > 0):
             ClearConsole()
 
@@ -135,13 +135,14 @@ class BigDikman:
                 print("You attack first, what move would you like to use?")
             else: 
                 print("Your turn to attack, what move would you like to use?")
-            ColorPrint("1.",TextColor.red, newLine=False); ColorPrint(" %s"%swordOrPunch)
+            ColorPrint("1.",TextColor.red, newLine=False); ColorPrint(" Punch")
             ColorPrint("2.", TextColor.red, newLine=False); ColorPrint(" Kick")
+            ColorPrint("3.", TextColor.red, newLine=False); ColorPrint(" Go for dik")
 
 
             move = ValidInput("\n-> ", ["1","2","3","4"])
-            """
-            if(not (player.HasSpecialItems())):
+            
+            if(not (player.HasSpecialAttackItems())):
                 move = ValidInput("(1/2/3/4)\n\n", ["1","2","3","4"])
             else:
                 for item in range(player.attackItems):
@@ -156,7 +157,7 @@ class BigDikman:
                         inputStr += '/'
                 inputStr += ')'
                 move = ValidInput(inputStr, inputVals)
-            """
+            
             attackDict[move](self)
             print("Press any key to continue...")
             getch()
