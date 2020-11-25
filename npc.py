@@ -17,7 +17,6 @@ class WanderingTraveler:
             30 : "Large Health Potion",
             50 : "Sword"
         }
-
         while 1:
             sg = self.Greeting()
             if sg: sg = self.Greeting()
@@ -32,14 +31,11 @@ class WanderingTraveler:
         shop = ValidInput("->", ["y","n"])
         if shop == "y":
             self.Shop(player)
-            ClearConsole()
-            TypeOut("Wandering Traveler: Would you like to purchase something?\n(y/n)")
-            shopAgain = ValidInput("->", ["y","n"])
-            if shopAgain == "y":
-                return 1
+            return 1
+        else: 
+            TypeOut("Wandering Traveler: Ok.. farewell thy lost player!")
+            time.sleep(1)
             return 0
-        else: TypeOut("Wandering Traveler: Ok.. farewell thy lost player!"); time.sleep(1)
-        return 0
 
 
     def Shop(self,player):
@@ -49,7 +45,8 @@ class WanderingTraveler:
         # Print shop
         print("\tSHOP ITEMS")
         for index, key in enumerate(self.shopItems):
-            print("%g. %s    $%g coins"%(index+1, self.shopItems[key], key))
+            lenItem = 30-len(self.shopItems[key])
+            print("%g. %s%s$%g coins"%(index+1, self.shopItems[key], ' '*lenItem, key))
             validItems.append(str(index+1))
         print("Balance: %g"%player.coins)
         print("\n")
@@ -79,9 +76,11 @@ class WanderingTraveler:
         ClearConsole()
         playsound(boopSound, block=False)
         TypeOut("Wandering Traveler: I'm off to explore some more, maybe I'll see you again!")
-        for room in rooms:
-            if not room.npc:
-                room.npc = "Wandering Traveler"
+        while 1:
+            newNpcRoom = random.choice(rooms)
+            if newNpcRoom.name not in range(player.room.name, player.room.name+5) and not newNpcRoom.npc:
+                newNpcRoom.npc = "Wandering Traveler"
+                break
         player.room.npc = None
         time.sleep(1.5)
         return
@@ -154,7 +153,7 @@ class BigDikman:
                         validMoves.append(str(moveIndex))
                         moveIndex += 1
 
-                    move = ValidInput("\n->", validMoves)
+                    move = ValidInput("\n-> ", validMoves)
                 
                 attackDict[move](self)
                 print("Press any key to continue...")
@@ -475,7 +474,7 @@ class Maya:
 
     def Greeting(self):
         ClearConsole()
-        TypeOut("???: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.\nMAYA: Can you help me find it, please?\nMAYA: I could bring PewDiePie back for you!\n", newline=False)
+        TypeOut("???: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.\nMAYA: Can you help me find it, please?\nMAYA: I could bring PewDiePie back for you!\n\n", newline=False)
         findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
         return findEye
     
@@ -498,12 +497,20 @@ class Maya:
             TypeOut("Oh yay!  Thank you so much.")
             TypeOut("Just for you.. I respawned PewDiePie in a random room.. go and find him!")
 
+            respawn = True
             for i in range(len(rooms)):
-                room = random.choice(rooms)
-                if not room.npc and room != player.room:
-                    room.npc = "PewDiePie"
+                if rooms[i].npc == "PewDiePie":
+                    respawn = False
+
+            if respawn:
+                while 1:
+                    newNpcRoomM = random.choice(rooms)
+                    if newNpcRoomM.name not in range(player.room.name, player.room.name+5) and not newNpcRoomM.npc:
+                        newNpcRoomM.npc = "PewDiePie"
+                        break
 
             player.room.npc = None
+            player.inventory.remove("Maya's Eyepatch")
             time.sleep(2)
             for i in player.quests:
                 if "Maya" in i:

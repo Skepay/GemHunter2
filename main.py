@@ -85,7 +85,7 @@ while 1:
             "\n2. Open Inventory."
             "\n3. View Quests.\n"
         )
-        menuOption = ValidInput("-> ",["1","2","3"])
+        menuOption = ValidInput("-> ",["1","2","3","4"])
         playsound(boopSound, block=False)
 
 
@@ -154,3 +154,11 @@ while 1:
             for index,name in enumerate(player.quests):
                 print("%g. %s"%(index+1, str(name)))
             input("\n\nPress any key to continue..")
+        
+
+        # Developer Thread Info.
+        elif menuOption == "4":
+            ClearConsole()
+            print("\t Debug Menu")
+            print("ACTIVE THREAD COUNT: %g"%threading.active_count())
+            input()

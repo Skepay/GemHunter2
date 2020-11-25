@@ -1,5 +1,5 @@
 # Program for automating the development of rooms.
-import pickle # rick lol haha
+import pickle  # rick lol haha
 
 import pygame
 
@@ -11,7 +11,7 @@ font = pygame.font.Font('freesansbold.ttf',10)
 class Room: # stores attributes of each room
     name = None  # int
     item = None  # str
-    door = None  # int
+    door = None  # list
     up = None    # room
     down = None  # room
     left = None  # room

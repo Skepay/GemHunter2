@@ -4,6 +4,7 @@ import random
 import subprocess
 import sys
 import time
+import threading
 
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
@@ -215,7 +216,7 @@ def WinGame():
     input("\nPress any key to continue..")
     ClearConsole()
     ColorPrint(str(st.renderText("SCORE")), inputColor=TextColor.blue)
-    score = len(player.inventory) + player.hp + player.coins
+    score = len(player.inventory) + player.hp + player.coins - player.deaths
     playsound(newItem,block=False)
     ColorPrint(str(st.renderText(str(score))), inputColor=TextColor.yellow)
     time.sleep(.5)
@@ -223,9 +224,9 @@ def WinGame():
     time.sleep(5)
     ClearConsole()
     time.sleep(.5)
-    TypeOut("Isaiah: Well this is the end, player.")
+    TypeOut("ISAIAH: Well this is the end, player.")
     time.sleep(1)
-    TypeOut("Isaiah: I'm not making another one of these so I hope you enjoyed it.")
+    TypeOut("ISAIAH: I'm not making another one of these so I hope you enjoyed it.")
     time.sleep(5)
     input("Press any key to exit..")
     exit()
@@ -233,6 +234,20 @@ def WinGame():
 
 
 #~/ Item Functions\~#
+# Function for GFUEL.
+def Gfuel(died=False):
+    TypeOut("A tasty beverage.")
+    time.sleep(1)
+    TypeOut("Would you like to drink it? (y/n)")
+    drink = ValidInput("\n-> ", ["y","n" ])
+    if drink == "y":
+        ClearConsole()
+        player.inventory.remove("GFUEL")
+        player.inventory.append("Empty GFUEL Shaker")
+        player.hp += 1
+        time.sleep(1)
+        ColorPrint("20% MUSCLE INCREASE!!!", TextColor.yellow)
+
 # Function for the PewDiePie chair item.
 def Chair():
     ClearConsole()
@@ -375,7 +390,8 @@ def Cesium():
 
 # Dictionary for the items
 items = {
-    'GFUEL' : "A tasty beverage.",
+    'GFUEL' : Gfuel,
+    'Empty GFUEL Shaker' : "A empty GFUEL shaker cup that once was filled with Lingonberry.",
     'PewDiePie 100M Edition Clutch Chair' : Chair,
     'Tunnel' : Tunnel,
     'Maya\'s Eyepatch' : "Return this item to Maya!",
@@ -409,8 +425,9 @@ class Player:
         self.inventory = ["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
-        self.coins = 0
+        self.coins = 100
         self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
+        self.deaths = 0
 
     def TakeDamage(self, dmg):
         self.hp -= dmg
@@ -419,10 +436,24 @@ class Player:
 
     def PlayerDie(self):
         ClearConsole()
-        TypeOut("You have been returned to your starting location.")
-        player.room = rooms[0]
-        player.hp = 20
-        time.sleep(2)
+        if "GFUEL" in player.inventory:
+            TypeOut("As you are bleeding out, you remember you have GFUEL.")
+            time.sleep(.5)
+            TypeOut("You quickly chug it all and feel revived!")
+            TypeOut("After you finish your GFUEL you quickly get up and escape with 1 hp.")
+            player.inventory.remove("GFUEL")
+            player.inventory.append("Empty GFUEL Shaker")
+            player.hp += 1
+            time.sleep(1)
+            ColorPrint("0 DEATHS!", TextColor.yellow)
+            player.room = rooms[0]
+
+        else:
+            self.deaths += 1
+            TypeOut("You have been returned to your starting location.  You have died %g times."%self.deaths)
+            player.room = rooms[0]
+            player.hp = 20
+            time.sleep(2)
 
     def Punch(self, enemy):
         damage = random.randint(2,5)

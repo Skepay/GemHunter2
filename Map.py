@@ -1,3 +1,4 @@
+# This map had to be manually edited for an npc and two doors.
 class Room:
 	def __init__(self, name, item, door, up, down, left, right, npc):
 		self.name = name
@@ -96,7 +97,7 @@ rooms.append(Room(81, None, None, None, 80, 82, None, None))              # Room
 rooms.append(Room(82, None, None, 181, 83, None, 81, None))               # Room 82
 rooms.append(Room(83, None, None, 82, 84, None, None, None))              # Room 83
 rooms.append(Room(84, None, None, 83, None, None, 85, None))              # Room 84
-rooms.append(Room(85, None, [105, 'Yellow Door', ['Yellow Key']], None, 195, 84, None, None))# Room 85
+rooms.append(Room(85, None, [195, 'Yellow Door', ['Yellow Key']], None, 195, 84, None, None))# Room 85
 rooms.append(Room(86, None, None, 90, 7, 87, 88, None))                   # Room 86
 rooms.append(Room(87, None, None, 93, None, None, 86, 'Maya'))            # Room 87
 rooms.append(Room(88, None, None, 89, None, 86, None, None))              # Room 88
@@ -205,7 +206,7 @@ rooms.append(Room(190, None, None, None, None, None, 188, None))          # Room
 rooms.append(Room(191, None, None, None, 188, 192, None, None))           # Room 191
 rooms.append(Room(192, None, None, None, None, 193, 191, None))           # Room 192
 rooms.append(Room(193, None, None, 194, None, None, 192, None))           # Room 193
-rooms.append(Room(194, None, None, None, 193, None, None, None))          # Room 194
+rooms.append(Room(194, None, None, None, 193, None, None, 'Wandering Traveler'))          # Room 194
 rooms.append(Room(195, 'Yellow Gem', None, 85, None, None, None, None))   # Room 195
 rooms.append(Room(196, 'Orange Key', None, 77, None, None, None, None))   # Room 196
 rooms.append(Room(197, None, None, 7, None, None, 198, None))             # Room 197
