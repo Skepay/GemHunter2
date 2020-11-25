@@ -8,19 +8,17 @@ import time
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
 
-try:
-    from playsound import playsound
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", 'playsound'])
-finally:
-    from playsound import playsound
+try: from playsound import playsound
+except ImportError: subprocess.call([sys.executable, "-m", "pip", "install", 'playsound'])
+finally: from playsound import playsound
 
-try:
-    from pyfiglet import Figlet
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", 'pyfiglet'])
-finally:
-    from pyfiglet import Figlet
+try: from pyfiglet import Figlet
+except ImportError: subprocess.call([sys.executable, "-m", "pip", "install", 'pyfiglet'])
+finally: from pyfiglet import Figlet
+
+try: import pyautogui
+except ImportError: subprocess.call([sys.executable, "-m", "pip", "install", 'pyautogui'])
+finally: import pyautogui
 
 
 
@@ -215,6 +213,14 @@ def WinGame():
     time.sleep(5)
     input("\nPress any key to continue..")
     ClearConsole()
+    ColorPrint(str(st.renderText("SCORE")), inputColor=TextColor.blue)
+    score = len(player.inventory) + player.hp + player.coins
+    playsound(newItem,block=False)
+    ColorPrint(str(st.renderText(str(score))), inputColor=TextColor.yellow)
+    time.sleep(.5)
+    pyautogui.screenshot().save("%s\GemHunter2Score.png"%os.path.abspath(__file__)[0:-6])
+    time.sleep(5)
+    ClearConsole()
     time.sleep(.5)
     TypeOut("Isaiah: Well this is the end, player.")
     time.sleep(1)
@@ -399,7 +405,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ["GFUEL"]
+        self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem']#["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
