@@ -161,7 +161,7 @@ def InfoMessages():
     TypeOut("You are currently in ", 0.010,newline=False); ColorPrint("Room %g"%player.room.name,TextColor.blue) # types out the name of color in blue
     ColorPrint("\nINVENTORY", TextColor.blue)
     TypeOut(', '.join(player.inventory),0.010)
-    ColorPrint("HEALTH: %g  COINS: %g\n"%(player.hp, player.coins), TextColor.blue)
+    print("%s: %g  %s: %g\n"%(color("HEALTH", TextColor.blue), player.hp, color("COINS",TextColor.blue), player.coins))
     print("Where would you like to travel to?",end =''); ColorPrint(" (w/a/s/d/m)",TextColor.lightpurple)
 
 

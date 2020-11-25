@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-Introduction()
+#Introduction()
 
 
 #~/ Main Loop \~#
@@ -10,9 +10,13 @@ while 1:
     InfoMessages()
 
     # Travel options
-    roomIndex = rooms.index(player.room)    # this stupidly long and ugly print statement below, will type out move locations in blue
-    print("up:",color("Room %s,"%rooms[roomIndex].up, TextColor.blue),"down:",color("Room %s,"%rooms[roomIndex].down, TextColor.blue),"left:",color("Room %s,"%rooms[roomIndex].left, TextColor.blue),"right:",color("Room %s,"%rooms[roomIndex].right, TextColor.blue))
-    
+    roomIndex = player.room.name
+    if rooms[roomIndex].up != None: print("up: %s  "%color("Room %s"%rooms[roomIndex].up, TextColor.blue),end = '')
+    if rooms[roomIndex].down != None: print("down: %s  "%color("Room %s"%rooms[roomIndex].down, TextColor.blue), end = '')
+    if rooms[roomIndex].left != None:  print("left: %s  "%color("Room %s"%rooms[roomIndex].left, TextColor.blue), end = '')
+    if rooms[roomIndex].right != None: print("right: %s  "%color("Room %s"%rooms[roomIndex].right, TextColor.blue), end = '')
+    print("\n")
+
     # Players next location
     travelTo = ValidInput("-> ",["w","a","s","d","m","menu"])
     
@@ -30,7 +34,7 @@ while 1:
                 room = rooms[keystrokes[travelTo]]
                 break
             except (NameError, TypeError):
-                print("You can't travel in that direction.")
+                print("You can't travel in that direction.  Pick a valid direction.")
                 travelTo = ValidInput("-> ",["w","a","s","d"])
         
         if player.room.door and player.room.door[0] == room.name:
