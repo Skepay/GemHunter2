@@ -589,6 +589,7 @@ class TypeRace:
     def __init__(self, player):
         self.codes = ["GEM HUNTER 2", "Gemstone", "Computer", "Keys", "Labrynth", "Trapped", "No Exit"]
         self.wpm = 0
+        self.score = 0
         self.Greeting()
         self.Type()
         self.GameOver(player)
@@ -636,19 +637,32 @@ class TypeRace:
                     TypeOut(self.randomMsg())
                 time.sleep(.75)
             else:
-                TypeOut("Memory error. . .\n", random.uniform(0.4, 1.0))
+                TypeOut("Memory error. . .\n", random.uniform(0.05, 0.3))
                 TypeOut("3..\n", 0.08, newline=False)
                 TypeOut("2..\n", 0.08, newline=False)
                 TypeOut("1..\n", 0.08, newline=False)
                 time.sleep(1)
-                if not random.randint(0,50):
+                penalty = random.randint(0,3)
+                if penalty in range(0,1):
                     ClearConsole()
                     time.sleep(10)
                     TypeOut("Back online.")
                     time.sleep(1)
                     ClearConsole()
-                else:
+                elif penalty == 2:
+                    ClearConsole()
                     TypeOut("Fixed.  Continue..")
+                    time.sleep(1)
+                    ClearConsole()
+                elif penalty == 3:
+                    ClearConsole()
+                    randDamage = random.randint(1,2)
+                    TypeOut("The computer sparks and electrocutes your hands.")
+                    TypeOut("You took %g damage."%randDamage)
+                    player.hp -= randDamage
+                    time.sleep(1)
+                    if player.hp <= 0:
+                        player.PlayerDie()
             
             
     def GameOver(self, player):

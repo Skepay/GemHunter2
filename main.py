@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-Introduction()
+#Introduction()
 
 
 #~/ Main Loop \~#
@@ -87,7 +87,7 @@ while 1:
             "\n2. Open Inventory."
             "\n3. View Quests.\n"
         )
-        menuOption = ValidInput("-> ",["1","2","3","4"])
+        menuOption = ValidInput("-> ",["1","2","3","4", ""])
         playsound(boopSound, block=False)
 
 
@@ -125,29 +125,36 @@ while 1:
                 print("%g. %s"%(index+1, str(name)))
 
             TypeOut("\nWhich item do you want to inspect?\n",newline=False)
-
+            flush_input()
             while True: # gets index input of the items
                 try:
-                    itemChoice = int(input("-> "))
+                    itemChoice = input("-> ")
+                    if itemChoice == "": break
+                    itemChoice = int(itemChoice)
                     player.inventory[itemChoice-1]
                     break
                 except: pass
 
-            
-            if player.inventory[itemChoice-1] not in items:
-                items.update({player.inventory[itemChoice-1] : "An item."})
+            if itemChoice == "": 
+                pass
 
-            if "Tunnel" in player.inventory[itemChoice-1]: # special case for tunnel bc the tunnel pass will rarely be the same across players games
-                ClearConsole()
-                items["Tunnel"]()
-            elif "Gem" in player.inventory[itemChoice-1]:
-                ClearConsole()
-                items["Gem"]
             else:
-                ClearConsole()
-                items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
-            
-            input("\nPress any key to continue..")
+                if player.inventory[itemChoice-1] not in items:
+                    items.update({player.inventory[itemChoice-1] : "An item."})
+
+                if "Tunnel" in player.inventory[itemChoice-1]: # special case for tunnel bc the tunnel pass will rarely be the same across players games
+                    ClearConsole()
+                    items["Tunnel"]()
+
+                elif "Gem" in player.inventory[itemChoice-1]:
+                    ClearConsole()
+                    items["Gem"]
+                    
+                else:
+                    ClearConsole()
+                    items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
+                
+                input("\nPress any key to continue..")
         
 
         # View Quests.
@@ -164,3 +171,5 @@ while 1:
             print("\t Debug Menu")
             print("ACTIVE THREAD COUNT: %g"%threading.active_count())
             input()
+
+        else: pass

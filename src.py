@@ -131,7 +131,7 @@ def Story():
     time.sleep(1.25)
     ColorPrint("Dr. %s"%player.name, TextColor.red)
     time.sleep(2.5)
-
+    flush_input()
     input("\n\nPress any key to continue to the game..")
 
 
@@ -147,6 +147,7 @@ def Introduction():
     ClearConsole()
     ColorPrint("Developed By: ", TextColor.green); TypeOut("Isaiah Harville, Joshua Payne, and Colin O'Kain.",0.06)
     time.sleep(5)
+    flush_input()
     InfoInp = input("Press enter to continue. Or type help for a list of keybinds.\n")
     Instructions() if InfoInp else Story()
 
@@ -383,7 +384,7 @@ def Cesium():
             TypeOut("Thanks to your Hazmat Suit, you aren't affected by the radiation.")
         else:
             TypeOut("The radiation is toxic to your health and you take significant damage.")
-            player.hp = player.hp  / 2
+            player.hp = player.hp / 2
 
         if player.room.door:
             player.room.door = None
