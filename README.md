@@ -5,7 +5,8 @@ Gem Hunter is a text-based adventure game filled with NPC's and challenges.  The
 once you have all of the Gemstones you can open the Gemstone Door.  After opening your Gemstone door, and searching the room it leads to, you beat the game.
 As you play, you are expected to draw a map to keep track of where youre going.  That is the biggest challenge of the game.  The player will always start in 
 room 0, however the room names do not necessarily indicate the next room.  Your map should be drawn as you move in the game.
-HINT: Room numbers really are not useful.
+HINT: Room numbers really are not useful.  AND whenever you open a door, search the room it leads to.s
+
 
 This game is developed in Python.  If you do not have python installed please download the latest version from https://www.python.org/downloads/.
 

@@ -6,8 +6,10 @@ import sys
 import time
 import threading
 
+from msvcrt import getch, kbhit
 from color_source import ColorsFG, TextColor, color
 from Map import rooms
+
 
 # Install required libraries.
 try: from playsound import playsound
@@ -67,12 +69,18 @@ def LoadingBar():
         time.sleep(random.uniform(0.0075,.100))
         
 
-# Clear the console
+# Clear the console.
 def ClearConsole(newline = False):
     os.system('cls')
     if newline:
         print()
 
+
+# Clear excess keystokes.
+def flush_input():
+    # msvcrt
+    while kbhit():
+        getch()
 
 # Type Out messages.
 def TypeOut(string, pause = 0.045, newline = True):
@@ -118,13 +126,13 @@ def Story():
             time.sleep(2)
             input("\nPress any key to continue..")
             ClearConsole()
-    time.sleep(2)
+    time.sleep(.75)
     ColorPrint("TEST SUBJECT: ", TextColor.red, newLine=False)
-    time.sleep(1.75)
+    time.sleep(1.25)
     ColorPrint("Dr. %s"%player.name, TextColor.red)
-    time.sleep(2)
+    time.sleep(2.5)
 
-    input("Press any key to continue to the game..")
+    input("\n\nPress any key to continue to the game..")
 
 
 # OG welcome message for gem hunter.
@@ -153,6 +161,7 @@ def Instructions():
         "m" or "menu" -> Opens the menu.
         """)
     input("\n\nPress any key to continue.")
+    Story()
 
 
 # Prints informational messages.
@@ -183,6 +192,7 @@ def openDoor(keys, doorName):
 
     else:  # if the player has the keys
         ClearConsole()
+        playsound(foundSound,block=False)
         TypeOut("The %s opened!"%doorName, 0.06)
         player.room.door = None
         for key in keys:

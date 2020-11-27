@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-Introduction()
+#Introduction()
 
 
 #~/ Main Loop \~#
@@ -17,6 +17,8 @@ while 1:
     if rooms[roomIndex].right != None: print("right: %s  "%color("Room %s"%rooms[roomIndex].right, TextColor.blue), end = '')
 
     # Players next location
+    time.sleep(.25) # put this here because there was a threading issue when spamming keystrokes.  better than a crash.
+    flush_input()   # flush input so you can't queue moves
     travelTo = ValidInput("\n-> ",["w","a","s","d","m","menu"])
     
     # Travel.

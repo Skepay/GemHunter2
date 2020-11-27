@@ -1,7 +1,6 @@
 # Contains all npcs and puzzles for the game.
 #TODO: Convert to all object-oriented.
 from src import *
-from msvcrt import getch
 
 #~/ SHOP \~#
 class WanderingTraveler:
@@ -274,8 +273,10 @@ class PewDiePie:
 
         else:                               # if their guess was wrong
             self.pdpScore -= 1
-            self.RandomResponse()
-            time.sleep(1)
+            ColorPrint("INCORRECT!", TextColor.red)
+            TypeOut("PEWDIEPIE: The correct answer was %s"%answerList[0])
+            #self.RandomResponse()
+            time.sleep(1.5)
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
 
 
@@ -299,7 +300,7 @@ class PewDiePie:
             TypeOut('PEWDIEPIE: Get out of my sight. atoo I spit on you')
             time.sleep(2)
         # Removes npc from room.
-        player.room.NPC = None
+        player.room.npc = None
         input("Press any key to continue...")
 
 
@@ -447,12 +448,13 @@ class DrSnafu:
                 lineNum += 1
                 ColorPrint('%2g:\t'%lineNum, TextColor.blue, newLine = False)
             sys.stdout.flush()
-
         print('\n' * 3)
         TypeOut('ISAIAH: Wow great job, You\'re pretty good at coding.', newline = False)
         time.sleep(0.5)
         TypeOut(' You didnt even have to copy and paste anything!')
         time.sleep(1)
+        flush_input()
+ 
 
 
 
