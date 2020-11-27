@@ -46,7 +46,7 @@ phoneRing = r"%s\walterWhitesRingtone.mp3"%soundPath
 def ValidInput(string, params):
     inp = str(input(string))
     while 1:
-        playsound(boopSound, block=False) #TODO: remove this if there is weird stuff
+        playsound(boopSound, block=False)
         if inp in params:
             return inp
         inp = str(input(string))
@@ -432,7 +432,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ["GFUEL"]
+        self.inventory = ["GFUEL", "PewDiePie 100M Edition Clutch Chair"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0

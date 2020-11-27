@@ -17,9 +17,9 @@ while 1:
     if rooms[roomIndex].right != None: print("right: %s  "%color("Room %s"%rooms[roomIndex].right, TextColor.blue), end = '')
 
     # Players next location
-    time.sleep(.25) # put this here because there was a threading issue when spamming keystrokes.  better than a crash.
+    time.sleep(.175) # put this here because there was a threading issue when spamming keystrokes.  better than a crash.
     flush_input()   # flush input so you can't queue moves
-    travelTo = ValidInput("\n-> ",["w","a","s","d","m","menu"])
+    travelTo = ValidInput("\n%s "%color("->", TextColor.lightpurple),["w","a","s","d","m","menu"])
     
     # Travel.
     if "m" not in travelTo:
@@ -37,7 +37,7 @@ while 1:
                 break
             except (NameError, TypeError):
                 print("You can't travel in that direction.  Pick a valid direction.")
-                travelTo = ValidInput("-> ",["w","a","s","d"])
+                travelTo = ValidInput("\n%s "%color("->", TextColor.lightpurple),["w","a","s","d"])
         
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()

@@ -208,6 +208,7 @@ class PewDiePie:
     def __init__(self, player):
         self.name = "PewDiePie"
         self.pdpScore = 0
+        self.pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com', 'Is for me?', 'Become a member today and get access to special videos!', 'www.youtube.com/pewdiepie', 'Gemhunter 2 is my favorite game!', 'Glug glug glug', 'Are ya winning, son?']
         self.pdpTrivia = {
             "What is the great price of my chair?" : ["399.99", "420.69", "399.90"],
             "What is the name of my signature GFUEL flavor?" : ["Lingonberry", "Swedish Meatballs", "Pewds"],
@@ -217,7 +218,8 @@ class PewDiePie:
             "Before the \"9 Year olds,\" what was my fanbase called?" : ["Bro Army", "Floor Gang", "Gamers"],
             "Where am I from?" : ["Sweden", "America", "UK"],
             "What was he to me?" : ["A father", "A boyfriend", "A homie"],
-            "How old was I in 2014" : ["25", "21", "23"]
+            "How old was I in 2014?" : ["25", "21", "23"],
+            "What is my favorite food?" : ["Pie", "Pizza", "Hotdogs"]
             }
 
         play = self.Greeting()
@@ -247,8 +249,9 @@ class PewDiePie:
 
 
     def RandomResponse(self):
-        pewdsResponses = ['Wonderful job!', '20% Muscle Increase', 'Big PP', '*meme review*', 'HahHAhah HOWS IT GOIN BROES.. MY NAME IS PEWWWWWWWWWWWWWWDIEPIEEHHHHHHHHHHHH', 'Code PEWDIEPIE gets you 30% off Gfuel.com', 'Is for me?', 'Become a member today and get acess to special videos!', 'www.youtube.com/pewdiepie']
-        TypeOut("PEWDIEPIE: %s"%random.choice(pewdsResponses))
+        line = random.choice(self.pewdsResponses)
+        TypeOut("PEWDIEPIE: %s"%line)
+        self.pewdsResponses.remove(line)
         return
     
 
@@ -274,7 +277,7 @@ class PewDiePie:
         else:                               # if their guess was wrong
             self.pdpScore -= 1
             ColorPrint("INCORRECT!", TextColor.red)
-            TypeOut("PEWDIEPIE: The correct answer was %s"%answerList[0])
+            TypeOut("PEWDIEPIE: The correct answer was %s."%answerList[0])
             #self.RandomResponse()
             time.sleep(1.5)
         del self.pdpTrivia[list(self.pdpTrivia.items())[triviaQuestion][0]]
@@ -285,7 +288,7 @@ class PewDiePie:
         TypeOut("PEWDIEPIE: Hm.. you finished with a score of ", 0.06, newline=False); ColorPrint(str(self.pdpScore), TextColor.yellow)
         time.sleep(1.5)
 
-        if self.pdpScore >= len(list(self.pdpTrivia)):  # player win
+        if self.pdpScore >= 5:  # player win
             TypeOut("PEWDIEPIE: Good enough for me!\nPEWDIEPIE: Take my chair, you were like a father to me afterall..\nPEWDIEPIE: Be seeing you, gamer.")
             playsound(newItem,block=False)
             ColorPrint("You recieved a PewDiePie 100M Edition Clutch Chair!", TextColor.red)
@@ -343,6 +346,7 @@ class Elon:
                 mazes += '\n'
             print(mazes)
             directions = {'w':[-1,0], 's':[1,0], 'a':[0,-1], 'd':[0,1]}
+            flush_input()
             direction = input('Enter direction. (w/a/s/d)\n').lower()
             if direction in directions:
                 if maze[playerD[0] + directions[direction][0]][playerD[1] + directions[direction][1]] != '#':
