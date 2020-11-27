@@ -10,6 +10,7 @@ class WanderingTraveler:
         time.sleep(1.25)
         self.name = "Wandering Traveler"
         self.shopItems = {
+            2 : "Water",
             5 : "Very yummy Hot Dog",
             10 : "Dope Jacket",
             15 : "Small Health Potion",

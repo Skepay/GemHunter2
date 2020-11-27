@@ -265,7 +265,7 @@ def Chair():
     useChair = ValidInput('This chair can teleport you to any room.. in STYLE.\nWould you like to use it?\n(y/n)\n\n-> ', ["y", "n"])
     if useChair == "y":
         ClearConsole()
-
+        flush_input()
         # verify the input of the room 
         while True:
             ClearConsole()
@@ -309,6 +309,7 @@ def Tunnel():
     else:
         TypeOut("MR. TUNNEL BUILDER: Please keep in mind, after you make a tunnel, the tunnel is permanent and can not be changed.")
         time.sleep(1)
+        flush_input()
         while True:
             ClearConsole()
             try:
@@ -320,7 +321,6 @@ def Tunnel():
         ElonRoom = int(player.inventory[Card][13:])  
         player.inventory.append("%s (CONNECTED TO: %s)"%(player.inventory[Card], endRoom))
         player.inventory.remove(player.inventory[Card])
-        #ElonRoom = int(player.inventory[Card][13:])  
     
 
     # if player is in the start tunnel room
@@ -374,7 +374,7 @@ def Cesium():
             break
         except: pass
 
-    if player.inventory[itemChoice].lower() == "water":
+    if player.inventory[itemChoice] == "Water":
         ClearConsole()
         player.inventory.remove(player.inventory[itemChoice])
         player.inventory.remove('Cesium')
@@ -407,6 +407,7 @@ items = {
     'Maya\'s Eyepatch' : "Return this item to Maya!",
     'Large Health Potion' : HealthPotion,
     'Small Health Potion' : HealthPotion,
+    'Water' : "Composed of one Hydrogen atom and two Oxygen atoms.\nEver thought of combining it with a certain isotope?",
     'Cesium' : Cesium,
     'Hazmat Suit' : "Protects you from radiation.\nIf you somehow managed to find any. . .",
     'Blue Ice Gfuel' : "Deliver this item to Walter White.",
@@ -436,7 +437,7 @@ class Player:
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
-        self.quests = ["Retrieve all the gems. With all of the gems, you can open the Gemstone Door."]
+        self.quests = ["Retrieve all the gems to open the Gemstone Door."]
         self.deaths = 0
 
     def TakeDamage(self, dmg):
