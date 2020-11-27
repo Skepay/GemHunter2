@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-#Introduction()
+Introduction()
 
 
 #~/ Main Loop \~#
@@ -149,7 +149,7 @@ while 1:
                 elif "Gem" in player.inventory[itemChoice-1]:
                     ClearConsole()
                     items["Gem"]
-                    
+
                 else:
                     ClearConsole()
                     items[player.inventory[itemChoice-1]]() if type(items[player.inventory[itemChoice-1]]) != str else TypeOut(items[player.inventory[itemChoice-1]])
@@ -173,3 +173,4 @@ while 1:
             input()
 
         else: pass
+        

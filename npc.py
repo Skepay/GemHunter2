@@ -589,7 +589,6 @@ class TypeRace:
     def __init__(self, player):
         self.codes = ["GEM HUNTER 2", "Gemstone", "Computer", "Keys", "Labrynth", "Trapped", "No Exit"]
         self.wpm = 0
-        self.score = 0
         self.Greeting()
         self.Type()
         self.GameOver(player)
