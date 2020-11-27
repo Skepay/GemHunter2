@@ -432,7 +432,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ["GFUEL", "PewDiePie 100M Edition Clutch Chair"]
+        self.inventory = ["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
