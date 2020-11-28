@@ -115,7 +115,7 @@ while 1:
                     player.room.item = None
                     time.sleep(2)
 
-            elif not player.room.item and not random.randint(0,10):
+            elif not player.room.item and not random.randint(0,5):
                 coinsAmount = random.randint(2,7)
                 TypeOut("You found %g coins!"%coinsAmount)
                 player.coins += coinsAmount
