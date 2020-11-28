@@ -39,6 +39,14 @@ while 1:
                 print("You can't travel in that direction.  Pick a valid direction.")
                 travelTo = ValidInput("\n%s "%color("->", TextColor.lightpurple),["w","a","s","d"])
         
+        if "Key" in player.room.item:
+            ClearConsole()
+            playsound(newItem,False)
+            ColorPrint("You found a %s!"%player.room.item, TextColor.yellow)
+            time.sleep(1)
+            player.inventory.append(player.room.item)
+            player.room.item = None
+
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()
             doorKeys = ', '.join(player.room.door[2])

@@ -583,6 +583,7 @@ class MrWhite:
             if "Walter White" in i:
                 player.quests.remove(i)
                 break
+        player.room.npc = None
 
 #~/ PUZZLES \~#
 class TypeRace:
