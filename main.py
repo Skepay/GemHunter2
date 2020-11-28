@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-Introduction()
+#Introduction()
 
 
 #~/ Main Loop \~#
@@ -38,14 +38,6 @@ while 1:
             except (NameError, TypeError):
                 print("You can't travel in that direction.  Pick a valid direction.")
                 travelTo = ValidInput("\n%s "%color("->", TextColor.lightpurple),["w","a","s","d"])
-        
-        if "Key" in player.room.item:
-            ClearConsole()
-            playsound(newItem,False)
-            ColorPrint("You found a %s!"%player.room.item, TextColor.yellow)
-            time.sleep(1)
-            player.inventory.append(player.room.item)
-            player.room.item = None
 
         if player.room.door and player.room.door[0] == room.name:
             ClearConsole()
@@ -66,7 +58,15 @@ while 1:
                 TypeOut("The door remains locked.")
             time.sleep(1)
 
-        else: player.room = room
+        else: 
+            player.room = room
+            if player.room.item:
+                ClearConsole()
+                playsound(newItem,False)
+                ColorPrint("You found a %s!"%player.room.item, TextColor.yellow)
+                time.sleep(1)
+                player.inventory.append(player.room.item)
+                player.room.item = None
 
 
         if player.room.npc: # if there is an npc in the room
