@@ -11,4 +11,4 @@ HINT: Room numbers really are not useful.  AND whenever you open a door, search 
 This game is developed in Python.  If you do not have python installed please download the latest version from https://www.python.org/downloads/.
 
 If you have python installed..
-To start the game double-click the main.py file.
+To start the game unzip the file and double-click the main.py file.
