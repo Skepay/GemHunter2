@@ -28,6 +28,7 @@ class WanderingTraveler:
     def Greeting(self):
         ClearConsole()
         TypeOut("Wandering Traveler: Would you like to purchase something?\n(y/n)")
+        flush_input()
         shop = ValidInput("->", ["y","n"])
         if shop == "y":
             self.Shop(player)
@@ -51,6 +52,7 @@ class WanderingTraveler:
         print("Balance: %g"%player.coins)
         print("\n")
         playsound(boopSound, block=False)
+        flush_input()
         purchase = ValidInput("What would you like to buy?\n->", validItems)
         purchase = list(self.shopItems)[int(purchase)-1]
 
@@ -144,6 +146,7 @@ class BigDikman:
 
                 
                 if(not (player.HasSpecialAttackItems())):
+                    flush_input()
                     move = ValidInput("\n-> ", ["1","2","3"])
                 else:
                     moveIndex = 4
@@ -152,7 +155,7 @@ class BigDikman:
                         ColorPrint("%g."%moveIndex, TextColor.red,newLine=False); ColorPrint(" Use %s"%i)
                         validMoves.append(str(moveIndex))
                         moveIndex += 1
-
+                    flush_input()
                     move = ValidInput("\n-> ", validMoves)
                 
                 attackDict[move](self)
@@ -243,6 +246,7 @@ class PewDiePie:
         ClearConsole()
         TypeOut("???: HEY BRO ITS ME, PEWDIEPIEEEEEE.\n",newline=False)
         TypeOut("PEWDIEPIE: Wanna play a little trivia?  If you win I'll give you my chair.\n",newline=False)
+        flush_input()
         playTrivia = ValidInput("(y/n)\n\n-> ",["y","n"])
         if playTrivia == "y":
             return True # play
@@ -268,6 +272,7 @@ class PewDiePie:
         for index, answer in enumerate(list(self.pdpTrivia.items())[triviaQuestion][1]):
             print("%s. %s\n"%(index+1, answer), end = '')
         
+        flush_input()
         pdpTriviaGuess = ValidInput("\n-> ",[answerList[0],answerList[1],answerList[2]])
 
         if pdpTriviaGuess == answerList[0]: # if their guess was right
@@ -326,6 +331,7 @@ class Elon:
         ClearConsole()
         TypeOut("???: H-h-h hey.  I'm Elon.\n",newline=False)
         TypeOut("ELON MUSK:  Can you drive my roadster through these martian mountains?  I'll let you build and use the next Boring Company tunnel if you do.\n",newline=False)
+        flush_input()
         driveRoadster = ValidInput("(y/n)\n\n-> ", ["y", "n"])
         if driveRoadster == "y":
             return True # play
@@ -436,6 +442,7 @@ class DrSnafu:
         TypeOut('ISAIAH: Whatdya say?', newline = False)
         time.sleep(0.5)
         TypeOut(' Will you help me?\n',newline=False)
+        flush_input()
         return ValidInput('(y/n)\n\n-> ', ['y', 'n']) == 'y'
 
 
@@ -482,6 +489,7 @@ class Maya:
     def Greeting(self):
         ClearConsole()
         TypeOut("???: Hi, I'm PewDiePie's pug, Maya.  I lost my eyepatch.\nMAYA: Can you help me find it, please?\nMAYA: I could bring PewDiePie back for you!\n\n", newline=False)
+        flush_input()
         findEye = ValidInput("1. I already found it!\n2. Yes I'll help.\n3. No I can't help you.\n\n-> ", ["1","2","3"])
         return findEye
     

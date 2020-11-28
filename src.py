@@ -371,7 +371,8 @@ def Cesium():
     while True: # gets index input of the items
         try:
             itemChoice = int(input("-> "))
-            player.inventory[itemChoice-1]
+            itemChoice -= 1
+            player.inventory[itemChoice]
             break
         except: pass
 
@@ -386,7 +387,7 @@ def Cesium():
             TypeOut("The radiation is toxic to your health and you take significant damage.")
             player.hp = player.hp / 2
 
-        if player.room.door:
+        if player.room.door and player.room.door[1] != 'Gemstone Door':
             player.room.door = None
             TypeOut("Somehow.. you managed to blow up a door!")
             time.sleep(1)
@@ -434,7 +435,7 @@ class Player:
     def __init__(self):
         self.hp = 20
         self.name = GetName()
-        self.inventory = ["GFUEL"]
+        self.inventory = ['Red Gem', 'Orange Gem', 'Yellow Gem', 'Green Gem', 'Blue Gem', 'Indigo Gem', 'Violet Gem', 'Cesium', 'Water']#["GFUEL"]
         self.attackItems = []
         self.room = rooms[0]
         self.coins = 0
