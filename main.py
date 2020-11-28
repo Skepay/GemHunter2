@@ -2,7 +2,7 @@
 from npc import *
 
 # Intro to Game
-#Introduction()
+Introduction()
 
 
 #~/ Main Loop \~#
